@@ -495,8 +495,8 @@
    "メンズエステマガジン"
   ],
   "note": "Aroma Roseの電話番号がサイトにより違う（050-5530-2941 / 080-5331-0680）",
-  "status": "閉店",
-  "fail_count": 3,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "接続できない(ドメイン消失の可能性)",
@@ -530,7 +530,8 @@
    "title": "",
    "final": "",
    "why": "TimeoutError"
-  }
+  },
+  "last_fail": "2026-11-22"
  },
  {
   "id": "er-7cbcb955",
@@ -1968,8 +1969,8 @@
    "エステ魂ランキング"
   ],
   "note": "",
-  "status": "閉店",
-  "fail_count": 3,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "接続できない(ドメイン消失の可能性)",
@@ -1986,7 +1987,8 @@
    "title": "",
    "final": "",
    "why": "TimeoutError"
-  }
+  },
+  "last_fail": "2026-11-22"
  },
  {
   "id": "er-5aed395b",
@@ -2864,8 +2866,8 @@
    "ゴーメンズエステ"
   ],
   "note": "",
-  "status": "閉店",
-  "fail_count": 3,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "HTTP 404",
@@ -2904,7 +2906,8 @@
    "title": "404 Not Found",
    "final": "https://nensan.est888.com/",
    "why": "HTTP 404"
-  }
+  },
+  "last_fail": "2026-11-22"
  },
  {
   "id": "go-c3a0931a",
@@ -3140,8 +3143,8 @@
    "ゴーメンズエステ"
   ],
   "note": "",
-  "status": "閉店",
-  "fail_count": 3,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "HTTP 404",
@@ -3165,7 +3168,8 @@
    "title": "404 Not Found",
    "final": "https://prinspa.estheya.com/",
    "why": "HTTP 404"
-  }
+  },
+  "last_fail": "2026-11-22"
  },
  {
   "id": "go-fa61e687",
@@ -3987,8 +3991,8 @@
    "ゴーメンズエステ"
   ],
   "note": "",
-  "status": "閉店",
-  "fail_count": 3,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "HTTP 404",
@@ -4021,7 +4025,8 @@
    "title": "404 Not Found",
    "final": "https://himawari.tyo.cm/",
    "why": "HTTP 404"
-  }
+  },
+  "last_fail": "2026-11-22"
  },
  {
   "id": "go-58347fd0",
@@ -4041,8 +4046,8 @@
    "ゴーメンズエステ"
   ],
   "note": "",
-  "status": "閉店",
-  "fail_count": 3,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "HTTP 404",
@@ -4075,7 +4080,8 @@
    "title": "404 Not Found",
    "final": "https://candy.jpn.cm/",
    "why": "HTTP 404"
-  }
+  },
+  "last_fail": "2026-11-22"
  },
  {
   "id": "go-2934ef6d",

@@ -304,7 +304,10 @@ def check_all(shops: list[dict], key: str = "hp_check") -> None:
             s["status"] = "営業中"
         elif alive is False:
             ng += 1
-            s["fail_count"] = s.get("fail_count", 0) + 1
+            # 同じ日に何回実行しても1日分として数える
+            if s.get("last_fail") != TODAY_STR:
+                s["fail_count"] = s.get("fail_count", 0) + 1
+                s["last_fail"] = TODAY_STR
             s["status"] = "閉店" if s["fail_count"] >= CLOSE_AFTER else "閉店の疑い"
         else:
             unk += 1
