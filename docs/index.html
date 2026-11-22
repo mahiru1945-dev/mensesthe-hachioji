@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow, noarchive, noimageindex">
 <meta name="referrer" content="no-referrer">
-<title>八王子メンエス一覧</title>
+<title>八王子・立川メンエス一覧</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 /* Layout: sticky filter bar over a single-column list, with a second view for today's therapists as a photo grid */
@@ -67,6 +67,8 @@ ul.list{list-style:none;margin:0;padding:8px 0 40px;display:grid;gap:8px}
 .card b{font-size:.95rem}
 .card .s{font-size:.72rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card .t{font-family:var(--f-mono);font-size:.75rem;color:var(--ok)}
+.shot{grid-column:1/-1;display:block;border-radius:6px;overflow:hidden;border:1px solid var(--line);max-height:150px}
+.shot img{display:block;width:100%;height:150px;object-fit:cover;object-position:top}
 .chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px}
 .chip{font:inherit;font-size:.72rem;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:2px 9px;border-radius:99px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -95,7 +97,7 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
 </head>
 <body>
 <header class="wrap">
-  <h1>八王子エリア メンズエステ一覧</h1>
+  <h1>八王子・立川エリア メンズエステ一覧</h1>
   <p class="sub" id="updated">読み込み中…</p>
   <div class="tabs" role="group" aria-label="表示切替">
     <button id="tab-shops" aria-pressed="true">店舗一覧</button>
@@ -105,6 +107,7 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
 </header>
 <div class="bar"><div class="wrap">
   <input id="q" type="search" placeholder="店名・駅・名前で検索" aria-label="検索">
+  <select id="area" aria-label="エリア"><option value="">全エリア</option><option>八王子</option><option>立川</option></select>
   <select id="type" aria-label="種類"><option value="">すべての種類</option><option value="日本人">日本人</option><option value="アジアン">アジアン</option><option value="出張">出張あり</option></select>
   <select id="sort" aria-label="並び替え"><option value="today">本日出勤が多い順</option><option value="src">掲載サイト数順</option><option value="rev">口コミ数順</option><option value="cheap">安い順</option><option value="name">名前順</option></select>
   <select id="tag" aria-label="タグ"><option value="">すべてのタグ</option></select>
@@ -117,7 +120,7 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
   <ul class="list" id="list"></ul>
   <div class="grid" id="grid" hidden></div>
   <div class="tagview" id="tagview" hidden></div>
-  <footer>情報元：エステ魂ランキング／ゴーメンズエステ／サロンガイド／メンズエステマガジン。公式HPに3日続けてつながらない店を「閉店」、1〜2日は「閉店の疑い」にしています。タグは各店の公式HPと掲載ページに書かれた言葉から自動で付けています。注意表示は、店名が出た摘発・逮捕報道と、直近1年に追加料金・時間短縮などのトラブル口コミが2件以上ある店に出します。個人利用のための一覧です。</footer>
+  <footer>対象：八王子・日野・立川エリア。情報元：エステ魂ランキング／ゴーメンズエステ／サロンガイド／メンズエステマガジン。公式HPに3日続けてつながらない店を「閉店」、1〜2日は「閉店の疑い」にしています。タグは各店の公式HPと掲載ページに書かれた言葉から自動で付けています。注意表示は、店名が出た摘発・逮捕報道と、直近1年に追加料金・時間短縮などのトラブル口コミが2件以上ある店に出します。個人利用のための一覧です。</footer>
 </main>
 <script>
 const $=s=>document.querySelector(s);
@@ -132,10 +135,12 @@ function statusTag(s){
   return m?`<span class="tag ${m}" title="${esc(s.http||"")}">${esc(s.status)}</span>`:"";
 }
 function typeTag(t){if(!t)return"";return `<span class="tag ${t.includes("アジアン")?"as":"jp"}">${esc(t)}</span>`}
+function areaTag(s){return `<span class="tag">${esc(s.area||"八王子")}</span>`}
 function photo(src,alt){return src?`<img class="ph" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph'}))">`:`<span class="ph"></span>`}
-function filters(){return{q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
+function filters(){return{area:$("#area").value,q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
 function shopOk(s,f){
   if(f.hide&&s.status==="閉店")return false;
+  if(f.area&&(s.area||"八王子")!==f.area)return false;
   if(f.ty&&!(s.type||"").includes(f.ty))return false;
   if(f.tag&&!(s.tags||[]).includes(f.tag))return false;
   if(f.alert&&!hasAlert(s))return false;
@@ -153,7 +158,7 @@ function renderShops(){
     const n=th.length||s.today;
     const ther=s.er?s.er.replace("/hachioji/shop-detail/","/therapist/"):"";
     return `<li class="shop${s.status==="閉店"?" closed":""}">
-      <h2 class="name">${esc(s.name)} ${typeTag(s.type)} ${statusTag(s)} ${s.note==="新着"?'<span class="tag ok">新着</span>':""}</h2>
+      <h2 class="name">${esc(s.name)} ${areaTag(s)} ${typeTag(s.type)} ${statusTag(s)} ${s.note==="新着"?'<span class="tag ok">新着</span>':""}</h2>
       <div class="meta">
         ${s.station?`<span>最寄 <span class="v">${esc(s.station)}</span></span>`:""}
         ${s.hours?`<span>営業 <span class="v">${esc(s.hours)}</span></span>`:""}
@@ -162,6 +167,7 @@ function renderShops(){
       </div>
       <div class="num">${n!=null?`<span class="today${n?"":" zero"}">${n}</span>本日出勤`:"出勤 −"}${s.ther?`<br>在籍 ${s.ther}名`:""}</div>
       ${th.length?`<div class="strip">${th.map(t=>`<a class="mini" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<span>${esc(t.name)}(${t.age})</span><span>${esc(t.time)}</span></a>`).join("")}</div>`:""}
+      ${s.browse&&s.browse.ok&&s.browse.shot_hp?`<a class="shot" href="${esc(s.hp)}" target="_blank" rel="noopener noreferrer" title="公式HPの表示（${esc(s.browse.date)}時点）"><img src="shots/${esc(s.id)}.jpg" alt="${esc(s.name)} 公式HP" loading="lazy" onerror="this.parentNode.remove()"></a>`:""}
       ${alerts(s)}
       ${(s.tags||[]).length?`<div class="chips">${s.tags.map(t=>`<button class="chip" data-tag="${esc(t)}" aria-pressed="${t===$("#tag").value}">${esc(t)}</button>`).join("")}</div>`:""}
       ${reviews(s)}
@@ -170,7 +176,7 @@ function renderShops(){
         ${ther?`<a href="${esc(ther)}" target="_blank" rel="noopener noreferrer">出勤ページ</a>`:""}
         ${s.go?`<a href="${esc(s.go)}" target="_blank" rel="noopener noreferrer">口コミ${s.rev?`（${s.rev}件）`:""}</a>`:""}
       </div>
-      <div class="foot">${s.note&&s.note!=="新着"?`<span class="note">${esc(s.note)}</span>　`:""}掲載：${s.src.map(esc).join("・")}${s.last_check?`　HP確認 ${esc(s.last_check)}（${esc(s.http||"")}）`:""}</div>
+      <div class="foot">${s.note&&s.note!=="新着"?`<span class="note">${esc(s.note)}</span>　`:""}掲載：${s.src.map(esc).join("・")}${s.browse?`　ブラウザ確認 ${esc(s.browse.date)}：${s.browse.ok?"開けた"+(s.browse.gate?"（年齢確認を通過）":""):"開けない（"+esc(s.browse.why)+"）"}`:s.last_check?`　HP確認 ${esc(s.last_check)}（${esc(s.http||"")}）`:""}</div>
     </li>`}).join(""):`<li class="empty">条件に合う店舗がありません。</li>`;
 }
 function renderToday(){
@@ -210,7 +216,7 @@ function render(){view==="shops"?renderShops():view==="today"?renderToday():rend
 function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#tag").hidden=v==="tags";render()}
 $("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");$("#tab-tags").onclick=()=>setView("tags");
 $("#tag").insertAdjacentHTML("beforeend",Object.entries(TAGS).map(([g,ts])=>`<optgroup label="${g}">${ts.map(t=>`<option>${t}</option>`).join("")}</optgroup>`).join(""));
-["#q","#type","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
+["#q","#area","#type","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
 Promise.all([fetch("data/shops.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/today.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]}))]).then(([shops,today,news])=>{
   SHOPS=shops;THER=today.therapists||[];NEWS=news.items||[];
   THER.forEach(t=>(byShop[t.shop_id]=byShop[t.shop_id]||[]).push(t));

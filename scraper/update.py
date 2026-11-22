@@ -1,4 +1,4 @@
-"""八王子エリアのメンズエステ一覧を毎日更新するスクリプト。
+"""八王子・立川エリアのメンズエステ一覧を毎日更新するスクリプト。
 
 やること:
   1. まとめサイト(エステ魂ランキング / ゴーメンズエステ)から店舗一覧を取り直し、新店を追加する
@@ -46,9 +46,17 @@ WAIT_SAME_SITE = 3.0
 # この回数続けてHPにつながらなかったら「閉店」にする
 CLOSE_AFTER = 3
 
-ER_LIST = "https://www.esthe-ranking.jp/hachioji/ippan/"
-ER_SCHEDULE = "https://www.esthe-ranking.jp/schedule/hachioji/ippan/"
-GO_LIST = "https://go-mensesthe.net/category/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/"
+AREAS = [
+    {"area": "八王子", "station": "八王子・京王八王子",
+     "er": "https://www.esthe-ranking.jp/hachioji/ippan/",
+     "schedule": "https://www.esthe-ranking.jp/schedule/hachioji/ippan/",
+     "go": "https://go-mensesthe.net/category/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/"},
+    {"area": "立川", "station": "立川",
+     "er": "https://www.esthe-ranking.jp/tachikawa/ippan/",
+     "schedule": "https://www.esthe-ranking.jp/schedule/tachikawa/ippan/",
+     "go": "https://go-mensesthe.net/category/chuo/%e7%ab%8b%e5%b7%9d/"},
+]
+SHOTS = ROOT / "docs" / "shots"
 
 log: dict = {"started": NOW.isoformat(), "steps": {}, "errors": []}
 _last_hit: dict[str, float] = {}
@@ -85,8 +93,8 @@ def make_id(er: str = "", go: str = "", name: str = "") -> str:
 
 # ---------------------------------------------------------------- 1. 店舗一覧
 
-def scrape_er_list() -> list[dict]:
-    """エステ魂ランキングの八王子メンズエステ一覧。"""
+def scrape_er_list(ER_LIST: str) -> list[dict]:
+    """エステ魂ランキングのエリア別メンズエステ一覧。"""
     r = polite_get(ER_LIST)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
@@ -125,8 +133,8 @@ def scrape_er_list() -> list[dict]:
     return out
 
 
-def scrape_go_list() -> list[dict]:
-    """ゴーメンズエステの八王子一覧(表形式)。"""
+def scrape_go_list(GO_LIST: str) -> list[dict]:
+    """ゴーメンズエステのエリア別一覧(表形式)。"""
     r = polite_get(GO_LIST)
     r.raise_for_status()
     soup = BeautifulSoup(r.text, "html.parser")
@@ -167,7 +175,7 @@ def find_er_official_hp(er_url: str) -> str:
     return ""
 
 
-def merge_lists(shops: list[dict]) -> None:
+def merge_lists(shops: list[dict], A: dict) -> None:
     by_er = {er_uuid(s["er"]): s for s in shops if s.get("er")}
     by_go = {s["go"]: s for s in shops if s.get("go")}
     by_phone = {norm_phone(s["phone"]): s for s in shops if norm_phone(s.get("phone"))}
@@ -179,8 +187,8 @@ def merge_lists(shops: list[dict]) -> None:
             s["src"].append(src)
 
     try:
-        er_rows = scrape_er_list()
-        log["steps"]["er_list"] = len(er_rows)
+        er_rows = scrape_er_list(A["er"])
+        log["steps"][f"er_list_{A['area']}"] = len(er_rows)
     except Exception as e:  # noqa: BLE001
         er_rows = []
         log["errors"].append(f"エステ魂一覧の取得失敗: {e}")
@@ -190,6 +198,7 @@ def merge_lists(shops: list[dict]) -> None:
         if s is None:
             s = new_shop(er=row["er"], name=row["name"])
             s["hp"] = find_er_official_hp(row["er"])
+            s["area"] = A["area"]
             shops.append(s)
             added += 1
         s["er"] = s.get("er") or row["er"]
@@ -207,8 +216,8 @@ def merge_lists(shops: list[dict]) -> None:
             by_phone[norm_phone(row["phone"])] = s
 
     try:
-        go_rows = scrape_go_list()
-        log["steps"]["go_list"] = len(go_rows)
+        go_rows = scrape_go_list(A["go"])
+        log["steps"][f"go_list_{A['area']}"] = len(go_rows)
     except Exception as e:  # noqa: BLE001
         go_rows = []
         log["errors"].append(f"ゴーメンズエステ一覧の取得失敗: {e}")
@@ -216,6 +225,7 @@ def merge_lists(shops: list[dict]) -> None:
         s = by_go.get(row["go"]) or by_phone.get(norm_phone(row["phone"]))
         if s is None:
             s = new_shop(go=row["go"], name=row["name"])
+            s["area"] = A["area"]
             shops.append(s)
             added += 1
         s["go"] = s.get("go") or row["go"]
@@ -224,11 +234,11 @@ def merge_lists(shops: list[dict]) -> None:
             if row[k] and not s.get(k):
                 s[k] = row[k]
         if not s.get("station"):
-            s["station"] = "八王子・京王八王子"
+            s["station"] = A["station"]
         touch(s, "ゴーメンズエステ")
         by_go[row["go"]] = s
 
-    log["steps"]["added_shops"] = added
+    log["steps"][f"added_{A['area']}"] = added
 
 
 def new_shop(er: str = "", go: str = "", name: str = "") -> dict:
@@ -309,6 +319,77 @@ def check_all(shops: list[dict]) -> None:
     log["steps"]["hp_check"] = {"ok": ok, "ng": ng, "unknown": unk}
 
 
+# ---------------------------------------------------------------- 2b. 公式HPをブラウザで開く
+
+GATE = r"ENTER|Enter|enter|ＥＮＴＥＲ|入場|入口|入り口|18歳以上|はい|同意して|入る"
+CLOSED_TEXT = r"閉店いたしました|閉店しました|営業を終了|サービスを終了|このドメインは|ドメインの有効期限"
+
+
+def browse_all(shops: list[dict]) -> None:
+    """まとめサイトに載っている公式HPのリンクを、本物のブラウザで開けるか確かめる。"""
+    from playwright.sync_api import sync_playwright
+
+    SHOTS.mkdir(parents=True, exist_ok=True)
+    ok = ng = gates = shots = 0
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        ctx = browser.new_context(user_agent=UA, locale="ja-JP", viewport={"width": 1280, "height": 800},
+                                  ignore_https_errors=True)
+        for s in shops:
+            if not s.get("hp"):
+                continue
+            page = ctx.new_page()
+            res = {"date": TODAY_STR, "ok": False, "gate": False, "title": "", "final": "", "why": ""}
+            try:
+                resp = page.goto(s["hp"], wait_until="domcontentloaded", timeout=30000)
+                page.wait_for_timeout(1500)
+                status = resp.status if resp else 0
+                # 年齢確認の入口ページを通り抜ける
+                gate = page.locator("a, button, input[type=button], input[type=submit]").filter(has_text=re.compile(GATE)).first
+                if gate.count() and gate.is_visible():
+                    try:
+                        gate.click(timeout=5000)
+                        page.wait_for_load_state("domcontentloaded", timeout=15000)
+                        page.wait_for_timeout(1200)
+                        res["gate"] = True
+                        gates += 1
+                    except Exception:  # noqa: BLE001
+                        pass
+                body = page.inner_text("body")[:5000] if page.locator("body").count() else ""
+                res["title"] = (page.title() or "")[:80]
+                res["final"] = page.url
+                if status >= 400:
+                    res["why"] = f"HTTP {status}"
+                elif re.search(CLOSED_TEXT, body):
+                    res["why"] = "閉店・ドメイン切れの表示"
+                elif len(body.strip()) < 20:
+                    res["why"] = "中身がほぼ空"
+                else:
+                    res["ok"] = True
+                shot = SHOTS / f"{s['id']}.jpg"
+                if res["ok"] and (not shot.exists() or (s.get("browse") or {}).get("shot_hp") != s["hp"]):
+                    page.screenshot(path=str(shot), type="jpeg", quality=45, clip={"x": 0, "y": 0, "width": 1280, "height": 800})
+                    res["shot_hp"] = s["hp"]
+                    shots += 1
+                elif shot.exists():
+                    res["shot_hp"] = (s.get("browse") or {}).get("shot_hp", s["hp"])
+            except Exception as e:  # noqa: BLE001
+                res["why"] = type(e).__name__
+            finally:
+                page.close()
+            s["browse"] = res
+            if res["ok"]:
+                ok += 1
+                # ブラウザで開けたなら営業中とみなす(requestsだけ弾かれていた店の救済)
+                s["status"] = "営業中"
+                s["fail_count"] = 0
+                s["last_ok"] = TODAY_STR
+            else:
+                ng += 1
+        browser.close()
+    log["steps"]["browse"] = {"ok": ok, "ng": ng, "age_gate_passed": gates, "new_screenshots": shots}
+
+
 # ---------------------------------------------------------------- 口コミ・摘発報道
 
 def update_reviews(shops: list[dict]) -> None:
@@ -384,7 +465,7 @@ def parse_therapist(item: dict) -> dict | None:
     }
 
 
-def scrape_today(shops: list[dict]) -> list[dict]:
+def scrape_today(shops: list[dict], ER_SCHEDULE: str) -> list[dict]:
     from playwright.sync_api import sync_playwright
 
     er_map = {er_uuid(s["er"]): s for s in shops if s.get("er")}
@@ -430,7 +511,8 @@ def scrape_today(shops: list[dict]) -> list[dict]:
                 if href.startswith(ER_SCHEDULE) and re.search(r"[?&]page=\d+", href) and href not in visited:
                     urls.append(href)
             time.sleep(WAIT_SAME_SITE)
-        log["steps"]["schedule_pages"] = len(visited)
+        log["steps"].setdefault("schedule_pages", 0)
+        log["steps"]["schedule_pages"] += len(visited)
         browser.close()
 
     out = []
@@ -441,8 +523,6 @@ def scrape_today(shops: list[dict]) -> list[dict]:
         t["shop_id"] = s["id"]
         t["shop_name"] = s["name"]
         out.append(t)
-    log["steps"]["therapists"] = len(out)
-    log["steps"]["therapists_with_photo"] = sum(1 for t in out if t["img"])
     return out
 
 
@@ -452,9 +532,12 @@ def main() -> int:
     shops = json.loads(SHOPS.read_text(encoding="utf-8"))
     skip_photos = "--no-photos" in sys.argv
 
-    merge_lists(shops)
+    for s in shops:
+        s.setdefault("area", "八王子")
+    for A in AREAS:
+        merge_lists(shops, A)
     check_all(shops)
-    for step in (update_reviews, update_news):
+    for step in (browse_all, update_reviews, update_news):
         try:
             step(shops)
         except Exception as e:  # noqa: BLE001
@@ -465,9 +548,14 @@ def main() -> int:
     therapists = None
     if not skip_photos:
         try:
-            therapists = scrape_today(shops)
+            therapists = []
+            for A in AREAS:
+                therapists += scrape_today(shops, A["schedule"])
+            log["steps"]["therapists"] = len(therapists)
+            log["steps"]["therapists_with_photo"] = sum(1 for t in therapists if t["img"])
         except Exception as e:  # noqa: BLE001
             log["errors"].append(f"出勤写真の取得失敗: {e}")
+            therapists = therapists or None
 
     SHOPS.write_text(json.dumps(shops, ensure_ascii=False, indent=1), encoding="utf-8")
     if therapists is not None:

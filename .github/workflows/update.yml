@@ -18,7 +18,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 40
+    timeout-minutes: 70
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -35,6 +35,7 @@ jobs:
           git config user.name "update-bot"
           git config user.email "update-bot@users.noreply.github.com"
           git add docs/data
+          if [ -d docs/shots ]; then git add docs/shots; fi
           if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
           git commit -m "データ更新 $(TZ=Asia/Tokyo date +%Y-%m-%d)"
           git push
