@@ -1,56 +1,23 @@
 {
- "updated": "2026-11-22T18:56:04.410876+09:00",
+ "updated": "2026-11-22T19:54:21.558078+09:00",
  "therapists": [
   {
    "shop_id": "k-a6059e8a",
    "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
-   "name": "かすみ",
-   "age": 26,
-   "time": "18:51〜",
+   "name": "もか",
+   "age": 22,
+   "time": "19:51〜",
    "state": "now",
    "now": true,
-   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20260915162012620.jpg?width=150&height=200&type=resize&quality=80",
-   "url": "https://fuzoku.jp/tachika0/girl/1453/"
-  },
-  {
-   "shop_id": "k-a6059e8a",
-   "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
-   "name": "けいと",
-   "age": 28,
-   "time": "18:51〜",
-   "state": "now",
-   "now": true,
-   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20260721215223516.jpg?width=150&height=200&type=resize&quality=80",
-   "url": "https://fuzoku.jp/tachika0/girl/1039/"
-  },
-  {
-   "shop_id": "k-a6059e8a",
-   "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
-   "name": "はるの",
-   "age": 23,
-   "time": "18:41〜",
-   "state": "now",
-   "now": true,
-   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20261027191457668_r9x6cvvw.jpg?width=150&height=200&type=resize&quality=80",
-   "url": "https://fuzoku.jp/tachika0/girl/1503/"
-  },
-  {
-   "shop_id": "k-a6059e8a",
-   "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
-   "name": "しおり",
-   "age": 25,
-   "time": "18:41〜",
-   "state": "now",
-   "now": true,
-   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20261013200211410_4ohz5rnr.jpg?width=150&height=200&type=resize&quality=80",
-   "url": "https://fuzoku.jp/tachika0/girl/1462/"
+   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20261006111159842_h2qek4xj.jpg?width=150&height=200&type=resize&quality=80",
+   "url": "https://fuzoku.jp/tachika0/girl/1456/"
   },
   {
    "shop_id": "k-a6059e8a",
    "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
    "name": "うい",
    "age": 23,
-   "time": "18:11〜",
+   "time": "19:51〜",
    "state": "now",
    "now": true,
    "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20260903170131377.jpg?width=150&height=200&type=resize&quality=80",
@@ -61,7 +28,7 @@
    "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
    "name": "じゅり",
    "age": 19,
-   "time": "18:11〜",
+   "time": "19:51〜",
    "state": "now",
    "now": true,
    "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20250922211521954.jpg?width=150&height=200&type=resize&quality=80",
@@ -72,22 +39,33 @@
    "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
    "name": "しい",
    "age": 20,
-   "time": "19:40〜",
-   "state": "later",
-   "now": false,
+   "time": "19:41〜",
+   "state": "now",
+   "now": true,
    "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20250922211307242.jpg?width=150&height=200&type=resize&quality=80",
    "url": "https://fuzoku.jp/tachika0/girl/1160/"
   },
   {
    "shop_id": "k-a6059e8a",
    "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
-   "name": "もか",
-   "age": 22,
-   "time": "19:50〜",
-   "state": "later",
-   "now": false,
-   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20261006111159842_h2qek4xj.jpg?width=150&height=200&type=resize&quality=80",
-   "url": "https://fuzoku.jp/tachika0/girl/1456/"
+   "name": "けいと",
+   "age": 28,
+   "time": "19:41〜",
+   "state": "now",
+   "now": true,
+   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20260721215223516.jpg?width=150&height=200&type=resize&quality=80",
+   "url": "https://fuzoku.jp/tachika0/girl/1039/"
+  },
+  {
+   "shop_id": "k-a6059e8a",
+   "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
+   "name": "はるの",
+   "age": 23,
+   "time": "19:31〜",
+   "state": "now",
+   "now": true,
+   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20261027191457668_r9x6cvvw.jpg?width=150&height=200&type=resize&quality=80",
+   "url": "https://fuzoku.jp/tachika0/girl/1503/"
   },
   {
    "shop_id": "k-a6059e8a",
@@ -99,6 +77,17 @@
    "now": false,
    "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20250922211234798.jpg?width=150&height=200&type=resize&quality=80",
    "url": "https://fuzoku.jp/tachika0/girl/1144/"
+  },
+  {
+   "shop_id": "k-a6059e8a",
+   "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
+   "name": "しおり",
+   "age": 25,
+   "time": "20:50〜",
+   "state": "later",
+   "now": false,
+   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20261013200211410_4ohz5rnr.jpg?width=150&height=200&type=resize&quality=80",
+   "url": "https://fuzoku.jp/tachika0/girl/1462/"
   },
   {
    "shop_id": "k-a6059e8a",
@@ -279,6 +268,17 @@
   {
    "shop_id": "k-a6059e8a",
    "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
+   "name": "かすみ",
+   "age": 26,
+   "time": "",
+   "state": "ended",
+   "now": false,
+   "img": "https://d1ywb8dvwodsnl.cloudfront.net/files.fuzoku.jp/img/shop/tachika0/gimg/20260915162012620.jpg?width=150&height=200&type=resize&quality=80",
+   "url": "https://fuzoku.jp/tachika0/girl/1453/"
+  },
+  {
+   "shop_id": "k-a6059e8a",
+   "shop_name": "東京メンズボディクリニック TMBC 立川店（リップグループ）",
    "name": "あずな",
    "age": 22,
    "time": "",
@@ -325,8 +325,8 @@
    "shop_name": "アドミsince2002立川デリヘル&Go To FANTASY東京本店",
    "name": "まどか",
    "age": 23,
-   "time": "",
-   "state": "",
+   "time": "20:00〜20:00",
+   "state": "later",
    "now": false,
    "img": "https://fuzoku-images.ranking-deli.jp/93525/5634616/img1_20261122171930.jpg",
    "url": "https://ranking-deli.jp/tokyo/area39/style2/4517/5634616/"
@@ -336,7 +336,7 @@
    "shop_name": "マダムの品格",
    "name": "えみ",
    "age": 25,
-   "time": "18:31〜",
+   "time": "19:18〜",
    "state": "now",
    "now": true,
    "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/2787699/img1_20261029192259.jpg",
@@ -347,7 +347,7 @@
    "shop_name": "マダムの品格",
    "name": "うみ",
    "age": 36,
-   "time": "18:28〜",
+   "time": "19:14〜",
    "state": "now",
    "now": true,
    "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/4688157/img1_20260220113025.jpg",
@@ -358,7 +358,7 @@
    "shop_name": "マダムの品格",
    "name": "あや",
    "age": 32,
-   "time": "18:25〜",
+   "time": "19:11〜",
    "state": "now",
    "now": true,
    "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571857/img1_20220616200945.jpg",
@@ -367,9 +367,20 @@
   {
    "shop_id": "k-0d1641fc",
    "shop_name": "マダムの品格",
+   "name": "まひる",
+   "age": 28,
+   "time": "19:44〜",
+   "state": "now",
+   "now": true,
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571980/img1_20180226141058.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571980/"
+  },
+  {
+   "shop_id": "k-0d1641fc",
+   "shop_name": "マダムの品格",
    "name": "かなで",
    "age": 32,
-   "time": "18:34〜",
+   "time": "19:34〜",
    "state": "now",
    "now": true,
    "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/4111532/img1_20260212191652.jpg",
@@ -378,68 +389,13 @@
   {
    "shop_id": "k-0d1641fc",
    "shop_name": "マダムの品格",
-   "name": "とわ",
-   "age": 31,
-   "time": "18:04〜",
-   "state": "now",
-   "now": true,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/5823959/img1_20260917125040.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/5823959/"
-  },
-  {
-   "shop_id": "k-0d1641fc",
-   "shop_name": "マダムの品格",
-   "name": "れいな",
-   "age": 37,
-   "time": "18:04〜",
-   "state": "now",
-   "now": true,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/572016/img1_20180226142652.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/572016/"
-  },
-  {
-   "shop_id": "k-0d1641fc",
-   "shop_name": "マダムの品格",
-   "name": "さら",
-   "age": 27,
-   "time": "",
-   "state": "ended",
-   "now": false,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571958/img1_20200109231630.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571958/"
-  },
-  {
-   "shop_id": "k-0d1641fc",
-   "shop_name": "マダムの品格",
-   "name": "まゆ",
-   "age": 36,
-   "time": "",
-   "state": "ended",
-   "now": false,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/5817129/img1_20260913184521.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/5817129/"
-  },
-  {
-   "shop_id": "k-0d1641fc",
-   "shop_name": "マダムの品格",
-   "name": "さくら",
-   "age": 29,
-   "time": "19:20〜17:00",
-   "state": "later",
-   "now": false,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571955/img1_20250310151420.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571955/"
-  },
-  {
-   "shop_id": "k-0d1641fc",
-   "shop_name": "マダムの品格",
-   "name": "まひる",
+   "name": "ひろ",
    "age": 28,
-   "time": "19:40〜18:00",
-   "state": "later",
-   "now": false,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571980/img1_20180226141058.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571980/"
+   "time": "19:04〜",
+   "state": "now",
+   "now": true,
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571922/img1_20191227174752.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571922/"
   },
   {
    "shop_id": "k-0d1641fc",
@@ -455,13 +411,35 @@
   {
    "shop_id": "k-0d1641fc",
    "shop_name": "マダムの品格",
-   "name": "ひろ",
-   "age": 28,
-   "time": "",
-   "state": "",
+   "name": "とわ",
+   "age": 31,
+   "time": "20:59〜12:00",
+   "state": "later",
    "now": false,
-   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571922/img1_20191227174752.jpg",
-   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571922/"
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/5823959/img1_20260917125040.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/5823959/"
+  },
+  {
+   "shop_id": "k-0d1641fc",
+   "shop_name": "マダムの品格",
+   "name": "さくら",
+   "age": 29,
+   "time": "22:00〜17:00",
+   "state": "later",
+   "now": false,
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571955/img1_20250310151420.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571955/"
+  },
+  {
+   "shop_id": "k-0d1641fc",
+   "shop_name": "マダムの品格",
+   "name": "れいな",
+   "age": 37,
+   "time": "22:20〜15:00",
+   "state": "later",
+   "now": false,
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/572016/img1_20180226142652.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/572016/"
   },
   {
    "shop_id": "k-0d1641fc",
@@ -473,6 +451,28 @@
    "now": false,
    "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571969/img1_20180226140354.jpg",
    "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571969/"
+  },
+  {
+   "shop_id": "k-0d1641fc",
+   "shop_name": "マダムの品格",
+   "name": "まゆ",
+   "age": 36,
+   "time": "",
+   "state": "ended",
+   "now": false,
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/5817129/img1_20260913184521.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/5817129/"
+  },
+  {
+   "shop_id": "k-0d1641fc",
+   "shop_name": "マダムの品格",
+   "name": "さら",
+   "age": 27,
+   "time": "",
+   "state": "ended",
+   "now": false,
+   "img": "https://fuzoku-images.ranking-deli.jp/madamnohinkaku/571958/img1_20200109231630.jpg",
+   "url": "https://ranking-deli.jp/tokyo/area39/style2/18488/571958/"
   },
   {
    "shop_id": "k-0d1641fc",
