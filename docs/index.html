@@ -69,6 +69,13 @@ ul.list{list-style:none;margin:0;padding:8px 0 40px;display:grid;gap:8px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px;text-decoration:none;color:var(--fg);display:flex;flex-direction:column;gap:4px;min-width:0}
 .card b{font-size:.95rem}
 .card .s{font-size:.72rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.badge{font-size:.7rem;font-weight:700;padding:1px 6px;border-radius:4px;align-self:flex-start}
+.badge.now{background:var(--ok);color:var(--surface)}
+.badge.soon{background:var(--chip);color:var(--accent)}
+.badge.busy{background:var(--chip);color:var(--warn)}
+.badge.ended,.badge.unknown{background:var(--chip);color:var(--muted)}
+.card.dim,.mini.dim{opacity:.45}
+.stale{color:var(--warn);font-size:.8rem;padding-top:6px}
 .card .t{font-family:var(--f-mono);font-size:.75rem;color:var(--ok)}
 .shot{grid-column:1/-1;display:block;border-radius:6px;overflow:hidden;border:1px solid var(--line);max-height:150px}
 .shot img{display:block;width:100%;height:150px;object-fit:cover;object-position:top}
@@ -117,6 +124,7 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
   <select id="tag" aria-label="タグ"><option value="">すべてのタグ</option></select>
   <label class="chk"><input type="checkbox" id="hideClosed" checked> 閉店を隠す</label>
   <label class="chk"><input type="checkbox" id="onlyAlert"> 注意ありのみ</label>
+  <select id="avail" aria-label="出勤の絞り込み" hidden><option value="now">今入れる子</option><option value="soon">これから入れる子も</option><option value="all">本日出勤の全員</option></select>
   <label class="chk" id="localWrap" hidden><input type="checkbox" id="onlyLocal" checked> 八王子・立川発のみ</label>
   <span class="count" id="count"></span>
 </div></div>
@@ -131,7 +139,7 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const yen=p=>{const m=/(\d+)分\s*([\d,]+)円/.exec(p||"");return m?Math.round(+m[2].replace(/,/g,"")/(+m[1])*60):1e9};
-let SHOPS=[],THER=[],NEWS=[],view="shops";
+let SHOPS=[],THER=[],NEWS=[],view="shops",TODAY_AT=null;
 const GENRE=location.hash==="#kaishun"?"kaishun":"mens";
 addEventListener("hashchange",()=>location.reload());
 const TAGS={"衣装":["マイクロビキニ","ベビードール","ノーブラ","ノーパン","紙パンツ","コスプレ"],"施術":["鼠径部","ディープリンパ","密着","マーメイド","カエル足","四つん這い","フェザータッチ","ホイップ","パウダー","洗体","Wセラピ"]};
@@ -174,7 +182,7 @@ function renderShops(){
         ${s.phone?`<span>電話 <span class="v phone">${esc(s.phone)}</span></span>`:""}
       </div>
       <div class="num">${n!=null?`<span class="today${n?"":" zero"}">${n}</span>本日出勤`:"出勤 −"}${s.ther?`<br>在籍 ${s.ther}名`:""}</div>
-      ${th.length?`<div class="strip">${th.map(t=>`<a class="mini" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<span>${esc(t.name)}(${t.age})</span><span>${esc(t.time)}</span></a>`).join("")}</div>`:""}
+      ${th.length?`<div class="strip">${th.map(t=>`<a class="mini${["ended"].includes(avail(t).k)?" dim":""}" title="${esc(avail(t).label)}" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<span>${esc(t.name)}(${t.age})</span><span>${esc(t.time)}</span></a>`).join("")}</div>`:""}
       ${s.browse&&s.browse.ok&&s.browse.shot_hp?`<a class="shot" href="${esc(s.hp)}" target="_blank" rel="noopener noreferrer" title="公式HPの表示（${esc(s.browse.date)}時点）"><img src="shots/${esc(s.id)}.jpg" alt="${esc(s.name)} 公式HP" loading="lazy" onerror="this.parentNode.remove()"></a>`:""}
       ${alerts(s)}
       ${(s.tags||[]).length?`<div class="chips">${s.tags.map(t=>`<button class="chip" data-tag="${esc(t)}" aria-pressed="${t===$("#tag").value}">${esc(t)}</button>`).join("")}</div>`:""}
@@ -188,13 +196,39 @@ function renderShops(){
       <div class="foot">${s.note&&s.note!=="新着"?`<span class="note">${esc(s.note)}</span>　`:""}掲載：${s.src.map(esc).join("・")}${s.browse?`　ブラウザ確認 ${esc(s.browse.date)}：${s.browse.ok?"開けた"+(s.browse.gate?"（年齢確認を通過）":""):"開けない（"+esc(s.browse.why)+"）"}`:s.last_check?`　HP確認 ${esc(s.last_check)}（${esc(s.http||"")}）`:""}</div>
     </li>`}).join(""):`<li class="empty">条件に合う店舗がありません。</li>`;
 }
+// ---- 出勤状況: 今の時刻(日本時間)と出勤時間を比べる
+function jstMinutes(){const d=new Date(Date.now()+9*3600e3);return d.getUTCHours()*60+d.getUTCMinutes()}
+function toMin(x,base){if(!x)return null;if(/LAST|ラスト/i.test(x))return 29*60;const m=/(翌)?(\d{1,2}):(\d{2})/.exec(x);if(!m)return null;let v=+m[2]*60+ +m[3];if(m[1])v+=1440;if(base!=null&&v<=base)v+=1440;return v}
+function fmtLeft(n){return n>=60?`${Math.floor(n/60)}時間${n%60?n%60+"分":""}`:`${n}分`}
+function avail(t){
+  // 返り値 {k:"now"|"soon"|"busy"|"ended"|"unknown", label, order}
+  if(t.state==="ended")return{k:"ended",label:"受付終了",order:4};
+  const parts=(t.time||"").split(/[〜～~]/),st=toMin(parts[0]),en=toMin(parts[1],st);
+  const nm=jstMinutes();
+  for(const x of [nm,nm+1440]){
+    if(st!=null&&x>=st&&(en==null||x<en-15)){
+      if(t.state==="busy")return{k:"busy",label:"案内中",order:1};
+      return{k:"now",label:en!=null?`今入れる・あと${fmtLeft(en-x)}`:"今入れる",order:0,left:en!=null?en-x:999};
+    }
+  }
+  if(t.state==="now"||(t.now&&st==null))return{k:"now",label:"今入れる",order:0,left:999};
+  if(t.state==="busy")return{k:"busy",label:"案内中",order:1};
+  if(st!=null&&nm<st)return{k:"soon",label:`${parts[0].trim()}から`,order:2,wait:st-nm};
+  if(st!=null)return{k:"ended",label:"終了",order:4};
+  return{k:"unknown",label:"時間不明",order:3};
+}
 function renderToday(){
   const f=filters();
   const shopById=Object.fromEntries(SHOPS.map(s=>[s.id,s]));
   let rows=THER.filter(t=>{const s=shopById[t.shop_id];if(s&&!shopOk(s,f))return false;return !f.q||(t.name+t.shop_name).toLowerCase().includes(f.q)});
-  rows.sort((a,b)=>(b.now-a.now)||(a.time||"").localeCompare(b.time||""));
-  $("#count").textContent=rows.length+" 人";
-  $("#grid").innerHTML=rows.length?rows.map(t=>`<a class="card" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<b>${esc(t.name)} <small>(${t.age})</small></b><span class="t">${t.now?"出勤中 ":""}${esc(t.time)}</span><span class="s">${esc(t.shop_name)}</span></a>`).join(""):`<div class="empty">本日出勤のデータがまだありません。毎朝の自動更新後に表示されます。</div>`;
+  const mode=$("#avail").value;
+  rows=rows.map(t=>({...t,av:avail(t)})).filter(t=>mode==="all"||t.av.k==="now"||(mode==="soon"&&(t.av.k==="soon"||t.av.k==="busy"||t.av.k==="unknown")));
+  rows.sort((a,b)=>a.av.order-b.av.order||(b.av.left||0)-(a.av.left||0)||(a.av.wait||0)-(b.av.wait||0));
+  const nm=jstMinutes();
+  $("#count").textContent=`${rows.length} 人（${String(Math.floor(nm/60)).padStart(2,"0")}:${String(nm%60).padStart(2,"0")} 時点）`;
+  $("#grid").innerHTML=rows.length?rows.map(t=>`<a class="card" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<b>${esc(t.name)} <small>(${t.age})</small></b><span class="badge ${t.av.k}">${esc(t.av.label)}</span><span class="t">${esc(t.time)}</span><span class="s">${esc(t.shop_name)}</span></a>`).join(""):`<div class="empty">${mode==="now"?"今入れる子は見つかりませんでした。「これから入れる子も」に切り替えてみてください。":"本日出勤のデータがまだありません。"}</div>`;
+  const age=TODAY_AT?(Date.now()-TODAY_AT)/60000:null;
+  $("#grid").insertAdjacentHTML("afterbegin",age!=null&&age>90?`<div class="stale" style="grid-column:1/-1">出勤情報は${Math.round(age/60)}時間前のものです。お店の出勤ページで最新を確認してください。</div>`:"");
 }
 function alerts(s){
   let h="";
@@ -221,16 +255,17 @@ document.addEventListener("click",e=>{
   if(b.dataset.tag){$("#tag").value=$("#tag").value===b.dataset.tag&&!b.dataset.go?"":b.dataset.tag;setView("shops");}
   else if(b.dataset.shop){$("#q").value=b.dataset.shop;$("#tag").value="";setView("shops");}
 });
+setInterval(()=>{if(view==="today")render()},5*60e3);
 function render(){view==="shops"?renderShops():view==="today"?renderToday():renderTags()}
-function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#tag").hidden=v==="tags";render()}
+function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#avail").hidden=v!=="today";$("#tag").hidden=v==="tags";render()}
 $("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");$("#tab-tags").onclick=()=>setView("tags");
 $("#tag").insertAdjacentHTML("beforeend",Object.entries(TAGS).map(([g,ts])=>`<optgroup label="${g}">${ts.map(t=>`<option>${t}</option>`).join("")}</optgroup>`).join(""));
-["#q","#area","#type","#onlyLocal","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
+["#q","#area","#type","#onlyLocal","#avail","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
 const F=GENRE==="kaishun"?["kaishun.json","kaishun_today.json"]:["shops.json","today.json"];
 $("#g-"+GENRE).setAttribute("aria-current","page");
 if(GENRE==="kaishun"){document.title="八王子・立川 回春エステ一覧";$("#h1").textContent="八王子・立川エリア 回春エステ一覧";$("#localWrap").hidden=false;$("#area").hidden=true;$("#type").hidden=true;$("#tab-tags").hidden=true;$("footer").textContent="情報元：風俗じゃぱん／ランキングデリ／シティヘブン（取れた日のみ）。八王子のページには都内各地から派遣する店も載るため、拠点が八王子・立川周辺の店を「地元発」としています。公式HPに3日続けてつながらない店は「閉店」。";}
 Promise.all([fetch("data/"+F[0],{cache:"no-store"}).then(r=>r.json()).catch(()=>[]),fetch("data/"+F[1],{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]}))]).then(([shops,today,news])=>{
-  SHOPS=shops;THER=today.therapists||[];NEWS=news.items||[];
+  SHOPS=shops;THER=today.therapists||[];TODAY_AT=today.updated?Date.parse(today.updated):null;NEWS=news.items||[];
   THER.forEach(t=>(byShop[t.shop_id]=byShop[t.shop_id]||[]).push(t));
   const c=k=>SHOPS.filter(s=>s.status===k).length;
   const up=today.updated?new Date(today.updated).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"未更新";

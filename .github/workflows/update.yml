@@ -29,7 +29,7 @@ jobs:
           pip install -r scraper/requirements.txt
           python -m playwright install --with-deps chromium
       - name: 巡回して更新
-        run: python scraper/update.py ${{ contains(github.event.head_commit.message, '[kaishun-only]') && '--only-kaishun' || '' }}
+        run: python scraper/update.py ${{ contains(github.event.head_commit.message, '[kaishun-only]') && '--only-kaishun' || contains(github.event.head_commit.message, '[today-only]') && '--only-today' || '' }}
       - name: 結果を保存
         run: |
           git config user.name "update-bot"

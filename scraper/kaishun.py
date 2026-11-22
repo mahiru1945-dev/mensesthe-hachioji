@@ -242,28 +242,39 @@ def merge(ctx, shops: list[dict]) -> None:
 
 JS_CARDS = r"""
 () => {
+  // 写真1枚ごとに、年齢(NN)が1人ぶんだけ入る一番外側の囲みまで遡る
+  const AGE = /[（(]\d{2}[)）]/g;
   const out = [], seen = new Set();
-  const ok = (t) => /[（(]\d{2}[)）]/.test(t) && /\d{1,2}:\d{2}/.test(t);
   for (const img of document.querySelectorAll("img")) {
-    let el = img;
-    for (let i = 0; i < 5 && el; i++) {
+    let el = img, best = null;
+    for (let i = 0; i < 8 && el.parentElement; i++) {
       el = el.parentElement;
-      if (!el) break;
       const t = el.innerText || "";
-      if (t.length > 300) break;
-      if (ok(t)) {
-        if (seen.has(el)) break;
-        seen.add(el);
-        const a = el.closest("a") || el.querySelector("a");
-        const src = img.currentSrc || img.getAttribute("data-src") || img.getAttribute("data-original") || img.src;
-        out.push({ text: t, img: src && !src.startsWith("data:") ? src : "", href: a ? a.href : location.href });
-        break;
-      }
+      const n = (t.match(AGE) || []).length;
+      if (n > 1 || t.length > 600) break;
+      if (n === 1) best = el;
     }
+    if (!best || seen.has(best)) continue;
+    seen.add(best);
+    const a = best.closest("a") || best.querySelector("a[href*='girl'], a");
+    const src = img.currentSrc || img.getAttribute("data-src") || img.getAttribute("data-original") || img.src;
+    out.push({ text: best.innerText, img: src && !src.startsWith("data:") ? src : "", href: a ? a.href : location.href });
   }
   return out;
 }
 """
+
+
+def state_of(text: str) -> str:
+    if re.search(r"受付終了|本日終了|退勤", text):
+        return "ended"
+    if re.search(r"案内中|接客中|予約満了|満了", text):
+        return "busy"
+    if re.search(r"待機中|即案内|すぐ案内|案内可|今すぐ", text):
+        return "now"
+    if re.search(r"次回|出勤予定", text):
+        return "later"
+    return ""
 
 
 def scrape_today(ctx, shops: list[dict]) -> list[dict]:
@@ -296,8 +307,10 @@ def scrape_today(ctx, shops: list[dict]) -> list[dict]:
                     t = TIME_RE.search(text)
                     if not m:
                         continue
+                    st = re.search(r"(\d{1,2}:\d{2})\s*[～〜~]", text)
                     out.append({"shop_id": s["id"], "shop_name": s["name"], "name": m.group(1), "age": int(m.group(2)),
-                                "time": f"{t.group(1)}〜{t.group(2)}" if t else "", "now": "待機" in text or "出勤中" in text,
+                                "time": f"{t.group(1)}〜{t.group(2)}" if t else (f"{st.group(1)}〜" if st else ""),
+                                "state": state_of(text), "now": state_of(text) == "now",
                                 "img": c["img"], "url": c["href"] or url})
                     got += 1
                 ctx.time.sleep(ctx.WAIT_SAME_SITE)
@@ -306,6 +319,17 @@ def scrape_today(ctx, shops: list[dict]) -> list[dict]:
         b.close()
     uniq = {(t["shop_id"], t["name"], t["age"]): t for t in out}
     return list(uniq.values())
+
+
+def run_today(ctx) -> None:
+    path = ctx.DATA / "kaishun.json"
+    if not path.exists():
+        return
+    shops = json.loads(path.read_text(encoding="utf-8"))
+    th = scrape_today(ctx, shops)
+    (ctx.DATA / "kaishun_today.json").write_text(
+        json.dumps({"updated": ctx.NOW.isoformat(), "therapists": th}, ensure_ascii=False, indent=1), encoding="utf-8")
+    ctx.log["steps"]["kaishun_therapists"] = len(th)
 
 
 def run(ctx) -> None:

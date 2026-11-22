@@ -463,6 +463,7 @@ def parse_therapist(item: dict) -> dict | None:
         "age": int(m.group(2)),
         "time": f"{t.group(1)}〜{t.group(2)}" if t else "",
         "now": "出勤中" in text or "待機中" in text,
+        "state": "now" if "待機中" in text else ("busy" if "接客中" in text or "案内中" in text else ""),
         "img": item.get("img") or "",
         "url": item["href"],
     }
@@ -535,6 +536,28 @@ def main() -> int:
     shops = json.loads(SHOPS.read_text(encoding="utf-8"))
     skip_photos = "--no-photos" in sys.argv
 
+    if "--only-today" in sys.argv:
+        # 出勤情報だけを取り直す(1時間ごとの実行用)
+        global LOG
+        LOG = DATA / "last_today_run.json"
+        try:
+            therapists = []
+            for A in AREAS:
+                therapists += scrape_today(shops, A["schedule"])
+            TODAY.write_text(json.dumps({"updated": NOW.isoformat(), "therapists": therapists},
+                                        ensure_ascii=False, indent=1), encoding="utf-8")
+            log["steps"]["therapists"] = len(therapists)
+        except Exception as e:  # noqa: BLE001
+            log["errors"].append(f"出勤取得失敗: {e}")
+        try:
+            import kaishun
+            kaishun.run_today(sys.modules[__name__])
+        except Exception as e:  # noqa: BLE001
+            log["errors"].append(f"回春 出勤取得失敗: {e}")
+        log["finished"] = datetime.now(JST).isoformat()
+        LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(json.dumps(log, ensure_ascii=False, indent=1))
+        return 0
     if "--only-kaishun" in sys.argv:
         import kaishun
         kaishun.run(sys.modules[__name__])

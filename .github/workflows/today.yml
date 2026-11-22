@@ -1,0 +1,38 @@
+name: 出勤情報の更新(1時間ごと)
+
+on:
+  schedule:
+    - cron: "17 3-19 * * *"   # 毎時17分、日本時間 12:17〜翌4:17
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update
+  cancel-in-progress: false
+
+jobs:
+  today:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: 必要なものを入れる
+        run: |
+          pip install -r scraper/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: 出勤情報を取り直す
+        run: python scraper/update.py --only-today
+      - name: 結果を保存
+        run: |
+          git config user.name "update-bot"
+          git config user.email "update-bot@users.noreply.github.com"
+          git add docs/data/today.json docs/data/kaishun_today.json docs/data/last_today_run.json
+          if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
+          git commit -m "出勤情報 $(TZ=Asia/Tokyo date '+%m/%d %H:%M')"
+          git pull --rebase -X theirs origin main || true
+          git push
