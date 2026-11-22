@@ -38,4 +38,5 @@ jobs:
           if [ -d docs/shots ]; then git add docs/shots; fi
           if git diff --cached --quiet; then echo "変更なし"; exit 0; fi
           git commit -m "データ更新 $(TZ=Asia/Tokyo date +%Y-%m-%d)"
+          git pull --rebase -X theirs origin main || true
           git push

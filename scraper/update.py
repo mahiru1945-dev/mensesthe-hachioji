@@ -281,7 +281,7 @@ def check_hp(url: str) -> tuple[bool | None, str, str]:
     return True, f"HTTP {r.status_code}", r.text
 
 
-def check_all(shops: list[dict]) -> None:
+def check_all(shops: list[dict], key: str = "hp_check") -> None:
     import urllib3
 
     urllib3.disable_warnings()
@@ -316,7 +316,7 @@ def check_all(shops: list[dict]) -> None:
             if gone >= 30:
                 s["status"] = "閉店の疑い"
                 s["http"] = f"まとめサイトから{gone}日掲載なし"
-    log["steps"]["hp_check"] = {"ok": ok, "ng": ng, "unknown": unk}
+    log["steps"][key] = {"ok": ok, "ng": ng, "unknown": unk}
 
 
 # ---------------------------------------------------------------- 2b. 公式HPをブラウザで開く
@@ -325,7 +325,7 @@ GATE = r"ENTER|Enter|enter|ＥＮＴＥＲ|入場|入口|入り口|18歳以上|�
 CLOSED_TEXT = r"閉店いたしました|閉店しました|営業を終了|サービスを終了|このドメインは|ドメインの有効期限"
 
 
-def browse_all(shops: list[dict]) -> None:
+def browse_all(shops: list[dict], key: str = "browse") -> None:
     """まとめサイトに載っている公式HPのリンクを、本物のブラウザで開けるか確かめる。"""
     from playwright.sync_api import sync_playwright
 
@@ -387,7 +387,7 @@ def browse_all(shops: list[dict]) -> None:
             else:
                 ng += 1
         browser.close()
-    log["steps"]["browse"] = {"ok": ok, "ng": ng, "age_gate_passed": gates, "new_screenshots": shots}
+    log["steps"][key] = {"ok": ok, "ng": ng, "age_gate_passed": gates, "new_screenshots": shots}
 
 
 # ---------------------------------------------------------------- 口コミ・摘発報道
@@ -558,6 +558,12 @@ def main() -> int:
             therapists = therapists or None
 
     SHOPS.write_text(json.dumps(shops, ensure_ascii=False, indent=1), encoding="utf-8")
+    if "--no-kaishun" not in sys.argv:
+        try:
+            import kaishun
+            kaishun.run(sys.modules[__name__])
+        except Exception as e:  # noqa: BLE001
+            log["errors"].append(f"回春エステの更新失敗: {e}")
     if therapists is not None:
         TODAY.write_text(json.dumps({"updated": NOW.isoformat(), "therapists": therapists},
                                     ensure_ascii=False, indent=1), encoding="utf-8")

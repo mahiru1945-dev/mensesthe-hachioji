@@ -29,6 +29,9 @@ img{max-width:100%}
 header{padding-block:18px 8px}
 h1{font-size:1.4rem;margin:0;font-weight:700}
 .sub{color:var(--muted);margin:4px 0 0;font-size:.82rem}
+.genre{display:flex;gap:4px;margin-bottom:10px;border-bottom:1px solid var(--line)}
+.genre a{padding:6px 12px;text-decoration:none;color:var(--muted);font-weight:500;border-bottom:2px solid transparent;margin-bottom:-1px}
+.genre a[aria-current="page"]{color:var(--fg);border-color:var(--accent)}
 .tabs{display:flex;gap:6px;margin-top:12px}
 .tabs button{font:inherit;font-weight:500;border:1px solid var(--line);background:var(--surface);color:var(--fg);padding:7px 14px;border-radius:99px;cursor:pointer}
 .tabs button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
@@ -97,7 +100,8 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
 </head>
 <body>
 <header class="wrap">
-  <h1>八王子・立川エリア メンズエステ一覧</h1>
+  <nav class="genre" aria-label="ジャンル"><a href="#" id="g-mens">メンズエステ</a><a href="#kaishun" id="g-kaishun">回春エステ</a></nav>
+  <h1 id="h1">八王子・立川エリア メンズエステ一覧</h1>
   <p class="sub" id="updated">読み込み中…</p>
   <div class="tabs" role="group" aria-label="表示切替">
     <button id="tab-shops" aria-pressed="true">店舗一覧</button>
@@ -113,6 +117,7 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
   <select id="tag" aria-label="タグ"><option value="">すべてのタグ</option></select>
   <label class="chk"><input type="checkbox" id="hideClosed" checked> 閉店を隠す</label>
   <label class="chk"><input type="checkbox" id="onlyAlert"> 注意ありのみ</label>
+  <label class="chk" id="localWrap" hidden><input type="checkbox" id="onlyLocal" checked> 八王子・立川発のみ</label>
   <span class="count" id="count"></span>
 </div></div>
 <main class="wrap">
@@ -127,6 +132,8 @@ const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const yen=p=>{const m=/(\d+)分\s*([\d,]+)円/.exec(p||"");return m?Math.round(+m[2].replace(/,/g,"")/(+m[1])*60):1e9};
 let SHOPS=[],THER=[],NEWS=[],view="shops";
+const GENRE=location.hash==="#kaishun"?"kaishun":"mens";
+addEventListener("hashchange",()=>location.reload());
 const TAGS={"衣装":["マイクロビキニ","ベビードール","ノーブラ","ノーパン","紙パンツ","コスプレ"],"施術":["鼠径部","ディープリンパ","密着","マーメイド","カエル足","四つん這い","フェザータッチ","ホイップ","パウダー","洗体","Wセラピ"]};
 const hasAlert=s=>(s.raids&&s.raids.length)||(s.reviews&&s.reviews.trouble_flag);
 const byShop={};
@@ -135,11 +142,12 @@ function statusTag(s){
   return m?`<span class="tag ${m}" title="${esc(s.http||"")}">${esc(s.status)}</span>`:"";
 }
 function typeTag(t){if(!t)return"";return `<span class="tag ${t.includes("アジアン")?"as":"jp"}">${esc(t)}</span>`}
-function areaTag(s){return `<span class="tag">${esc(s.area||"八王子")}</span>`}
+function areaTag(s){if(GENRE==="kaishun")return `<span class="tag${s.local?" ok":""}">${esc(s.local?"地元発":"遠方発")}</span>`+(s.kind?`<span class="tag">${esc(s.kind)}</span>`:"");return `<span class="tag">${esc(s.area||"八王子")}</span>`}
 function photo(src,alt){return src?`<img class="ph" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph'}))">`:`<span class="ph"></span>`}
-function filters(){return{area:$("#area").value,q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
+function filters(){return{local:GENRE==="kaishun"&&$("#onlyLocal").checked,area:$("#area").value,q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
 function shopOk(s,f){
   if(f.hide&&s.status==="閉店")return false;
+  if(f.local&&!s.local)return false;
   if(f.area&&(s.area||"八王子")!==f.area)return false;
   if(f.ty&&!(s.type||"").includes(f.ty))return false;
   if(f.tag&&!(s.tags||[]).includes(f.tag))return false;
@@ -174,6 +182,7 @@ function renderShops(){
       <div class="links">
         ${s.hp?`<a class="hp" href="${esc(s.hp)}" target="_blank" rel="noopener noreferrer">公式HPを開く</a>`:""}
         ${ther?`<a href="${esc(ther)}" target="_blank" rel="noopener noreferrer">出勤ページ</a>`:""}
+        ${Object.entries(s.pages||{}).map(([k,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(k)}</a><a href="${esc(u.replace(/\/?$/,"/schedule/"))}" target="_blank" rel="noopener noreferrer">出勤表</a>`).join("")}
         ${s.go?`<a href="${esc(s.go)}" target="_blank" rel="noopener noreferrer">口コミ${s.rev?`（${s.rev}件）`:""}</a>`:""}
       </div>
       <div class="foot">${s.note&&s.note!=="新着"?`<span class="note">${esc(s.note)}</span>　`:""}掲載：${s.src.map(esc).join("・")}${s.browse?`　ブラウザ確認 ${esc(s.browse.date)}：${s.browse.ok?"開けた"+(s.browse.gate?"（年齢確認を通過）":""):"開けない（"+esc(s.browse.why)+"）"}`:s.last_check?`　HP確認 ${esc(s.last_check)}（${esc(s.http||"")}）`:""}</div>
@@ -216,8 +225,11 @@ function render(){view==="shops"?renderShops():view==="today"?renderToday():rend
 function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#tag").hidden=v==="tags";render()}
 $("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");$("#tab-tags").onclick=()=>setView("tags");
 $("#tag").insertAdjacentHTML("beforeend",Object.entries(TAGS).map(([g,ts])=>`<optgroup label="${g}">${ts.map(t=>`<option>${t}</option>`).join("")}</optgroup>`).join(""));
-["#q","#area","#type","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
-Promise.all([fetch("data/shops.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/today.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]}))]).then(([shops,today,news])=>{
+["#q","#area","#type","#onlyLocal","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
+const F=GENRE==="kaishun"?["kaishun.json","kaishun_today.json"]:["shops.json","today.json"];
+$("#g-"+GENRE).setAttribute("aria-current","page");
+if(GENRE==="kaishun"){document.title="八王子・立川 回春エステ一覧";$("#h1").textContent="八王子・立川エリア 回春エステ一覧";$("#localWrap").hidden=false;$("#area").hidden=true;$("#type").hidden=true;$("#tab-tags").hidden=true;$("footer").textContent="情報元：風俗じゃぱん／ランキングデリ／シティヘブン（取れた日のみ）。八王子のページには都内各地から派遣する店も載るため、拠点が八王子・立川周辺の店を「地元発」としています。公式HPに3日続けてつながらない店は「閉店」。";}
+Promise.all([fetch("data/"+F[0],{cache:"no-store"}).then(r=>r.json()).catch(()=>[]),fetch("data/"+F[1],{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]}))]).then(([shops,today,news])=>{
   SHOPS=shops;THER=today.therapists||[];NEWS=news.items||[];
   THER.forEach(t=>(byShop[t.shop_id]=byShop[t.shop_id]||[]).push(t));
   const c=k=>SHOPS.filter(s=>s.status===k).length;
