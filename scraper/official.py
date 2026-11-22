@@ -120,7 +120,12 @@ def scrape_official(ctx, shops: list[dict], js_cards: str, gate_re: str, label: 
                 })
                 got.append(d)
             uniq = {(g["name"], g["age"]): g for g in got}
-            if 0 < len(uniq) <= 150:
+            timed = sum(1 for g in uniq.values() if g["time"] or g["state"])
+            # 時間も状態も書かれていない大人数のリストは「在籍一覧」とみなして使わない
+            roster = len(uniq) > 30 and timed < len(uniq) * 0.3
+            if roster:
+                ctx.log["steps"].setdefault(f"{label}_official_roster_skipped", []).append(s["name"])
+            if 0 < len(uniq) <= 150 and not roster:
                 out += list(uniq.values())
                 ok += 1
             pg.close()
