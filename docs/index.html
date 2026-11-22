@@ -199,7 +199,7 @@ function renderTags(){
   $("#count").textContent="";
   $("#tagview").innerHTML=Object.entries(TAGS).map(([g,ts])=>`<section><h2>${g}</h2><div class="chips">${ts.map(t=>`<button class="chip" data-tag="${esc(t)}" data-go="1">${esc(t)}<small>${cnt(t)}</small></button>`).join("")}</div></section>`).join("")+
   `<section><h2>注意表示のある店（${al.length}）</h2><div class="chips">${al.map(s=>`<button class="chip" data-shop="${esc(s.name)}">${esc(s.name)}</button>`).join("")||"<span class='active-tag'>今のところありません</span>"}</div></section>`+
-  `<section><h2>メンズエステ関連の摘発ニュース（八王子・日野）</h2><ul class="news">${NEWS.map(n=>`<li><time>${esc(new Date(n.date).toLocaleDateString("ja-JP"))}</time><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></li>`).join("")||"<li class='active-tag'>次回の自動更新後に表示されます</li>"}</ul></section>`;
+  `<section><h2>最近のメンズエステ摘発ニュース（全国）</h2><ul class="news">${NEWS.map(n=>`<li><time>${esc(new Date(n.date).toLocaleDateString("ja-JP"))}</time><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></li>`).join("")||"<li class='active-tag'>次回の自動更新後に表示されます</li>"}</ul></section>`;
 }
 document.addEventListener("click",e=>{
   const b=e.target.closest(".chip");if(!b)return;
