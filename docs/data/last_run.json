@@ -1,5 +1,5 @@
 {
- "started": "2026-11-22T17:33:24.607859+09:00",
+ "started": "2026-11-23T06:26:06.974051+09:00",
  "steps": {
   "er_list_八王子": 43,
   "go_list_八王子": 58,
@@ -8,13 +8,13 @@
   "go_list_立川": 40,
   "added_立川": 0,
   "hp_check": {
-   "ok": 131,
-   "ng": 8,
-   "unknown": 4
+   "ok": 129,
+   "ng": 7,
+   "unknown": 5
   },
   "browse_schedule_found": 69,
   "browse": {
-   "ok": 127,
+   "ok": 125,
    "ng": 16,
    "age_gate_passed": 1,
    "new_screenshots": 0
@@ -24,45 +24,45 @@
    "trouble_flag": 1
   },
   "news": {
-   "articles": 12,
+   "articles": 11,
    "shop_matches": 0
   },
   "schedule_pages": 2,
-  "therapists": 395,
-  "therapists_with_photo": 395,
+  "therapists": 447,
+  "therapists_with_photo": 447,
   "kaishun_fuzoku": 55,
-  "kaishun_rdeli": 33,
+  "kaishun_rdeli": 32,
   "kaishun_heaven": 0,
-  "kaishun_added": 3,
+  "kaishun_added": 2,
   "kaishun_hp_check": {
-   "ok": 53,
+   "ok": 58,
    "ng": 3,
-   "unknown": 14
+   "unknown": 11
   },
   "kaishun_browse_schedule_found": 27,
   "kaishun_browse": {
-   "ok": 56,
+   "ok": 58,
    "ng": 8,
    "age_gate_passed": 33,
-   "new_screenshots": 1
+   "new_screenshots": 2
   },
-  "kaishun_therapists": 66,
-  "kaishun_shops": 70,
+  "kaishun_therapists": 49,
+  "kaishun_shops": 72,
   "kaishun_local": 6,
   "mens_official": {
    "schedule_pages": 69,
    "opened": 69,
    "shops_with_girls": 11,
-   "girls": 90
+   "girls": 86
   },
   "kaishun_official": {
    "schedule_pages": 3,
    "opened": 3,
    "shops_with_girls": 1,
-   "girls": 125
+   "girls": 1
   }
  },
  "errors": [],
- "finished": "2026-11-22T18:20:35.002994+09:00",
+ "finished": "2026-11-23T07:11:40.165239+09:00",
  "shops": 143
 }
