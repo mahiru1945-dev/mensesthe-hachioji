@@ -54,6 +54,7 @@ def _row(name, url, text, src):
     today = re.search(r"(?:本日出勤|出勤)\s*(\d+)\s*(?:人|名)", text)
     kind = "店舗型" if re.search(r"店舗型|受付型|店舗・受付", text) else ("派遣型" if re.search(r"派遣|デリヘル|発", text) else "")
     base = re.search(r"[（(]([^（）()]{1,20}?)発[)）]", text)
+    paren = " ".join(re.findall(r"[（(]([^（）()]{1,25})[)）]", text[:250]))
     return {
         "name": name, "page": url, "src": src, "text": text[:400],
         "hours": f"{t.group(1)}～{t.group(2)}" if t else "",
@@ -62,6 +63,7 @@ def _row(name, url, text, src):
         "today": int(today.group(1)) if today else None,
         "kind": kind,
         "base": (base.group(1) + "発") if base else "",
+        "paren": paren,
     }
 
 
@@ -75,7 +77,7 @@ def scrape_fuzoku(get) -> list[dict]:
         m = re.fullmatch(r"https://fuzoku\.jp/([a-z0-9_\-]+)/", href)
         name = a.get_text(" ", strip=True)
         if not m or m.group(1) in ("tokyo", "kanagawa", "saitama", "chiba") or not name or len(name) > 60 or href in seen \
-                or re.search(r"詳細|もっと|一覧|予約|求人|クーポン|地図", name):
+                or re.search(r"詳細|もっと|一覧|予約|求人|クーポン|地図|マイページ|ログイン|会員", name):
             continue
         blk = _block(a)
         text = blk.get_text(" ", strip=True)
@@ -133,7 +135,8 @@ def scrape_heaven() -> list[dict]:
     return out
 
 
-HP_WORDS = re.compile(r"公式|オフィシャル|ホームページ|^HP$|Official", re.I)
+HP_WORDS = re.compile(r"公式|オフィシャル|ホームページ|\bHP\b|Official", re.I)
+ROW_WORDS = re.compile(r"ホームページ|^\s*URL\s*$|公式|オフィシャル|^\s*HP\s*$", re.I)
 AGGREGATORS = ("fuzoku.jp", "ranking-deli.jp", "cityheaven.net", "dto.jp", "fujoho.jp", "twitter.com", "x.com",
                "line.me", "instagram.com", "google.", "yahoo.", "qzin", "kaikatsu", "girlsheaven", "yoasobi")
 
@@ -143,13 +146,23 @@ def find_hp(get, page: str) -> str:
         soup = BeautifulSoup(get(page, timeout=20).text, "html.parser")
     except Exception:  # noqa: BLE001
         return ""
+    def external(a):
+        href = urljoin(page, a.get("href", ""))
+        net = urlparse(href).netloc
+        return href if href.startswith("http") and net and not any(x in net for x in AGGREGATORS) else ""
+
+    # 1) 店舗情報の表で「ホームページ」「URL」欄にあるリンク
+    for row in soup.select("tr, dl"):
+        head = row.find(["th", "dt"])
+        if head and ROW_WORDS.search(head.get_text(" ", strip=True)):
+            for a in row.find_all("a", href=True):
+                if external(a):
+                    return external(a)
+    # 2) 「HP」「公式」などと書かれたリンク
     for a in soup.find_all("a", href=True):
-        href = a["href"]
-        if not href.startswith("http") or any(x in urlparse(href).netloc for x in AGGREGATORS):
-            continue
         label = a.get_text(" ", strip=True) + " " + (a.get("title") or "") + " " + " ".join(i.get("alt", "") for i in a.find_all("img"))
-        if HP_WORDS.search(label.strip()):
-            return href
+        if external(a) and HP_WORDS.search(label):
+            return external(a)
     return ""
 
 
@@ -199,11 +212,14 @@ def merge(ctx, shops: list[dict]) -> None:
             s["today"] = row["today"]
         if row.get("base"):
             s["base"] = row["base"]
-        local = bool(LOCAL_WORDS.search(row.get("base", "") or "")) or row.get("area_no") in RDELI_LOCAL_AREAS \
-            or bool(LOCAL_WORDS.search(row["name"]))
-        if row["src"] == "風俗じゃぱん" and not row.get("base"):
-            local = local or bool(LOCAL_WORDS.search(row["text"][:200]))
-        s["local"] = bool(s.get("local")) or local
+        # 地元発: 店名・発着表記・ランキングデリのエリア番号のどれかが八王子/立川周辺
+        if row["src"] == "ランキングデリ":
+            local = row.get("area_no") in RDELI_LOCAL_AREAS
+        else:
+            local = bool(LOCAL_WORDS.search(row.get("base") or row.get("paren") or ""))
+        local = local or bool(LOCAL_WORDS.search(row["name"]))
+        s.setdefault("local_votes", {})[row["src"]] = local
+        s["local"] = any(s["local_votes"].values())
         s["station"] = s.get("base") or ("八王子・立川周辺" if s["local"] else "都内から派遣")
         by_page[row["page"]] = s
         by_name[norm_name(row["name"])] = s

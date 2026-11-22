@@ -535,6 +535,13 @@ def main() -> int:
     shops = json.loads(SHOPS.read_text(encoding="utf-8"))
     skip_photos = "--no-photos" in sys.argv
 
+    if "--only-kaishun" in sys.argv:
+        import kaishun
+        kaishun.run(sys.modules[__name__])
+        log["finished"] = datetime.now(JST).isoformat()
+        LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(json.dumps(log, ensure_ascii=False, indent=1))
+        return 0
     for s in shops:
         s.setdefault("area", "八王子")
     for A in AREAS:
