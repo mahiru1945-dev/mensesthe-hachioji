@@ -1,5 +1,5 @@
 {
- "started": "2026-11-22T13:28:29.787422+09:00",
+ "started": "2026-11-22T13:44:41.600548+09:00",
  "steps": {
   "er_list": 43,
   "go_list": 58,
@@ -9,11 +9,19 @@
    "ng": 6,
    "unknown": 3
   },
+  "reviews": {
+   "shops": 58,
+   "trouble_flag": 0
+  },
+  "news": {
+   "articles": 12,
+   "shop_matches": 0
+  },
   "schedule_pages": 1,
   "therapists": 239,
   "therapists_with_photo": 239
  },
  "errors": [],
- "finished": "2026-11-22T13:30:47.674931+09:00",
+ "finished": "2026-11-22T13:54:49.008908+09:00",
  "shops": 87
 }
