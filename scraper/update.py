@@ -21,11 +21,15 @@ from urllib.parse import urljoin, urlparse
 import requests
 from bs4 import BeautifulSoup
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import extras  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
 SHOPS = DATA / "shops.json"
 TODAY = DATA / "today.json"
 LOG = DATA / "last_run.json"
+NEWS = DATA / "news.json"
 
 JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
@@ -116,6 +120,7 @@ def scrape_er_list() -> list[dict]:
             "phone": tel["href"].replace("tel:", "") if tel else "",
             "today": int(today.group(1)) if today else None,
             "ther": int(ther.group(1)) if ther else None,
+            "tags": extras.tag_text(text),
         })
     return out
 
@@ -190,6 +195,7 @@ def merge_lists(shops: list[dict]) -> None:
         s["er"] = s.get("er") or row["er"]
         for k in ("today", "ther"):
             s[k] = row[k]
+        s["list_tags"] = row["tags"]
         for k in ("station", "hours", "price", "phone"):
             if row[k] and not s.get(k):
                 s[k] = row[k]
@@ -237,31 +243,32 @@ def new_shop(er: str = "", go: str = "", name: str = "") -> dict:
 
 # ---------------------------------------------------------------- 2. 閉店チェック
 
-def check_hp(url: str) -> tuple[bool | None, str]:
+def check_hp(url: str) -> tuple[bool | None, str, str]:
     """True=つながった / False=つながらない / None=判断できない(ボット拒否など)。"""
     if not url:
-        return None, "HPなし"
+        return None, "HPなし", ""
     try:
         r = polite_get(url, allow_redirects=True, timeout=20)
     except requests.exceptions.SSLError:
         try:
             r = requests.get(url, headers=HEADERS, timeout=20, verify=False)
         except Exception as e:  # noqa: BLE001
-            return False, f"接続できない({type(e).__name__})"
+            return False, f"接続できない({type(e).__name__})", ""
     except requests.exceptions.ConnectionError:
-        return False, "接続できない(ドメイン消失の可能性)"
+        return False, "接続できない(ドメイン消失の可能性)", ""
     except requests.exceptions.Timeout:
-        return None, "タイムアウト"
+        return None, "タイムアウト", ""
     except Exception as e:  # noqa: BLE001
-        return None, type(e).__name__
+        return None, type(e).__name__, ""
     if r.status_code in (404, 410):
-        return False, f"HTTP {r.status_code}"
+        return False, f"HTTP {r.status_code}", ""
     if r.status_code in (401, 403, 429) or r.status_code >= 500:
-        return None, f"HTTP {r.status_code}"
+        return None, f"HTTP {r.status_code}", ""
     body = r.text[:20000]
     if re.search(r"閉店いたしました|閉店しました|営業を終了|サービスを終了|このドメインは|ドメインの有効期限", body):
-        return False, "閉店・ドメイン切れの表示"
-    return True, f"HTTP {r.status_code}"
+        return False, "閉店・ドメイン切れの表示", ""
+    r.encoding = r.apparent_encoding or r.encoding
+    return True, f"HTTP {r.status_code}", r.text
 
 
 def check_all(shops: list[dict]) -> None:
@@ -271,7 +278,13 @@ def check_all(shops: list[dict]) -> None:
     ok = ng = unk = 0
     # 同じホストが続かないよう、ホスト名で並べ替えて順番にアクセス
     for s in sorted(shops, key=lambda x: urlparse(x.get("hp") or "").netloc):
-        alive, why = check_hp(s.get("hp", ""))
+        alive, why, html = check_hp(s.get("hp", ""))
+        if alive:
+            try:
+                text = extras.collect_hp_text(polite_get, s["hp"], html)
+                s["tags"] = extras.tag_text(text)
+            except Exception as e:  # noqa: BLE001
+                log["errors"].append(f"タグ付け失敗 {s['name']}: {e}")
         s["last_check"] = TODAY_STR
         s["http"] = why
         if alive is True:
@@ -294,6 +307,36 @@ def check_all(shops: list[dict]) -> None:
                 s["status"] = "閉店の疑い"
                 s["http"] = f"まとめサイトから{gone}日掲載なし"
     log["steps"]["hp_check"] = {"ok": ok, "ng": ng, "unknown": unk}
+
+
+# ---------------------------------------------------------------- 口コミ・摘発報道
+
+def update_reviews(shops: list[dict]) -> None:
+    n = flagged = 0
+    for s in shops:
+        if not s.get("go"):
+            continue
+        try:
+            r = polite_get(s["go"])
+            r.encoding = "utf-8"
+            summ = extras.summarize_reviews(extras.parse_reviews(r.text), NOW)
+        except Exception as e:  # noqa: BLE001
+            log["errors"].append(f"口コミ取得失敗 {s['name']}: {e}")
+            continue
+        s["reviews"] = summ
+        if summ["count"]:
+            s["rev"] = summ["count"]
+        n += 1
+        flagged += summ["trouble_flag"]
+    log["steps"]["reviews"] = {"shops": n, "trouble_flag": flagged}
+
+
+def update_news(shops: list[dict]) -> None:
+    news = extras.fetch_news(polite_get)
+    hits = extras.match_news(shops, news)
+    keep = [x for x in news if re.search(r"逮捕|摘発|容疑|書類送検", x["title"])]
+    NEWS.write_text(json.dumps({"updated": NOW.isoformat(), "items": keep[:40]}, ensure_ascii=False, indent=1), encoding="utf-8")
+    log["steps"]["news"] = {"articles": len(news), "shop_matches": hits}
 
 
 # ---------------------------------------------------------------- 3. 出勤写真
@@ -367,6 +410,14 @@ def scrape_today(shops: list[dict]) -> list[dict]:
                 if y >= h and h == last:
                     break
                 last = h
+            # 「もっと見る」系のボタンがあれば押して全員出す
+            for _ in range(20):
+                btn = page.locator("text=/もっと見る|さらに表示|もっと表示|次の\\d+件/").first
+                if btn.count() == 0 or not btn.is_visible():
+                    break
+                btn.click()
+                page.wait_for_timeout(1500)
+                page.mouse.wheel(0, 4000)
             page.wait_for_timeout(1500)
             for item in page.evaluate(JS_COLLECT):
                 t = parse_therapist(item)
@@ -403,6 +454,13 @@ def main() -> int:
 
     merge_lists(shops)
     check_all(shops)
+    for step in (update_reviews, update_news):
+        try:
+            step(shops)
+        except Exception as e:  # noqa: BLE001
+            log["errors"].append(f"{step.__name__} 失敗: {e}")
+    for s in shops:
+        s["tags"] = sorted(set(s.get("tags") or []) | set(s.get("list_tags") or []), key=list(extras.TAGS).index)
 
     therapists = None
     if not skip_photos:

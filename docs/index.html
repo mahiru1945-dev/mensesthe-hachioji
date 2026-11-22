@@ -67,6 +67,27 @@ ul.list{list-style:none;margin:0;padding:8px 0 40px;display:grid;gap:8px}
 .card b{font-size:.95rem}
 .card .s{font-size:.72rem;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card .t{font-family:var(--f-mono);font-size:.75rem;color:var(--ok)}
+.chips{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:5px}
+.chip{font:inherit;font-size:.72rem;border:1px solid var(--line);background:var(--bg);color:var(--fg);padding:2px 9px;border-radius:99px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.alert{grid-column:1/-1;border:1px solid var(--bad);border-left-width:4px;border-radius:6px;padding:8px 10px;font-size:.8rem;display:grid;gap:4px}
+.alert.warn{border-color:var(--warn)}
+.alert b{color:var(--bad)} .alert.warn b{color:var(--warn)}
+.alert a{color:inherit}
+.alert q{color:var(--muted)}
+details.rev{grid-column:1/-1;font-size:.8rem}
+details.rev summary{cursor:pointer;color:var(--muted)}
+details.rev p{margin:6px 0 0;padding-left:10px;border-left:2px solid var(--line)}
+details.rev time{font-family:var(--f-mono);color:var(--muted);font-size:.72rem;margin-right:6px}
+.tagview{padding:10px 0 40px;display:grid;gap:18px}
+.tagview h2{font-size:1rem;margin:0 0 8px}
+.tagview .chips button{font-size:.85rem;padding:5px 12px}
+.tagview .chips small{font-family:var(--f-mono);color:var(--muted);margin-left:4px}
+.chip[aria-pressed="true"] small{color:inherit}
+.news{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.82rem}
+.news a{color:var(--fg)}
+.news time{font-family:var(--f-mono);color:var(--muted);font-size:.72rem;margin-right:6px}
+.active-tag{font-size:.8rem;color:var(--muted)}
 .empty{text-align:center;color:var(--muted);padding:40px 0;grid-column:1/-1}
 footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
 @media (max-width:520px){.shop{grid-template-columns:minmax(0,1fr)} .num{grid-column:1;grid-row:auto;text-align:left}.num .today{display:inline;margin-right:6px}}
@@ -79,26 +100,32 @@ footer{font-size:.75rem;color:var(--muted);padding-bottom:30px}
   <div class="tabs" role="group" aria-label="表示切替">
     <button id="tab-shops" aria-pressed="true">店舗一覧</button>
     <button id="tab-today" aria-pressed="false">本日出勤</button>
+    <button id="tab-tags" aria-pressed="false">タグ・注意</button>
   </div>
 </header>
 <div class="bar"><div class="wrap">
   <input id="q" type="search" placeholder="店名・駅・名前で検索" aria-label="検索">
   <select id="type" aria-label="種類"><option value="">すべての種類</option><option value="日本人">日本人</option><option value="アジアン">アジアン</option><option value="出張">出張あり</option></select>
   <select id="sort" aria-label="並び替え"><option value="today">本日出勤が多い順</option><option value="src">掲載サイト数順</option><option value="rev">口コミ数順</option><option value="cheap">安い順</option><option value="name">名前順</option></select>
+  <select id="tag" aria-label="タグ"><option value="">すべてのタグ</option></select>
   <label class="chk"><input type="checkbox" id="hideClosed" checked> 閉店を隠す</label>
+  <label class="chk"><input type="checkbox" id="onlyAlert"> 注意ありのみ</label>
   <span class="count" id="count"></span>
 </div></div>
 <main class="wrap">
   <div class="stats" id="stats"></div>
   <ul class="list" id="list"></ul>
   <div class="grid" id="grid" hidden></div>
-  <footer>情報元：エステ魂ランキング／ゴーメンズエステ／サロンガイド／メンズエステマガジン。公式HPに3日続けてつながらない店を「閉店」、1〜2日は「閉店の疑い」にしています。個人利用のための一覧です。</footer>
+  <div class="tagview" id="tagview" hidden></div>
+  <footer>情報元：エステ魂ランキング／ゴーメンズエステ／サロンガイド／メンズエステマガジン。公式HPに3日続けてつながらない店を「閉店」、1〜2日は「閉店の疑い」にしています。タグは各店の公式HPと掲載ページに書かれた言葉から自動で付けています。注意表示は、店名が出た摘発・逮捕報道と、直近1年に追加料金・時間短縮などのトラブル口コミが2件以上ある店に出します。個人利用のための一覧です。</footer>
 </main>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const yen=p=>{const m=/(\d+)分\s*([\d,]+)円/.exec(p||"");return m?Math.round(+m[2].replace(/,/g,"")/(+m[1])*60):1e9};
-let SHOPS=[],THER=[],view="shops";
+let SHOPS=[],THER=[],NEWS=[],view="shops";
+const TAGS={"衣装":["マイクロビキニ","ベビードール","ノーブラ","ノーパン","紙パンツ","コスプレ"],"施術":["鼠径部","ディープリンパ","密着","マーメイド","カエル足","四つん這い","フェザータッチ","ホイップ","パウダー","洗体","Wセラピ"]};
+const hasAlert=s=>(s.raids&&s.raids.length)||(s.reviews&&s.reviews.trouble_flag);
 const byShop={};
 function statusTag(s){
   const m={"営業中":"ok","閉店の疑い":"warn","閉店":"bad","要確認":"warn"}[s.status];
@@ -106,10 +133,12 @@ function statusTag(s){
 }
 function typeTag(t){if(!t)return"";return `<span class="tag ${t.includes("アジアン")?"as":"jp"}">${esc(t)}</span>`}
 function photo(src,alt){return src?`<img class="ph" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph'}))">`:`<span class="ph"></span>`}
-function filters(){return{q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked}}
+function filters(){return{q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
 function shopOk(s,f){
   if(f.hide&&s.status==="閉店")return false;
   if(f.ty&&!(s.type||"").includes(f.ty))return false;
+  if(f.tag&&!(s.tags||[]).includes(f.tag))return false;
+  if(f.alert&&!hasAlert(s))return false;
   return true;
 }
 function renderShops(){
@@ -133,6 +162,9 @@ function renderShops(){
       </div>
       <div class="num">${n!=null?`<span class="today${n?"":" zero"}">${n}</span>本日出勤`:"出勤 −"}${s.ther?`<br>在籍 ${s.ther}名`:""}</div>
       ${th.length?`<div class="strip">${th.map(t=>`<a class="mini" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<span>${esc(t.name)}(${t.age})</span><span>${esc(t.time)}</span></a>`).join("")}</div>`:""}
+      ${alerts(s)}
+      ${(s.tags||[]).length?`<div class="chips">${s.tags.map(t=>`<button class="chip" data-tag="${esc(t)}" aria-pressed="${t===$("#tag").value}">${esc(t)}</button>`).join("")}</div>`:""}
+      ${reviews(s)}
       <div class="links">
         ${s.hp?`<a class="hp" href="${esc(s.hp)}" target="_blank" rel="noopener noreferrer">公式HPを開く</a>`:""}
         ${ther?`<a href="${esc(ther)}" target="_blank" rel="noopener noreferrer">出勤ページ</a>`:""}
@@ -149,17 +181,43 @@ function renderToday(){
   $("#count").textContent=rows.length+" 人";
   $("#grid").innerHTML=rows.length?rows.map(t=>`<a class="card" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<b>${esc(t.name)} <small>(${t.age})</small></b><span class="t">${t.now?"出勤中 ":""}${esc(t.time)}</span><span class="s">${esc(t.shop_name)}</span></a>`).join(""):`<div class="empty">本日出勤のデータがまだありません。毎朝の自動更新後に表示されます。</div>`;
 }
-function render(){view==="shops"?renderShops():renderToday()}
-function setView(v){view=v;$("#tab-shops").setAttribute("aria-pressed",v==="shops");$("#tab-today").setAttribute("aria-pressed",v==="today");$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#sort").hidden=v!=="shops";render()}
-$("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");
-["#q","#type","#sort","#hideClosed"].forEach(s=>$(s).addEventListener("input",render));
-Promise.all([fetch("data/shops.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/today.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]}))]).then(([shops,today])=>{
-  SHOPS=shops;THER=today.therapists||[];
+function alerts(s){
+  let h="";
+  if(s.raids&&s.raids.length)h+=`<div class="alert"><b>摘発・逮捕の報道あり</b>${s.raids.map(r=>`<a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">${esc(r.title)}</a>`).join("")}</div>`;
+  const rv=s.reviews;
+  if(rv&&rv.trouble_flag)h+=`<div class="alert warn"><b>トラブルの口コミ ${rv.trouble.length}件（直近1年）</b>${rv.trouble.map(t=>`<span><time>${esc(t.date)}</time>「${esc(t.word)}」${t.text?` <q>${esc(t.text)}</q>`:""}</span>`).join("")}</div>`;
+  return h;
+}
+function reviews(s){
+  const rv=s.reviews;if(!rv||!rv.count)return"";
+  return `<details class="rev"><summary>口コミ ${rv.count}件（直近1年 ${rv.recent_1y}件・最新 ${esc(rv.last||"−")}）</summary>${rv.snippets.map(x=>`<p><time>${esc(x.date)}</time>${esc(x.text)}</p>`).join("")||"<p>表示できる抜粋はありません。</p>"}</details>`;
+}
+function renderTags(){
+  const f=filters();const base=SHOPS.filter(s=>!(f.hide&&s.status==="閉店"));
+  const cnt=t=>base.filter(s=>(s.tags||[]).includes(t)).length;
+  const al=base.filter(hasAlert);
+  $("#count").textContent="";
+  $("#tagview").innerHTML=Object.entries(TAGS).map(([g,ts])=>`<section><h2>${g}</h2><div class="chips">${ts.map(t=>`<button class="chip" data-tag="${esc(t)}" data-go="1">${esc(t)}<small>${cnt(t)}</small></button>`).join("")}</div></section>`).join("")+
+  `<section><h2>注意表示のある店（${al.length}）</h2><div class="chips">${al.map(s=>`<button class="chip" data-shop="${esc(s.name)}">${esc(s.name)}</button>`).join("")||"<span class='active-tag'>今のところありません</span>"}</div></section>`+
+  `<section><h2>メンズエステ関連の摘発ニュース（八王子・日野）</h2><ul class="news">${NEWS.map(n=>`<li><time>${esc(new Date(n.date).toLocaleDateString("ja-JP"))}</time><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></li>`).join("")||"<li class='active-tag'>次回の自動更新後に表示されます</li>"}</ul></section>`;
+}
+document.addEventListener("click",e=>{
+  const b=e.target.closest(".chip");if(!b)return;
+  if(b.dataset.tag){$("#tag").value=$("#tag").value===b.dataset.tag&&!b.dataset.go?"":b.dataset.tag;setView("shops");}
+  else if(b.dataset.shop){$("#q").value=b.dataset.shop;$("#tag").value="";setView("shops");}
+});
+function render(){view==="shops"?renderShops():view==="today"?renderToday():renderTags()}
+function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#tag").hidden=v==="tags";render()}
+$("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");$("#tab-tags").onclick=()=>setView("tags");
+$("#tag").insertAdjacentHTML("beforeend",Object.entries(TAGS).map(([g,ts])=>`<optgroup label="${g}">${ts.map(t=>`<option>${t}</option>`).join("")}</optgroup>`).join(""));
+["#q","#type","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
+Promise.all([fetch("data/shops.json",{cache:"no-store"}).then(r=>r.json()),fetch("data/today.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]}))]).then(([shops,today,news])=>{
+  SHOPS=shops;THER=today.therapists||[];NEWS=news.items||[];
   THER.forEach(t=>(byShop[t.shop_id]=byShop[t.shop_id]||[]).push(t));
   const c=k=>SHOPS.filter(s=>s.status===k).length;
   const up=today.updated?new Date(today.updated).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"未更新";
   $("#updated").textContent=`最終更新 ${up}（毎朝6時ごろ自動更新）`;
-  $("#stats").innerHTML=`<span>全 <b>${SHOPS.length}</b> 店</span><span>営業中 <b>${c("営業中")}</b></span><span>閉店の疑い <b>${c("閉店の疑い")}</b></span><span>閉店 <b>${c("閉店")}</b></span><span>本日出勤 <b>${THER.length}</b> 人</span>`;
+  $("#stats").innerHTML=`<span>全 <b>${SHOPS.length}</b> 店</span><span>営業中 <b>${c("営業中")}</b></span><span>閉店の疑い <b>${c("閉店の疑い")}</b></span><span>閉店 <b>${c("閉店")}</b></span><span>本日出勤 <b>${THER.length}</b> 人</span><span>注意あり <b>${SHOPS.filter(hasAlert).length}</b></span>`;
   render();
 }).catch(e=>{$("#updated").textContent="データを読み込めませんでした："+e.message});
 </script>
