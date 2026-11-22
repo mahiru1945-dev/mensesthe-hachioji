@@ -595,7 +595,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/%e4%ba%ba%e5%a6%bb%e3%83%95%e3%82%a1%e3%83%b3%e3%82%bf%e3%82%b8%e3%83%bc/",
   "rev": 1,
   "ther": 257,
-  "today": 50,
+  "today": 49,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -4506,7 +4506,8 @@
    "gate": false,
    "title": "新宿・五反田・蒲田・調布・立川高級メンズエステ 小悪魔Spa Tokyo",
    "final": "https://mens-esthe-aroma.site/",
-   "why": "TimeoutError"
+   "why": "",
+   "shot_hp": "https://mens-esthe-aroma.site/"
   },
   "raids": []
  },
@@ -4669,7 +4670,8 @@
    "gate": false,
    "title": "メンズエステサロン　【Calla】カラー立川｜Calla -カラー-",
    "final": "https://calla-esthe.com/",
-   "why": "TimeoutError"
+   "why": "",
+   "shot_hp": "https://calla-esthe.com/"
   },
   "reviews": {
    "count": 1,
@@ -4744,7 +4746,7 @@
   "go": "",
   "rev": 0,
   "ther": 256,
-  "today": 50,
+  "today": 49,
   "src": [
    "エステ魂ランキング"
   ],
@@ -4890,7 +4892,7 @@
   ],
   "note": "新着",
   "status": "閉店の疑い",
-  "fail_count": 1,
+  "fail_count": 2,
   "last_check": "2026-11-22",
   "last_ok": null,
   "http": "接続できない(ドメイン消失の可能性)",
@@ -4911,7 +4913,8 @@
   "raids": [],
   "tags": [
    "コスプレ"
-  ]
+  ],
+  "last_fail": "2026-11-22"
  },
  {
   "id": "er-76403f4b",
@@ -6528,11 +6531,11 @@
    "ゴーメンズエステ"
   ],
   "note": "新着",
-  "status": "要確認",
-  "fail_count": 0,
+  "status": "閉店の疑い",
+  "fail_count": 1,
   "last_check": "2026-11-22",
   "last_ok": null,
-  "http": "HTTP 503",
+  "http": "接続できない(ドメイン消失の可能性)",
   "first_seen": "2026-11-22",
   "last_listed": "2026-11-22",
   "area": "立川",
@@ -6540,9 +6543,9 @@
    "date": "2026-11-22",
    "ok": false,
    "gate": false,
-   "title": "サイトへのアクセスは制限されています",
-   "final": "https://cupid.est-relax.com/",
-   "why": "HTTP 503"
+   "title": "",
+   "final": "",
+   "why": "Error"
   },
   "reviews": {
    "count": 7,
@@ -6568,7 +6571,8 @@
    "trouble_flag": false
   },
   "raids": [],
-  "tags": []
+  "tags": [],
+  "last_fail": "2026-11-22"
  },
  {
   "id": "go-65a1c90f",
@@ -6931,7 +6935,8 @@
    "gate": false,
    "title": "立川駅マッサージなら　メンズエステ「一目惚れ」",
    "final": "https://whitemink10.sakura.ne.jp/tatikawa-hitome/",
-   "why": "TimeoutError"
+   "why": "",
+   "shot_hp": "https://whitemink10.sakura.ne.jp/tatikawa-hitome/"
   },
   "reviews": {
    "count": 7,
