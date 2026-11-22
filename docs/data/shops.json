@@ -12,7 +12,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/salon-office-%e3%82%b5%e3%83%ad%e3%83%b3%e3%82%aa%e3%83%95%e3%82%a3%e3%82%b9/",
   "rev": 4,
   "ther": 64,
-  "today": 13,
+  "today": 10,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ",
@@ -62,7 +62,8 @@
    "final": "https://salonoffice.net/",
    "why": "",
    "shot_hp": "https://salonoffice.net/"
-  }
+  },
+  "hp_schedule": "https://salonoffice.net/schedule.php"
  },
  {
   "id": "er-27b30002",
@@ -77,7 +78,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/%e3%82%89%e3%82%93%e3%81%b7-7/",
   "rev": 23,
   "ther": 44,
-  "today": 10,
+  "today": 9,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ",
@@ -135,7 +136,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/luxe-aroma-%e3%83%a9%e3%82%b0%e3%82%bc%e3%82%a2%e3%83%ad%e3%83%9e-2/",
   "rev": 1,
   "ther": 41,
-  "today": 1,
+  "today": null,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ",
@@ -175,7 +176,8 @@
    "final": "https://luxe-aroma.com/",
    "why": "",
    "shot_hp": "https://luxe-aroma.com/"
-  }
+  },
+  "hp_schedule": "https://luxe-aroma.com/schedule/"
  },
  {
   "id": "er-05348966",
@@ -190,7 +192,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/tplus-%e3%83%86%e3%82%a3%e3%83%bc%e3%83%97%e3%83%a9%e3%82%b9/",
   "rev": 5,
   "ther": 71,
-  "today": 13,
+  "today": 11,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ",
@@ -237,7 +239,8 @@
    "final": "https://tokyopla.com/",
    "why": "",
    "shot_hp": "https://tokyopla.com/"
-  }
+  },
+  "hp_schedule": "https://tokyopla.com/schedule"
  },
  {
   "id": "er-f56b46b7",
@@ -252,7 +255,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/one-feeling-2/",
   "rev": 1,
   "ther": 66,
-  "today": 8,
+  "today": 6,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ",
@@ -295,7 +298,8 @@
    "final": "https://onefeeling.net/",
    "why": "",
    "shot_hp": "https://onefeeling.net/"
-  }
+  },
+  "hp_schedule": "https://onefeeling.net/scheduleAll.html"
  },
  {
   "id": "er-d4954df9",
@@ -364,7 +368,8 @@
    "final": "https://ryoran100.com/",
    "why": "",
    "shot_hp": "https://ryoran100.com/"
-  }
+  },
+  "hp_schedule": "https://ryoran100.com/schedule/"
  },
  {
   "id": "er-a59c3fca",
@@ -379,7 +384,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/private-salon-%e9%9b%85/",
   "rev": 1,
   "ther": 30,
-  "today": 5,
+  "today": 4,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ",
@@ -431,7 +436,7 @@
   "er": "https://www.esthe-ranking.jp/hachioji/shop-detail/1b42e2f7-d44b-42c4-bfad-723a9185aed7/",
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/hangout-%e3%83%8f%e3%83%b3%e3%82%b0%e3%82%a2%e3%82%a6%e3%83%88/",
   "rev": 1,
-  "ther": 41,
+  "ther": 43,
   "today": 5,
   "src": [
    "エステ魂ランキング",
@@ -473,7 +478,8 @@
    "final": "https://hangout-esthe.com/",
    "why": "",
    "shot_hp": "https://hangout-esthe.com/"
-  }
+  },
+  "hp_schedule": "https://hangout-esthe.com/schedule"
  },
  {
   "id": "er-433d198f",
@@ -580,7 +586,8 @@
    "final": "http://www.rilaiku.com/",
    "why": "",
    "shot_hp": "http://www.rilaiku.com/"
-  }
+  },
+  "hp_schedule": "http://www.rilaiku.com/schedule/"
  },
  {
   "id": "er-2e240561",
@@ -595,7 +602,7 @@
   "go": "https://go-mensesthe.net/chuo/%e5%85%ab%e7%8e%8b%e5%ad%90/%e4%ba%ba%e5%a6%bb%e3%83%95%e3%82%a1%e3%83%b3%e3%82%bf%e3%82%b8%e3%83%bc/",
   "rev": 1,
   "ther": 257,
-  "today": 49,
+  "today": 38,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -652,7 +659,7 @@
   "go": "",
   "rev": 0,
   "ther": 107,
-  "today": 28,
+  "today": 27,
   "src": [
    "エステ魂ランキング",
    "メンズエステマガジン"
@@ -685,7 +692,8 @@
    "final": "https://ntokyo-esthe-pompom.com/",
    "why": "",
    "shot_hp": "https://ntokyo-esthe-pompom.com/"
-  }
+  },
+  "hp_schedule": "https://ntokyo-esthe-pompom.com/sch_1.html"
  },
  {
   "id": "er-b30bd4db",
@@ -756,7 +764,8 @@
     }
    ],
    "trouble_flag": true
-  }
+  },
+  "hp_schedule": "https://www.gladol-spa.tokyo/schedule/"
  },
  {
   "id": "er-0afa75d8",
@@ -802,7 +811,8 @@
    "final": "https://amaterasu-tachikawa.com/",
    "why": "",
    "shot_hp": "https://amaterasu-tachikawa.com/"
-  }
+  },
+  "hp_schedule": "https://amaterasu-tachikawa.com/schedule"
  },
  {
   "id": "er-47aebd93",
@@ -817,7 +827,7 @@
   "go": "",
   "rev": 0,
   "ther": 34,
-  "today": 5,
+  "today": 4,
   "src": [
    "エステ魂ランキング",
    "メンズエステマガジン"
@@ -846,7 +856,8 @@
    "final": "https://dandy-salon.com/",
    "why": "",
    "shot_hp": "https://dandy-salon.com/"
-  }
+  },
+  "hp_schedule": "https://dandy-salon.com/schedule"
  },
  {
   "id": "er-4ce1b1c3",
@@ -896,7 +907,8 @@
    "final": "https://aroma-rain.com/",
    "why": "",
    "shot_hp": "https://aroma-rain.com/"
-  }
+  },
+  "hp_schedule": "https://aroma-rain.com/schedule.html"
  },
  {
   "id": "er-8d396f97",
@@ -911,7 +923,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/enotera-%e3%82%a8%e3%83%8e%e3%83%86%e3%83%a9/",
   "rev": 1,
   "ther": 42,
-  "today": 4,
+  "today": 3,
   "src": [
    "エステ魂ランキング",
    "メンズエステマガジン",
@@ -953,7 +965,8 @@
    "snippets": [],
    "trouble": [],
    "trouble_flag": false
-  }
+  },
+  "hp_schedule": "https://www.enotera.tokyo/schedule/"
  },
  {
   "id": "er-1e45cfc4",
@@ -1004,7 +1017,8 @@
    "final": "https://hachioji-diamond.com/",
    "why": "",
    "shot_hp": "https://hachioji-diamond.com/"
-  }
+  },
+  "hp_schedule": "https://hachioji-diamond.com/schedule"
  },
  {
   "id": "er-d713ee49",
@@ -1019,7 +1033,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/rose-spa-%e3%83%ad%e3%82%bc%e3%82%b9%e3%83%91/",
   "rev": 1,
   "ther": 43,
-  "today": 7,
+  "today": 6,
   "src": [
    "エステ魂ランキング",
    "メンズエステマガジン",
@@ -1056,7 +1070,8 @@
    "snippets": [],
    "trouble": [],
    "trouble_flag": false
-  }
+  },
+  "hp_schedule": "https://rosespa-tokyo.com/schedule/"
  },
  {
   "id": "er-a4a33cd0",
@@ -1117,7 +1132,8 @@
    "final": "https://teddy-select.com/",
    "why": "",
    "shot_hp": "https://teddy-select.com/"
-  }
+  },
+  "hp_schedule": "https://teddy-select.com/scheduleAll.html"
  },
  {
   "id": "er-9c1ff255",
@@ -1178,7 +1194,8 @@
    "final": "https://www.rere-group.com/hachioji/",
    "why": "",
    "shot_hp": "https://www.rere-group.com/hachioji/"
-  }
+  },
+  "hp_schedule": "https://www.rere-group.com/hachioji/blog/rere_syukkininfo/38522/"
  },
  {
   "id": "go-fbfebe58",
@@ -1238,7 +1255,8 @@
    "final": "https://www.esthe-alife.com/",
    "why": "",
    "shot_hp": "https://www.esthe-alife.com/"
-  }
+  },
+  "hp_schedule": "https://www.esthe-alife.com/schedule/"
  },
  {
   "id": "go-16265702",
@@ -1309,7 +1327,7 @@
   "go": "",
   "rev": 0,
   "ther": 101,
-  "today": 23,
+  "today": 21,
   "src": [
    "エステ魂ランキング"
   ],
@@ -1335,7 +1353,8 @@
    "final": "http://ebis-komadame.net/",
    "why": "",
    "shot_hp": "http://ebis-komadame.net/"
-  }
+  },
+  "hp_schedule": "http://ebis-komadame.net/schedule"
  },
  {
   "id": "er-c2d61c8b",
@@ -1374,7 +1393,8 @@
    "final": "http://esthe-lavieet.tokyo/",
    "why": "",
    "shot_hp": "http://esthe-lavieet.tokyo/"
-  }
+  },
+  "hp_schedule": "http://esthe-lavieet.tokyo/schedule"
  },
  {
   "id": "er-9c3532e2",
@@ -1415,7 +1435,8 @@
    "final": "http://esthe-blue-diamond.com/",
    "why": "",
    "shot_hp": "http://esthe-blue-diamond.com/"
-  }
+  },
+  "hp_schedule": "http://esthe-blue-diamond.com/schedule"
  },
  {
   "id": "er-fda23467",
@@ -1456,7 +1477,8 @@
    "final": "http://esthe-foraladdin.com/",
    "why": "",
    "shot_hp": "http://esthe-foraladdin.com/"
-  }
+  },
+  "hp_schedule": "http://esthe-foraladdin.com/schedule"
  },
  {
   "id": "er-32b15770",
@@ -1471,7 +1493,7 @@
   "go": "",
   "rev": 0,
   "ther": 59,
-  "today": 13,
+  "today": 12,
   "src": [
    "エステ魂ランキング"
   ],
@@ -1497,7 +1519,8 @@
    "final": "http://celebjukujo-meguro.com/",
    "why": "",
    "shot_hp": "http://celebjukujo-meguro.com/"
-  }
+  },
+  "hp_schedule": "http://celebjukujo-meguro.com/schedule"
  },
  {
   "id": "er-86c60dfb",
@@ -1538,7 +1561,8 @@
    "final": "http://celesthine-aromage.tokyo/",
    "why": "",
    "shot_hp": "http://celesthine-aromage.tokyo/"
-  }
+  },
+  "hp_schedule": "http://celesthine-aromage.tokyo/schedule"
  },
  {
   "id": "er-8ecc02c6",
@@ -1581,7 +1605,8 @@
    "final": "http://celeb-bimajo.com/",
    "why": "",
    "shot_hp": "http://celeb-bimajo.com/"
-  }
+  },
+  "hp_schedule": "http://celeb-bimajo.com/schedule"
  },
  {
   "id": "er-c69ecba6",
@@ -1596,7 +1621,7 @@
   "go": "",
   "rev": 0,
   "ther": 49,
-  "today": 12,
+  "today": 11,
   "src": [
    "エステ魂ランキング"
   ],
@@ -1628,7 +1653,8 @@
    "final": "https://tokyo-spa.com/",
    "why": "",
    "shot_hp": "https://tokyo-spa.com/"
-  }
+  },
+  "hp_schedule": "https://tokyo-spa.com/schedule/"
  },
  {
   "id": "er-7822408c",
@@ -1643,7 +1669,7 @@
   "go": "",
   "rev": 0,
   "ther": 54,
-  "today": 10,
+  "today": 8,
   "src": [
    "エステ魂ランキング"
   ],
@@ -1672,7 +1698,8 @@
    "final": "https://tsuyane.com/",
    "why": "",
    "shot_hp": "https://tsuyane.com/"
-  }
+  },
+  "hp_schedule": "https://tsuyane.com/scheduleAll.html"
  },
  {
   "id": "er-a32ace21",
@@ -1711,7 +1738,8 @@
    "final": "http://esthe-maserati-ginza.com/",
    "why": "",
    "shot_hp": "http://esthe-maserati-ginza.com/"
-  }
+  },
+  "hp_schedule": "http://esthe-maserati-ginza.com/schedule"
  },
  {
   "id": "er-744328d1",
@@ -1752,7 +1780,8 @@
    "final": "http://onesamahote.tokyo/",
    "why": "",
    "shot_hp": "http://onesamahote.tokyo/"
-  }
+  },
+  "hp_schedule": "http://onesamahote.tokyo/schedule"
  },
  {
   "id": "er-86e9ceae",
@@ -1805,7 +1834,7 @@
   "go": "",
   "rev": 0,
   "ther": 36,
-  "today": 7,
+  "today": 6,
   "src": [
    "エステ魂ランキング"
   ],
@@ -1829,7 +1858,8 @@
    "final": "http://clubmaria-ginza.com/",
    "why": "",
    "shot_hp": "http://clubmaria-ginza.com/"
-  }
+  },
+  "hp_schedule": "http://clubmaria-ginza.com/schedule"
  },
  {
   "id": "er-65000ddd",
@@ -1870,7 +1900,8 @@
    "final": "http://aromahermes.com/",
    "why": "",
    "shot_hp": "http://aromahermes.com/"
-  }
+  },
+  "hp_schedule": "http://aromahermes.com/schedule"
  },
  {
   "id": "er-25fb0072",
@@ -2027,7 +2058,8 @@
    "final": "https://maison-du-luxe.com/",
    "why": "",
    "shot_hp": "https://maison-du-luxe.com/"
-  }
+  },
+  "hp_schedule": "https://maison-du-luxe.com/schedule"
  },
  {
   "id": "er-d230dd08",
@@ -2066,7 +2098,8 @@
    "final": "https://aromashiro.net/",
    "why": "",
    "shot_hp": "https://aromashiro.net/"
-  }
+  },
+  "hp_schedule": "https://aromashiro.net/schedule"
  },
  {
   "id": "er-3dec521f",
@@ -2122,7 +2155,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/luxe-aroma-%e3%83%a9%e3%82%b0%e3%82%bc%e3%82%a2%e3%83%ad%e3%83%9e/",
   "rev": 7,
   "ther": 43,
-  "today": 3,
+  "today": 1,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -2205,7 +2238,8 @@
    "final": "https://aroma-with.com/",
    "why": "",
    "shot_hp": "https://aroma-with.com/"
-  }
+  },
+  "hp_schedule": "https://aroma-with.com/schedule.html"
  },
  {
   "id": "go-19ee9cce",
@@ -2356,7 +2390,8 @@
    "final": "http://fta.sh-tlo.xyz/",
    "why": "",
    "shot_hp": "http://fta.sh-tlo.xyz/"
-  }
+  },
+  "hp_schedule": "http://fta.sh-tlo.xyz/?list_4/"
  },
  {
   "id": "go-1d12340f",
@@ -3859,7 +3894,8 @@
    "final": "https://hi-msg.com/rakuyu/index.php",
    "why": "",
    "shot_hp": "https://hi-msg.com/rakuyu/"
-  }
+  },
+  "hp_schedule": "https://hi-msg.com/rakuyu/schedule.html"
  },
  {
   "id": "go-11660139",
@@ -4470,7 +4506,8 @@
    "final": "https://www.pepespa.com/",
    "why": "",
    "shot_hp": "https://www.pepespa.com/"
-  }
+  },
+  "hp_schedule": "https://www.pepespa.com/schedule/"
  },
  {
   "id": "er-6e368251",
@@ -4509,7 +4546,8 @@
    "why": "",
    "shot_hp": "https://mens-esthe-aroma.site/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://mens-esthe-aroma.site/schedule.html"
  },
  {
   "id": "er-01383749",
@@ -4540,8 +4578,7 @@
   "area": "立川",
   "list_tags": [],
   "tags": [
-   "紙パンツ",
-   "鼠径部"
+   "紙パンツ"
   ],
   "browse": {
    "date": "2026-11-22",
@@ -4569,7 +4606,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://vieas-esthe.com/schedule"
  },
  {
   "id": "er-aabdec32",
@@ -4584,7 +4622,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/disini-%e3%83%87%e3%82%a3%e3%82%b7%e3%83%8b/",
   "rev": 9,
   "ther": 46,
-  "today": 9,
+  "today": 4,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -4633,7 +4671,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://disini.jp/sch_1.html"
  },
  {
   "id": "er-b0ba0fee",
@@ -4647,7 +4686,7 @@
   "er": "https://www.esthe-ranking.jp/tachikawa/shop-detail/b0ba0fee-d444-4f00-80eb-28bc97265648/",
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/calla-%e3%82%ab%e3%83%a9%e3%83%bc/",
   "rev": 1,
-  "ther": 39,
+  "ther": 40,
   "today": 8,
   "src": [
    "エステ魂ランキング",
@@ -4681,7 +4720,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://calla-esthe.com/schedule/"
  },
  {
   "id": "er-c55e9183",
@@ -4696,7 +4736,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/paraiso-%e3%83%91%e3%83%a9%e3%82%a4%e3%82%bd/",
   "rev": 1,
   "ther": 37,
-  "today": 6,
+  "today": 4,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -4731,7 +4771,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://tachikawa-paraiso.com/sch_1.html"
  },
  {
   "id": "er-54c34f3d",
@@ -4746,7 +4787,7 @@
   "go": "",
   "rev": 0,
   "ther": 256,
-  "today": 49,
+  "today": 38,
   "src": [
    "エステ魂ランキング"
   ],
@@ -4827,7 +4868,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://crestspa-tokyo.com/schedule"
  },
  {
   "id": "er-b59402e3",
@@ -4842,7 +4884,7 @@
   "go": "",
   "rev": 0,
   "ther": 69,
-  "today": 5,
+  "today": 4,
   "src": [
    "エステ魂ランキング"
   ],
@@ -4871,7 +4913,8 @@
    "why": "",
    "shot_hp": "https://fever-nishitokyo.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://fever-nishitokyo.com/schedule"
  },
  {
   "id": "er-f8e30207",
@@ -4929,7 +4972,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/morganite-%e3%83%a2%e3%83%ab%e3%82%ac%e3%83%8a%e3%82%a4%e3%83%88/",
   "rev": 1,
   "ther": 53,
-  "today": 6,
+  "today": 5,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -4962,7 +5005,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://a-morganite.com/schedule/"
  },
  {
   "id": "er-5154b9b7",
@@ -5026,7 +5070,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://www.pandaeste-tachikawa.com/schedule/"
  },
  {
   "id": "er-edd92995",
@@ -5065,7 +5110,8 @@
    "why": "",
    "shot_hp": "https://tachimichiesthe.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://tachimichiesthe.com/schedule"
  },
  {
   "id": "er-a5ef39d5",
@@ -5080,7 +5126,7 @@
   "go": "",
   "rev": 0,
   "ther": 52,
-  "today": 13,
+  "today": 12,
   "src": [
    "エステ魂ランキング"
   ],
@@ -5112,7 +5158,8 @@
    "why": "",
    "shot_hp": "https://spa-urekaji.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://spa-urekaji.com/schedule/"
  },
  {
   "id": "er-742d10e5",
@@ -5127,7 +5174,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/enchant-%e3%82%a8%e3%83%b3%e3%83%81%e3%83%a3%e3%83%b3%e3%83%88/",
   "rev": 1,
   "ther": 38,
-  "today": 5,
+  "today": 4,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -5164,7 +5211,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://enchant-tokyo.com/schedule"
  },
  {
   "id": "er-6e2fb5bb",
@@ -5207,7 +5255,8 @@
    "why": "",
    "shot_hp": "https://3rd-eye.site/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://3rd-eye.site/schedule.html"
  },
  {
   "id": "er-dc438560",
@@ -5251,7 +5300,8 @@
    "why": "",
    "shot_hp": "https://mrs-healing.tokyo/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://mrs-healing.tokyo/schedule"
  },
  {
   "id": "er-79d4b5ad",
@@ -5292,7 +5342,8 @@
    "why": "",
    "shot_hp": "https://muchi2onesan-west.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://muchi2onesan-west.com/schedule"
  },
  {
   "id": "er-c0315fd0",
@@ -5307,7 +5358,7 @@
   "go": "",
   "rev": 0,
   "ther": 19,
-  "today": 2,
+  "today": 1,
   "src": [
    "エステ魂ランキング"
   ],
@@ -5331,7 +5382,8 @@
    "why": "",
    "shot_hp": "https://troislien.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://troislien.com/schedule.html"
  },
  {
   "id": "er-d6a2131d",
@@ -5370,7 +5422,8 @@
    "why": "",
    "shot_hp": "https://seiiki-tachikawa.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://seiiki-tachikawa.com/schedule"
  },
  {
   "id": "er-81f3047d",
@@ -5452,7 +5505,8 @@
    "why": "",
    "shot_hp": "http://ginza-nobuko.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "http://ginza-nobuko.com/schedule"
  },
  {
   "id": "er-cb4301b9",
@@ -5491,7 +5545,8 @@
    "why": "",
    "shot_hp": "https://heavensroad.net/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://heavensroad.net/schedule"
  },
  {
   "id": "er-3aff4a9c",
@@ -5505,7 +5560,7 @@
   "er": "https://www.esthe-ranking.jp/tachikawa/shop-detail/3aff4a9c-fb00-43cd-8974-6f0645eef714/",
   "go": "",
   "rev": 0,
-  "ther": 1,
+  "ther": 4,
   "today": null,
   "src": [
    "エステ魂ランキング"
@@ -5532,7 +5587,8 @@
    "why": "",
    "shot_hp": "https://redribbon-tachikawa.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://redribbon-tachikawa.com/schedule"
  },
  {
   "id": "er-2794046c",
@@ -5547,7 +5603,7 @@
   "go": "https://go-mensesthe.net/chuo/%e7%ab%8b%e5%b7%9d-chuo/%e3%82%89%e3%82%93%e3%81%b7-4/",
   "rev": 11,
   "ther": 51,
-  "today": 11,
+  "today": 8,
   "src": [
    "エステ魂ランキング",
    "ゴーメンズエステ"
@@ -5635,7 +5691,8 @@
    "why": "",
    "shot_hp": "https://esthe-nekonote.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://esthe-nekonote.com/schedule"
  },
  {
   "id": "er-3fecd6bf",
@@ -5677,7 +5734,8 @@
    "why": "",
    "shot_hp": "https://tenkai-tachikawa.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://tenkai-tachikawa.com/schedule"
  },
  {
   "id": "er-835a7d61",
@@ -5716,7 +5774,8 @@
    "why": "",
    "shot_hp": "http://okusamahote.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "http://okusamahote.com/schedule"
  },
  {
   "id": "er-1dc9b248",
@@ -5755,7 +5814,8 @@
    "why": "",
    "shot_hp": "https://mensesthefeel2.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://mensesthefeel2.com/schedule/"
  },
  {
   "id": "er-e20794b7",
@@ -5794,7 +5854,8 @@
    "why": "",
    "shot_hp": "https://cinderella-veil.com/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://cinderella-veil.com/schedule"
  },
  {
   "id": "er-5a8735a2",
@@ -5835,7 +5896,8 @@
    "why": "",
    "shot_hp": "https://gentlemans-spa.jp/"
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://gentlemans-spa.jp/schedule"
  },
  {
   "id": "er-dc09d50b",
@@ -6079,7 +6141,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://seiiki-tachikawa.com/schedule"
  },
  {
   "id": "go-9cc793e1",
@@ -6405,7 +6468,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://muchi2onesan.com/schedule"
  },
  {
   "id": "go-defd688c",
@@ -6511,7 +6575,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://tenkai-tachikawa.com/schedule"
  },
  {
   "id": "go-fa8a10f1",
@@ -6792,7 +6857,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "http://www.aries.eevjp.com/schedule.html"
  },
  {
   "id": "go-4b4e393e",
@@ -6843,7 +6909,8 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://3rd-eye.site/schedule.html"
  },
  {
   "id": "go-962c6d44",
@@ -7239,6 +7306,7 @@
    "trouble": [],
    "trouble_flag": false
   },
-  "raids": []
+  "raids": [],
+  "hp_schedule": "https://tachikawa.red/staff_shift/"
  }
 ]
