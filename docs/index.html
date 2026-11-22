@@ -159,6 +159,36 @@ details.rev time{font-family:var(--f-mono);color:var(--muted);font-size:.7rem;ma
 .card.dim,.mini.dim{opacity:.45}
 .stale{color:var(--warn);background:var(--warn-bg);border-radius:12px;padding:8px 12px;font-size:.8rem}
 
+/* favorites / hide */
+.acts{display:flex;gap:6px;flex:none}
+.ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--surface);color:var(--muted);display:grid;place-items:center;cursor:pointer;font-size:1.05rem;padding:0;box-shadow:var(--shadow)}
+.ic.on{background:#f5b301;border-color:#f5b301;color:#fff}
+.ic.hid.on{background:var(--muted);border-color:var(--muted)}
+.shop.is-hidden{opacity:.55}
+.hidnote{font-size:.75rem;font-weight:700;color:var(--muted);background:var(--chip);border-radius:8px;padding:6px 10px}
+.mini,.card{font:inherit;border:0;background:none;padding:0;cursor:pointer;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);padding:8px;text-align:left}
+.star{position:absolute;top:14px;right:14px;color:#f5b301;font-size:1.1rem;text-shadow:0 1px 4px rgba(0,0,0,.5)}
+.mini{position:relative}.mini .star{top:2px;right:4px;font-size:.9rem}
+.src{font-size:.62rem;font-weight:800;color:var(--teal)}
+dialog#girl{border:0;border-radius:22px;padding:0;width:min(440px,calc(100vw - 24px));max-height:calc(100dvh - 24px);background:var(--surface);color:var(--fg);box-shadow:var(--shadow-hi)}
+dialog#girl::backdrop{background:rgba(8,4,14,.6);backdrop-filter:blur(3px)}
+.gd{display:flex;flex-direction:column}
+.gd .ph{width:100%;aspect-ratio:4/5;max-height:52dvh;object-fit:cover;object-position:top;background:var(--chip);display:block}
+.gd .in{padding:16px;display:flex;flex-direction:column;gap:12px}
+.gd h3{font-family:var(--f-head);font-size:1.3rem;margin:0}
+.gd h3 small{font-size:.9rem;color:var(--muted);font-weight:500;margin-left:6px}
+.gd .shopn{font-size:.85rem;color:var(--muted);margin-top:2px}
+.gd .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.gd .x{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:0;background:rgba(0,0,0,.55);color:#fff;font-size:1.2rem;cursor:pointer}
+.hist{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.hist div{border-radius:8px;background:var(--chip);padding:5px 2px;text-align:center;font-size:.62rem;color:var(--muted);line-height:1.3;min-height:48px}
+.hist div.on{background:var(--rose-bg);color:var(--accent);font-weight:700}
+.hist div b{display:block;font-size:.8rem;color:var(--fg)}
+.hist div.on b{color:var(--accent)}
+.hist small{display:block;font-family:var(--f-mono);font-size:.56rem}
+.gd .btn{width:100%}
+
 /* tag view */
 .tagview{padding:14px 0 40px;display:grid;gap:14px}
 .tagview section{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
@@ -197,6 +227,8 @@ footer{font-size:.74rem;color:var(--muted);padding-bottom:max(30px,env(safe-area
   <select id="avail" aria-label="出勤の絞り込み" hidden><option value="now">今入れる子</option><option value="soon">これから入れる子も</option><option value="all">本日出勤の全員</option></select>
   <label class="tog"><input type="checkbox" id="hideClosed" checked>閉店を隠す</label>
   <label class="tog"><input type="checkbox" id="onlyAlert">注意ありのみ</label>
+  <label class="tog"><input type="checkbox" id="onlyFav">★ お気に入り</label>
+  <label class="tog"><input type="checkbox" id="showHidden">非表示も表示</label>
   <label class="tog" id="localWrap" hidden><input type="checkbox" id="onlyLocal" checked>八王子・立川発のみ</label>
   </div>
   <span class="count" id="count"></span>
@@ -207,6 +239,7 @@ footer{font-size:.74rem;color:var(--muted);padding-bottom:max(30px,env(safe-area
   <div class="tagview" id="tagview" hidden></div>
   <footer>対象：八王子・日野・立川エリア。情報元：エステ魂ランキング／ゴーメンズエステ／サロンガイド／メンズエステマガジン。公式HPに3日続けてつながらない店を「閉店」、1〜2日は「閉店の疑い」にしています。タグは各店の公式HPと掲載ページに書かれた言葉から自動で付けています。注意表示は、店名が出た摘発・逮捕報道と、直近1年に追加料金・時間短縮などのトラブル口コミが2件以上ある店に出します。個人利用のための一覧です。</footer>
 </main>
+<dialog id="girl" aria-label="女の子の出勤情報"></dialog>
 <script>
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -217,12 +250,20 @@ addEventListener("hashchange",()=>location.reload());
 const TAGS={"衣装":["マイクロビキニ","ベビードール","ノーブラ","ノーパン","紙パンツ","コスプレ"],"施術":["鼠径部","ディープリンパ","密着","マーメイド","カエル足","四つん這い","フェザータッチ","ホイップ","パウダー","洗体","Wセラピ"]};
 const hasAlert=s=>(s.raids&&s.raids.length)||(s.reviews&&s.reviews.trouble_flag);
 const byShop={};
+let OFF=[],HIST={},GIRLS={},SHOP_BY={};
+const ST={get(k){try{return new Set(JSON.parse(localStorage.getItem("me:"+k)||"[]"))}catch(e){return new Set()}},set(k,v){try{localStorage.setItem("me:"+k,JSON.stringify([...v]))}catch(e){}}};
+const FAV={shop:ST.get("fav-shop"),girl:ST.get("fav-girl")},HID={shop:ST.get("hid-shop"),girl:ST.get("hid-girl"),tag:ST.get("hid-tag")};
+function flip(map,store,kind,key){map[kind].has(key)?map[kind].delete(key):map[kind].add(key);ST.set(store+"-"+kind,map[kind])}
+const gk=t=>t.shop_id+"|"+t.name;
+const shopHidden=s=>HID.shop.has(s.id)||(s.tags||[]).some(t=>HID.tag.has(t));
+const girlLink=t=>t.src==="公式HP"?t.url:((SHOP_BY[t.shop_id]||{}).hp_schedule||t.url);
 const IC={
  phone:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2"/></svg>',
  globe:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 010 18M12 3a14 14 0 000 18"/></svg>',
  cal:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>',
  chat:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 5h16v11H9l-5 4z"/></svg>',
  link:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M10 14a4 4 0 006 0l3-3a4 4 0 00-6-6l-1 1M14 10a4 4 0 00-6 0l-3 3a4 4 0 006 6l1-1"/></svg>',
+ eyeoff:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 3l18 18M10.6 6.1A10 10 0 0112 6c5 0 9 6 9 6a17 17 0 01-3.2 3.7M6.5 7.6A17 17 0 003 12s4 6 9 6a9 9 0 004-.9"/><path d="M9.9 9.9a3 3 0 004.2 4.2"/></svg>',
  warn:'<svg class="i" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l10 18H2zM12 10v5M12 18v.5"/></svg>'};
 const ext='target="_blank" rel="noopener noreferrer"';
 const telOf=p=>String(p||"").replace(/[^\d+]/g,"");
@@ -233,8 +274,10 @@ function statusTag(s){
 function typeTag(t){if(!t)return"";return `<span class="tag ${t.includes("アジアン")?"as":"jp"}">${esc(t)}</span>`}
 function areaTag(s){if(GENRE==="kaishun")return `<span class="tag${s.local?" ok":""}">${esc(s.local?"地元発":"遠方発")}</span>`+(s.kind?`<span class="tag">${esc(s.kind)}</span>`:"");return `<span class="tag">${esc(s.area||"八王子")}</span>`}
 function photo(src,alt){return src?`<img class="ph" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'ph'}))">`:`<span class="ph"></span>`}
-function filters(){return{local:GENRE==="kaishun"&&$("#onlyLocal").checked,area:$("#area").value,q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
+function filters(){return{fav:$("#onlyFav").checked,showHid:$("#showHidden").checked,local:GENRE==="kaishun"&&$("#onlyLocal").checked,area:$("#area").value,q:$("#q").value.trim().toLowerCase(),ty:$("#type").value,hide:$("#hideClosed").checked,tag:$("#tag").value,alert:$("#onlyAlert").checked}}
 function shopOk(s,f){
+  if(!f.showHid&&shopHidden(s))return false;
+  if(f.fav&&!FAV.shop.has(s.id)&&!(byShop[s.id]||[]).some(t=>FAV.girl.has(gk(t))))return false;
   if(f.hide&&s.status==="閉店")return false;
   if(f.local&&!s.local)return false;
   if(f.area&&(s.area||"八王子")!==f.area)return false;
@@ -258,12 +301,14 @@ function renderShops(){
     const shot=s.browse&&s.browse.ok&&s.browse.shot_hp;
     const chips=(s.tags||[]).map(t=>`<button class="chip${TAGS["衣装"].includes(t)?" c":""}" data-tag="${esc(t)}" aria-pressed="${t===$("#tag").value}">${esc(t)}</button>`).join("");
     const subs=[
-      ther?`<a href="${esc(ther)}" ${ext}>${IC.cal}出勤ページ</a>`:"",
+      s.hp_schedule?`<a href="${esc(s.hp_schedule)}" ${ext}>${IC.cal}公式HPの出勤表</a>`:"",
+      ther?`<a href="${esc(ther)}" ${ext}>${IC.cal}出勤ページ（エステ魂）</a>`:"",
       ...Object.entries(s.pages||{}).flatMap(([k,u])=>[`<a href="${esc(u.replace(/\/?$/,"/schedule/"))}" ${ext}>${IC.cal}出勤表（${esc(k)}）</a>`]),
       s.go?`<a href="${esc(s.go)}" ${ext}>${IC.chat}口コミ${s.rev?` ${s.rev}件`:""}</a>`:"",
       s.er?`<a href="${esc(s.er)}" ${ext}>${IC.link}エステ魂</a>`:"",
     ].join("");
-    return `<li class="shop${s.status==="閉店"?" closed":""}">
+    const isF=FAV.shop.has(s.id),isH=shopHidden(s);
+    return `<li class="shop${s.status==="閉店"?" closed":""}${isH?" is-hidden":""}">
       ${shot?`<a class="banner" href="${esc(s.hp)}" ${ext} title="公式HP（${esc(s.browse.date)}時点）"><img src="shots/${esc(s.id)}.jpg" alt="${esc(s.name)} の公式HP" loading="lazy" onerror="this.parentNode.remove()"><span class="open">公式HPのプレビュー</span></a>`:""}
       <div class="body">
         <div class="top">
@@ -271,8 +316,10 @@ function renderShops(){
             <h2 class="name">${esc(s.name)}</h2>
             <div class="pills">${statusTag(s)}${areaTag(s)}${typeTag(s.type)}${s.note==="新着"?'<span class="tag ok">新着</span>':""}</div>
           </div>
+          <div class="acts"><button class="ic${isF?" on":""}" data-act="fav-shop" data-key="${esc(s.id)}" aria-pressed="${isF}" title="お気に入り" aria-label="お気に入り">★</button><button class="ic hid${HID.shop.has(s.id)?" on":""}" data-act="hid-shop" data-key="${esc(s.id)}" aria-pressed="${HID.shop.has(s.id)}" title="このお店を非表示" aria-label="非表示">${IC.eyeoff}</button></div>
           ${n!=null?`<div class="ring${n?"":" zero"}" style="--p:${pct}%" title="在籍${s.ther||"?"}名中"><b>${n}</b><small>本日出勤</small></div>`:""}
         </div>
+        ${isH?`<div class="hidnote">非表示にしたお店です（${HID.shop.has(s.id)?"お店を非表示":"苦手なタグ「"+esc((s.tags||[]).filter(t=>HID.tag.has(t)).join("・"))+"」"}）</div>`:""}
         <div class="facts">
           ${s.price?`<div class="fact price"><small>料金</small><span>${esc(s.price)}</span></div>`:""}
           ${s.hours?`<div class="fact"><small>営業時間</small><span>${esc(s.hours)}</span></div>`:""}
@@ -282,7 +329,7 @@ function renderShops(){
           ${s.phone?`<a class="btn call${s.hp?"":" full"}" href="tel:${esc(telOf(s.phone))}"><small>${IC.phone} タップで電話</small><b>${esc(s.phone)}</b></a>`:""}
           ${s.hp?`<a class="btn hp${s.phone?"":" full"}" href="${esc(s.hp)}" ${ext}>${IC.globe}公式HP</a>`:""}
         </div>
-        ${th.length?`<div class="strip">${th.map(t=>{const a=avail(t);return `<a class="mini${a.k==="ended"?" dim":""}" title="${esc(a.label)}" href="${esc(t.url)}" ${ext}>${photo(t.img,t.name)}<span>${esc(t.name)}(${t.age})</span><span class="tm">${esc(t.time)}</span></a>`}).join("")}</div>`:""}
+        ${th.length?`<div class="strip">${th.filter(t=>$("#showHidden").checked||!HID.girl.has(gk(t))).map(t=>{const a=avail(t);return `<button class="mini${a.k==="ended"||HID.girl.has(gk(t))?" dim":""}" title="${esc(a.label)}" data-girl="${esc(gk(t))}">${photo(t.img,t.name)}${FAV.girl.has(gk(t))?'<span class="star">★</span>':""}<span>${esc(t.name)}(${t.age})</span><span class="tm">${esc(t.time||a.label)}</span></button>`}).join("")}</div>`:""}
         ${alerts(s)}
         ${chips?`<div class="chips">${chips}</div>`:""}
         ${reviews(s)}
@@ -315,13 +362,16 @@ function avail(t){
 function renderToday(){
   const f=filters();
   const shopById=Object.fromEntries(SHOPS.map(s=>[s.id,s]));
-  let rows=THER.filter(t=>{const s=shopById[t.shop_id];if(s&&!shopOk(s,f))return false;return !f.q||(t.name+t.shop_name).toLowerCase().includes(f.q)});
+  let rows=THER.filter(t=>{const s=shopById[t.shop_id];if(s&&!shopOk(s,{...f,fav:false}))return false;
+    if(!f.showHid&&HID.girl.has(gk(t)))return false;
+    if(f.fav&&!FAV.girl.has(gk(t))&&!FAV.shop.has(t.shop_id))return false;
+    return !f.q||(t.name+t.shop_name).toLowerCase().includes(f.q)});
   const mode=$("#avail").value;
   rows=rows.map(t=>({...t,av:avail(t)})).filter(t=>mode==="all"||t.av.k==="now"||(mode==="soon"&&(t.av.k==="soon"||t.av.k==="busy"||t.av.k==="unknown")));
-  rows.sort((a,b)=>a.av.order-b.av.order||(b.av.left||0)-(a.av.left||0)||(a.av.wait||0)-(b.av.wait||0));
+  rows.sort((a,b)=>a.av.order-b.av.order||(FAV.girl.has(gk(b))-FAV.girl.has(gk(a)))||(b.av.left||0)-(a.av.left||0)||(a.av.wait||0)-(b.av.wait||0));
   const nm=jstMinutes();
   $("#count").textContent=`${rows.length} 人（${String(Math.floor(nm/60)).padStart(2,"0")}:${String(nm%60).padStart(2,"0")} 時点）`;
-  $("#grid").innerHTML=rows.length?rows.map(t=>`<a class="card" href="${esc(t.url)}" target="_blank" rel="noopener noreferrer">${photo(t.img,t.name)}<b>${esc(t.name)} <small>(${t.age})</small></b><span class="badge ${t.av.k}">${esc(t.av.label)}</span><span class="t">${IC.cal} ${esc(t.time||"時間未定")}</span><span class="s">${esc(t.shop_name)}</span></a>`).join(""):`<div class="empty">${mode==="now"?"今入れる子は見つかりませんでした。「これから入れる子も」に切り替えてみてください。":"本日出勤のデータがまだありません。"}</div>`;
+  $("#grid").innerHTML=rows.length?rows.map(t=>`<button class="card${HID.girl.has(gk(t))?" dim":""}" data-girl="${esc(gk(t))}">${photo(t.img,t.name)}${FAV.girl.has(gk(t))?'<span class="star">★</span>':""}<b>${esc(t.name)} <small>(${t.age})</small></b><span class="badge ${t.av.k}">${esc(t.av.label)}</span><span class="t">${IC.cal} ${esc(t.time||"時間未定")}</span><span class="s">${esc(t.shop_name)}</span>${t.src==="公式HP"?'<span class="src">公式HPの出勤表より</span>':""}</button>`).join(""):`<div class="empty">${mode==="now"?"今入れる子は見つかりませんでした。「これから入れる子も」に切り替えてみてください。":"本日出勤のデータがまだありません。"}</div>`;
   const age=TODAY_AT?(Date.now()-TODAY_AT)/60000:null;
   $("#grid").insertAdjacentHTML("afterbegin",age!=null&&age>90?`<div class="stale" style="grid-column:1/-1">出勤情報は${Math.round(age/60)}時間前のものです。お店の出勤ページで最新を確認してください。</div>`:"");
 }
@@ -342,10 +392,45 @@ function renderTags(){
   const al=base.filter(hasAlert);
   $("#count").textContent="";
   $("#tagview").innerHTML=Object.entries(TAGS).map(([g,ts])=>`<section><h2>${g}</h2><div class="chips">${ts.map(t=>`<button class="chip${g==="衣装"?" c":""}" data-tag="${esc(t)}" data-go="1">${esc(t)}<small>${cnt(t)}</small></button>`).join("")}</div></section>`).join("")+
+  `<section><h2>苦手なタグ（このタグがある店を隠す）</h2><div class="chips">${Object.values(TAGS).flat().map(t=>`<button class="chip${HID.tag.has(t)?"":" c"}" data-act="hid-tag" data-key="${esc(t)}" aria-pressed="${HID.tag.has(t)}">${HID.tag.has(t)?"隠し中：":""}${esc(t)}</button>`).join("")}</div></section>`+
+  `<section><h2>非表示にしたもの</h2><div class="chips">${[...HID.shop].map(id=>SHOP_BY[id]).filter(Boolean).map(x=>`<button class="chip" data-act="hid-shop" data-key="${esc(x.id)}">${esc(x.name)} を戻す</button>`).join("")}${[...HID.girl].map(k=>`<button class="chip" data-act="hid-girl" data-key="${esc(k)}">${esc(k.split("|")[1])}（${esc((SHOP_BY[k.split("|")[0]]||{}).name||"")}）を戻す</button>`).join("")||(HID.shop.size?"":"<span class='active-tag'>ありません。お店の目のマークや、女の子の画面から非表示にできます。</span>")}</div></section>`+
   `<section><h2>注意表示のある店（${al.length}）</h2><div class="chips">${al.map(s=>`<button class="chip c" data-shop="${esc(s.name)}">${esc(s.name)}</button>`).join("")||"<span class='active-tag'>今のところありません</span>"}</div></section>`+
   `<section><h2>最近のメンズエステ摘発ニュース（全国）</h2><ul class="news">${NEWS.map(n=>`<li><time>${esc(new Date(n.date).toLocaleDateString("ja-JP"))}</time><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></li>`).join("")||"<li class='active-tag'>次回の自動更新後に表示されます</li>"}</ul></section>`;
 }
+const WD="日月火水木金土";
+function openGirl(key){
+  const t=GIRLS[key];if(!t)return;const s=SHOP_BY[t.shop_id]||{};const a=avail(t);
+  const days=[];for(let i=13;i>=0;i--){const d=new Date(Date.now()+9*3600e3-i*864e5);days.push(d.toISOString().slice(0,10))}
+  const h=HIST[key]||{};const worked=days.filter(d=>h[d]).length;
+  const isF=FAV.girl.has(key),isH=HID.girl.has(key);
+  const sch=t.src==="公式HP"?t.url:(s.hp_schedule||"");
+  $("#girl").innerHTML=`<div class="gd">${t.img?`<img class="ph" src="${esc(t.img)}" alt="${esc(t.name)}" referrerpolicy="no-referrer">`:`<span class="ph"></span>`}
+   <button class="x" data-act="close" aria-label="閉じる">×</button>
+   <div class="in">
+    <div><h3>${esc(t.name)}<small>${t.age}歳</small></h3><div class="shopn">${esc(t.shop_name)}</div></div>
+    <div class="row"><span class="badge ${a.k}">${esc(a.label)}</span><span class="t">${IC.cal} 本日 ${esc(t.time||"時間未定")}</span></div>
+    <div><b style="font-size:.85rem">直近2週間の出勤（${worked}日）</b>
+     <div class="hist">${days.map(d=>{const dt=new Date(d);return `<div class="${h[d]?"on":""}"><b>${dt.getUTCDate()}</b>${WD[dt.getUTCDay()]}${h[d]?`<small>${esc(h[d].replace(/〜.*/,"〜"))}</small>`:""}</div>`}).join("")}</div>
+     <div class="shopn" style="margin-top:4px">記録は11/22から。毎日の巡回で見つけた出勤を残しています。</div></div>
+    ${sch?`<a class="btn hp" href="${esc(sch)}" ${ext}>${IC.cal}公式HPで出勤を確認</a>`:(s.hp?`<a class="btn hp" href="${esc(s.hp)}" ${ext}>${IC.globe}公式HPを開く</a>`:"")}
+    ${s.phone?`<a class="btn call" href="tel:${esc(telOf(s.phone))}"><small>${IC.phone} タップで電話</small><b>${esc(s.phone)}</b></a>`:""}
+    ${t.src!=="公式HP"&&t.url?`<a class="btn" href="${esc(t.url)}" ${ext}>${IC.link}プロフィール（掲載サイト）</a>`:""}
+    <div class="row"><button class="btn" style="flex:1" data-act="fav-girl" data-key="${esc(key)}">${isF?"★ お気に入り解除":"☆ お気に入り"}</button><button class="btn" style="flex:1" data-act="hid-girl" data-key="${esc(key)}">${isH?"非表示を解除":"この子を非表示"}</button></div>
+   </div></div>`;
+  if(!$("#girl").open)$("#girl").showModal();
+}
 document.addEventListener("click",e=>{
+  const act=e.target.closest("[data-act]");
+  if(act){const k=act.dataset.key,a=act.dataset.act;
+    if(a==="close"){$("#girl").close();return}
+    if(a==="fav-shop")flip(FAV,"fav","shop",k);
+    if(a==="hid-shop")flip(HID,"hid","shop",k);
+    if(a==="hid-tag")flip(HID,"hid","tag",k);
+    if(a==="fav-girl"){flip(FAV,"fav","girl",k);openGirl(k)}
+    if(a==="hid-girl"){flip(HID,"hid","girl",k);openGirl(k)}
+    render();return}
+  const g=e.target.closest("[data-girl]");if(g){openGirl(g.dataset.girl);return}
+  if(e.target.id==="girl"){$("#girl").close();return}
   const b=e.target.closest(".chip");if(!b)return;
   if(b.dataset.tag){$("#tag").value=$("#tag").value===b.dataset.tag&&!b.dataset.go?"":b.dataset.tag;setView("shops");}
   else if(b.dataset.shop){$("#q").value=b.dataset.shop;$("#tag").value="";setView("shops");}
@@ -355,12 +440,19 @@ function render(){view==="shops"?renderShops():view==="today"?renderToday():rend
 function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#avail").hidden=v!=="today";$("#tag").hidden=v==="tags";render()}
 $("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");$("#tab-tags").onclick=()=>setView("tags");
 $("#tag").insertAdjacentHTML("beforeend",Object.entries(TAGS).map(([g,ts])=>`<optgroup label="${g}">${ts.map(t=>`<option>${t}</option>`).join("")}</optgroup>`).join(""));
-["#q","#area","#type","#onlyLocal","#avail","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
+["#q","#area","#type","#onlyLocal","#onlyFav","#showHidden","#avail","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
 const F=GENRE==="kaishun"?["kaishun.json","kaishun_today.json"]:["shops.json","today.json"];
 $("#g-"+GENRE).setAttribute("aria-current","page");
-if(GENRE==="kaishun"){document.title="八王子・立川 回春エステ一覧";$("#h1").innerHTML="八王子・立川<wbr>回春エステ一覧";$("#localWrap").hidden=false;$("#area").hidden=true;$("#type").hidden=true;$("#tab-tags").hidden=true;$("footer").textContent="情報元：風俗じゃぱん／ランキングデリ／シティヘブン（取れた日のみ）。八王子のページには都内各地から派遣する店も載るため、拠点が八王子・立川周辺の店を「地元発」としています。公式HPに3日続けてつながらない店は「閉店」。";}
-Promise.all([fetch("data/"+F[0],{cache:"no-store"}).then(r=>r.json()).catch(()=>[]),fetch("data/"+F[1],{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]}))]).then(([shops,today,news])=>{
-  SHOPS=shops;THER=today.therapists||[];TODAY_AT=today.updated?Date.parse(today.updated):null;NEWS=news.items||[];
+if(GENRE==="kaishun"){document.title="八王子・立川 回春エステ一覧";$("#h1").innerHTML="八王子・立川<wbr>回春エステ一覧";$("#localWrap").hidden=false;$("#area").hidden=true;$("#type").hidden=true;$("footer").textContent="情報元：風俗じゃぱん／ランキングデリ／シティヘブン（取れた日のみ）。八王子のページには都内各地から派遣する店も載るため、拠点が八王子・立川周辺の店を「地元発」としています。公式HPに3日続けてつながらない店は「閉店」。";}
+Promise.all([fetch("data/"+F[0],{cache:"no-store"}).then(r=>r.json()).catch(()=>[]),fetch("data/"+F[1],{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/news.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({items:[]})),fetch("data/official_today.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({therapists:[]})),fetch("data/history.json",{cache:"no-store"}).then(r=>r.json()).catch(()=>({}))]).then(([shops,today,news,off,hist])=>{
+  SHOPS=shops;THER=today.therapists||[];HIST=hist||{};
+  SHOP_BY=Object.fromEntries(SHOPS.map(s=>[s.id,s]));
+  // 公式HPの出勤表: 同じ名前の子は掲載サイトの情報に統合し、公式にしかいない子は追加する
+  const offToday=(off.updated||"").slice(0,10)===new Date(Date.now()+9*3600e3).toISOString().slice(0,10);
+  if(offToday)for(const o of off.therapists||[]){if(!SHOP_BY[o.shop_id])continue;
+    const m=THER.find(t=>t.shop_id===o.shop_id&&t.name===o.name);
+    if(m){m.img=m.img||o.img;m.time=m.time||o.time;m.state=m.state||o.state;m.official_url=o.url}else THER.push(o)}
+  THER.forEach(t=>{GIRLS[gk(t)]=t});TODAY_AT=today.updated?Date.parse(today.updated):null;NEWS=news.items||[];
   THER.forEach(t=>(byShop[t.shop_id]=byShop[t.shop_id]||[]).push(t));
   const c=k=>SHOPS.filter(s=>s.status===k).length;
   const up=today.updated?new Date(today.updated).toLocaleString("ja-JP",{timeZone:"Asia/Tokyo",month:"numeric",day:"numeric",hour:"2-digit",minute:"2-digit"}):"未更新";

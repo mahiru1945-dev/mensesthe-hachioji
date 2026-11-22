@@ -23,6 +23,7 @@ from bs4 import BeautifulSoup
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import extras  # noqa: E402
+import official  # noqa: E402
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA = ROOT / "docs" / "data"
@@ -30,6 +31,8 @@ SHOPS = DATA / "shops.json"
 TODAY = DATA / "today.json"
 LOG = DATA / "last_run.json"
 NEWS = DATA / "news.json"
+OFFICIAL = DATA / "official_today.json"
+HISTORY = DATA / "history.json"
 
 JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
@@ -369,6 +372,16 @@ def browse_all(shops: list[dict], key: str = "browse") -> None:
                     res["why"] = "中身がほぼ空"
                 else:
                     res["ok"] = True
+                    # 公式HPの中の「出勤」「スケジュール」ページを探す
+                    try:
+                        links = page.eval_on_selector_all(
+                            "a[href]", "els => els.map(e => ({t: (e.innerText || e.title || (e.querySelector('img') ? e.querySelector('img').alt : '') || '').trim().slice(0, 40), h: e.href}))")
+                        sch = official.find_schedule(links, page.url)
+                        if sch:
+                            s["hp_schedule"] = sch
+                            log["steps"][key + "_schedule_found"] = log["steps"].get(key + "_schedule_found", 0) + 1
+                    except Exception:  # noqa: BLE001
+                        pass
                 shot = SHOTS / f"{s['id']}.jpg"
                 if res["ok"] and (not shot.exists() or (s.get("browse") or {}).get("shot_hp") != s["hp"]):
                     page.screenshot(path=str(shot), type="jpeg", quality=45, clip={"x": 0, "y": 0, "width": 1280, "height": 800})
@@ -532,6 +545,40 @@ def scrape_today(shops: list[dict], ER_SCHEDULE: str) -> list[dict]:
 
 # ---------------------------------------------------------------- main
 
+def run_official(shops: list[dict]) -> None:
+    """公式HPの出勤ページから出勤者を拾う(1日1回)。"""
+    import kaishun
+    found: list[dict] = []
+    try:
+        found += official.scrape_official(sys.modules[__name__], shops, kaishun.JS_CARDS, GATE, "mens")
+    except Exception as e:  # noqa: BLE001
+        log["errors"].append(f"公式出勤(メンエス)失敗: {e}")
+    kp = DATA / "kaishun.json"
+    if kp.exists():
+        try:
+            ks = [k for k in json.loads(kp.read_text(encoding="utf-8")) if k.get("local")]
+            found += official.scrape_official(sys.modules[__name__], ks, kaishun.JS_CARDS, GATE, "kaishun")
+        except Exception as e:  # noqa: BLE001
+            log["errors"].append(f"公式出勤(回春)失敗: {e}")
+    OFFICIAL.write_text(json.dumps({"updated": NOW.isoformat(), "therapists": found}, ensure_ascii=False, indent=1),
+                        encoding="utf-8")
+
+
+def save_history() -> None:
+    groups = []
+    for f in (TODAY, DATA / "kaishun_today.json", OFFICIAL):
+        try:
+            d = json.loads(f.read_text(encoding="utf-8"))
+            if (d.get("updated") or "")[:10] == TODAY_STR:
+                groups.append(d.get("therapists") or [])
+        except Exception:  # noqa: BLE001
+            pass
+    try:
+        official.update_history(HISTORY, TODAY_STR, groups)
+    except Exception as e:  # noqa: BLE001
+        log["errors"].append(f"出勤履歴の保存失敗: {e}")
+
+
 def main() -> int:
     shops = json.loads(SHOPS.read_text(encoding="utf-8"))
     skip_photos = "--no-photos" in sys.argv
@@ -554,6 +601,7 @@ def main() -> int:
             kaishun.run_today(sys.modules[__name__])
         except Exception as e:  # noqa: BLE001
             log["errors"].append(f"回春 出勤取得失敗: {e}")
+        save_history()
         log["finished"] = datetime.now(JST).isoformat()
         LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
         print(json.dumps(log, ensure_ascii=False, indent=1))
@@ -600,6 +648,9 @@ def main() -> int:
     if therapists is not None:
         TODAY.write_text(json.dumps({"updated": NOW.isoformat(), "therapists": therapists},
                                     ensure_ascii=False, indent=1), encoding="utf-8")
+    if "--no-official" not in sys.argv:
+        run_official(shops)
+    save_history()
     log["finished"] = datetime.now(JST).isoformat()
     log["shops"] = len(shops)
     LOG.write_text(json.dumps(log, ensure_ascii=False, indent=1), encoding="utf-8")
