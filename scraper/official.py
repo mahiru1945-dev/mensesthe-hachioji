@@ -75,7 +75,8 @@ def scrape_official(ctx, shops: list[dict], js_cards: str, gate_re: str, label: 
 
     out: list[dict] = []
     visited = ok = 0
-    targets = [s for s in shops if s.get("hp_schedule") and s.get("status") != "閉店"]
+    skip = getattr(ctx, "SKIP", set())
+    targets = [s for s in shops if s.get("hp_schedule") and s.get("status") != "閉店" and s["id"] not in skip]
     with sync_playwright() as p:
         b = p.chromium.launch()
         cx = b.new_context(user_agent=ctx.UA, locale="ja-JP", viewport={"width": 1280, "height": 900},

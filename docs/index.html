@@ -394,6 +394,9 @@ function renderTags(){
   $("#tagview").innerHTML=Object.entries(TAGS).map(([g,ts])=>`<section><h2>${g}</h2><div class="chips">${ts.map(t=>`<button class="chip${g==="衣装"?" c":""}" data-tag="${esc(t)}" data-go="1">${esc(t)}<small>${cnt(t)}</small></button>`).join("")}</div></section>`).join("")+
   `<section><h2>苦手なタグ（このタグがある店を隠す）</h2><div class="chips">${Object.values(TAGS).flat().map(t=>`<button class="chip${HID.tag.has(t)?"":" c"}" data-act="hid-tag" data-key="${esc(t)}" aria-pressed="${HID.tag.has(t)}">${HID.tag.has(t)?"隠し中：":""}${esc(t)}</button>`).join("")}</div></section>`+
   `<section><h2>非表示にしたもの</h2><div class="chips">${[...HID.shop].map(id=>SHOP_BY[id]).filter(Boolean).map(x=>`<button class="chip" data-act="hid-shop" data-key="${esc(x.id)}">${esc(x.name)} を戻す</button>`).join("")}${[...HID.girl].map(k=>`<button class="chip" data-act="hid-girl" data-key="${esc(k)}">${esc(k.split("|")[1])}（${esc((SHOP_BY[k.split("|")[0]]||{}).name||"")}）を戻す</button>`).join("")||(HID.shop.size?"":"<span class='active-tag'>ありません。お店の目のマークや、女の子の画面から非表示にできます。</span>")}</div></section>`+
+  `<section><h2>巡回から外す（取得時間の節約）</h2><p class="active-tag" style="margin:0 0 10px">非表示にしたお店（${HID.shop.size}店）を、毎日の自動巡回でも取得しないようにします。下のボタンで設定をコピーし、GitHubの設定ファイルに貼り付けて保存してください。翌朝の巡回から反映されます。女の子単位の非表示は、取得時間が変わらないので対象外です。</p>
+   <div class="row" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn hp" data-act="copy-skip" style="flex:1">設定をコピー</button><a class="btn" style="flex:1" href="https://github.com/mahiru1945-dev/mensesthe-hachioji/edit/main/config/skip.json" ${ext}>${IC.link}GitHubの設定ファイルを開く</a></div>
+   <textarea id="skiptext" readonly style="width:100%;margin-top:8px;font-family:var(--f-mono);font-size:.72rem;border-radius:10px;border:1px solid var(--line);background:var(--raise);color:var(--fg);padding:8px" rows="3"></textarea></section>`+
   `<section><h2>注意表示のある店（${al.length}）</h2><div class="chips">${al.map(s=>`<button class="chip c" data-shop="${esc(s.name)}">${esc(s.name)}</button>`).join("")||"<span class='active-tag'>今のところありません</span>"}</div></section>`+
   `<section><h2>最近のメンズエステ摘発ニュース（全国）</h2><ul class="news">${NEWS.map(n=>`<li><time>${esc(new Date(n.date).toLocaleDateString("ja-JP"))}</time><a href="${esc(n.url)}" target="_blank" rel="noopener noreferrer">${esc(n.title)}</a></li>`).join("")||"<li class='active-tag'>次回の自動更新後に表示されます</li>"}</ul></section>`;
 }
@@ -423,6 +426,13 @@ document.addEventListener("click",e=>{
   const act=e.target.closest("[data-act]");
   if(act){const k=act.dataset.key,a=act.dataset.act;
     if(a==="close"){$("#girl").close();return}
+    if(a==="copy-skip"){
+      let cur=[];try{cur=JSON.parse(localStorage.getItem("me:skip-merged")||"[]")}catch(e){}
+      const txt=JSON.stringify({note:"非表示にしたお店は巡回しない",shops:[...HID.shop].sort()},null,2);
+      const ta=$("#skiptext");ta.value=txt;
+      const done=()=>{act.textContent="コピーしました"};
+      try{navigator.clipboard.writeText(txt).then(done,()=>{ta.select();act.textContent="下の文字を長押しでコピー"})}catch(e){ta.select();act.textContent="下の文字を長押しでコピー"}
+      return}
     if(a==="fav-shop")flip(FAV,"fav","shop",k);
     if(a==="hid-shop")flip(HID,"hid","shop",k);
     if(a==="hid-tag")flip(HID,"hid","tag",k);

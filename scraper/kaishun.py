@@ -232,6 +232,8 @@ def merge(ctx, shops: list[dict]) -> None:
     for s in sorted(shops, key=lambda x: not x.get("local")):
         if s.get("hp") or s.get("hp_tried") == ctx.TODAY_STR:
             continue
+        if s["id"] in getattr(ctx, "SKIP", set()):
+            continue
         for page in s.get("pages", {}).values():
             hp = find_hp(get, page)
             if hp:
@@ -284,7 +286,8 @@ def scrape_today(ctx, shops: list[dict]) -> list[dict]:
     from playwright.sync_api import sync_playwright
 
     out = []
-    targets = [s for s in shops if s.get("local") and s.get("status") != "閉店"]
+    skip = getattr(ctx, "SKIP", set())
+    targets = [s for s in shops if s.get("local") and s.get("status") != "閉店" and s["id"] not in skip]
     with sync_playwright() as p:
         b = p.chromium.launch()
         pg = b.new_page(user_agent=ctx.UA, locale="ja-JP", viewport={"width": 1280, "height": 900})

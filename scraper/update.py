@@ -34,6 +34,17 @@ NEWS = DATA / "news.json"
 OFFICIAL = DATA / "official_today.json"
 HISTORY = DATA / "history.json"
 
+
+def _load_skip() -> set[str]:
+    """config/skip.json に書かれた、巡回しないお店のID。"""
+    try:
+        return set(json.loads((ROOT / "config" / "skip.json").read_text(encoding="utf-8")).get("shops") or [])
+    except Exception:  # noqa: BLE001
+        return set()
+
+
+SKIP = _load_skip()
+
 JST = timezone(timedelta(hours=9))
 NOW = datetime.now(JST)
 TODAY_STR = NOW.strftime("%Y-%m-%d")
@@ -291,6 +302,8 @@ def check_all(shops: list[dict], key: str = "hp_check") -> None:
     ok = ng = unk = 0
     # 同じホストが続かないよう、ホスト名で並べ替えて順番にアクセス
     for s in sorted(shops, key=lambda x: urlparse(x.get("hp") or "").netloc):
+        if s["id"] in SKIP:
+            continue
         alive, why, html = check_hp(s.get("hp", ""))
         if alive:
             try:
@@ -342,7 +355,7 @@ def browse_all(shops: list[dict], key: str = "browse") -> None:
         ctx = browser.new_context(user_agent=UA, locale="ja-JP", viewport={"width": 1280, "height": 800},
                                   ignore_https_errors=True)
         for s in shops:
-            if not s.get("hp"):
+            if not s.get("hp") or s["id"] in SKIP:
                 continue
             page = ctx.new_page()
             res = {"date": TODAY_STR, "ok": False, "gate": False, "title": "", "final": "", "why": ""}
