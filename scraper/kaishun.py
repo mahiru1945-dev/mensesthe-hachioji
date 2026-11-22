@@ -24,7 +24,7 @@ LOCAL_WORDS = re.compile(r"八王子|立川|日野|豊田|西八王子|京王堀
 RDELI_LOCAL_AREAS = {"220", "39"}  # ランキングデリのエリア番号: 220=八王子, 39=立川
 
 TIME_RE = re.compile(r"(\d{1,2}:\d{2})\s*[-〜~～]\s*(翌?\d{1,2}:\d{2}|LAST|ラスト)")
-PRICE_RE = re.compile(r"(\d+)分\s*[¥￥]?\s*([\d,]+)\s*円?")
+PRICE_RE = re.compile(r"(\d{2,3})分\s*[¥￥]?\s*(\d{1,3}(?:,\d{3})+|\d{4,6})\s*円?")
 TEL_RE = re.compile(r"0\d{1,4}-\d{1,4}-\d{3,4}")
 
 
@@ -205,7 +205,10 @@ def merge(ctx, shops: list[dict]) -> None:
         if row["src"] not in s["src"]:
             s["src"].append(row["src"])
         s["last_listed"] = ctx.TODAY_STR
-        for k in ("hours", "price", "phone", "kind"):
+        for k in ("hours", "price"):
+            if row.get(k):
+                s[k] = row[k]
+        for k in ("phone", "kind"):
             if row.get(k) and not s.get(k):
                 s[k] = row[k]
         if row["today"] is not None:
