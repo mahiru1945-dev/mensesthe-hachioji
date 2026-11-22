@@ -191,6 +191,13 @@ dialog#girl::backdrop{background:rgba(8,4,14,.6);backdrop-filter:blur(3px)}
 
 #toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;background:var(--fg);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:.84rem;font-weight:700;transition:.25s;z-index:20;pointer-events:none;max-width:calc(100vw - 32px)}
 #toast.show{opacity:1;transform:translate(-50%,0)}
+/* pager */
+.pager{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;padding:4px 0 36px}
+.pager button{font:inherit;font-weight:700;min-width:40px;height:40px;padding:0 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;box-shadow:var(--shadow)}
+.pager button[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pager button:disabled{opacity:.35;cursor:default}
+.pager .gap{color:var(--muted);padding:0 2px}
+.pager .info{flex-basis:100%;text-align:center;font-size:.78rem;color:var(--muted);font-family:var(--f-mono)}
 /* tag view */
 .tagview{padding:14px 0 40px;display:grid;gap:14px}
 .tagview section{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:16px;box-shadow:var(--shadow)}
@@ -224,6 +231,7 @@ footer{font-size:.74rem;color:var(--muted);padding-bottom:max(30px,env(safe-area
   <div class="ctrls">
   <select id="area" aria-label="エリア"><option value="">全エリア</option><option>八王子</option><option>立川</option></select>
   <select id="type" aria-label="種類"><option value="">すべての種類</option><option value="日本人">日本人</option><option value="アジアン">アジアン</option><option value="出張">出張あり</option></select>
+  <select id="per" aria-label="表示件数"><option value="10">10件ずつ</option><option value="20" selected>20件ずつ</option><option value="50">50件ずつ</option><option value="0">全部表示</option></select>
   <select id="sort" aria-label="並び替え"><option value="today">本日出勤が多い順</option><option value="src">掲載サイト数順</option><option value="rev">口コミ数順</option><option value="cheap">安い順</option><option value="name">名前順</option></select>
   <select id="tag" aria-label="タグ"><option value="">すべてのタグ</option></select>
   <select id="avail" aria-label="出勤の絞り込み" hidden><option value="now">今入れる子</option><option value="soon">これから入れる子も</option><option value="all">本日出勤の全員</option></select>
@@ -237,6 +245,7 @@ footer{font-size:.74rem;color:var(--muted);padding-bottom:max(30px,env(safe-area
 </div></div>
 <main class="wrap">
   <ul class="list" id="list"></ul>
+  <nav class="pager" id="pager" aria-label="ページ"></nav>
   <div class="grid" id="grid" hidden></div>
   <div class="tagview" id="tagview" hidden></div>
   <footer>対象：八王子・日野・立川エリア。情報元：エステ魂ランキング／ゴーメンズエステ／サロンガイド／メンズエステマガジン。公式HPに3日続けてつながらない店を「閉店」、1〜2日は「閉店の疑い」にしています。タグは各店の公式HPと掲載ページに書かれた言葉から自動で付けています。注意表示は、店名が出た摘発・逮捕報道と、直近1年に追加料金・時間短縮などのトラブル口コミが2件以上ある店に出します。個人利用のための一覧です。</footer>
@@ -314,7 +323,12 @@ function renderShops(){
   const tcount=s=>(byShop[s.id]||[]).length||s.today||0;
   const by={src:(a,b)=>b.src.length-a.src.length||tcount(b)-tcount(a),today:(a,b)=>tcount(b)-tcount(a)||b.src.length-a.src.length,rev:(a,b)=>(b.rev||0)-(a.rev||0),cheap:(a,b)=>yen(a.price)-yen(b.price),name:(a,b)=>a.name.localeCompare(b.name,"ja")};
   rows.sort(by[so]);
-  $("#count").textContent=rows.length+" / "+SHOPS.length+" 店";
+  // ページ分け
+  const per=+$("#per").value,total=rows.length,pages=per?Math.max(1,Math.ceil(total/per)):1;
+  PAGE=Math.min(Math.max(1,PAGE),pages);
+  const from=per?(PAGE-1)*per:0;rows=per?rows.slice(from,from+per):rows;
+  $("#count").textContent=total+" / "+SHOPS.length+" 店";
+  renderPager(PAGE,pages,total,from,rows.length);
   $("#list").innerHTML=rows.length?rows.map(s=>{
     const th=byShop[s.id]||[];
     const n=th.length||s.today;
@@ -474,10 +488,22 @@ document.addEventListener("click",e=>{
 });
 setInterval(()=>{if(view==="today")render()},5*60e3);
 function render(){view==="shops"?renderShops():view==="today"?renderToday():renderTags()}
-function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#avail").hidden=v!=="today";$("#tag").hidden=v==="tags";render()}
+let PAGE=1;
+function renderPager(cur,pages,total,from,n){
+  const el=$("#pager");if(pages<=1){el.innerHTML=total?`<span class="info">${total}店すべて表示中</span>`:"";return}
+  const nums=[];for(let i=1;i<=pages;i++)if(i===1||i===pages||Math.abs(i-cur)<=1)nums.push(i);
+  let h=`<button data-page="${cur-1}" ${cur===1?"disabled":""} aria-label="前のページ">‹ 前へ</button>`,prev=0;
+  for(const i of nums){if(i-prev>1)h+='<span class="gap">…</span>';h+=`<button data-page="${i}" ${i===cur?'aria-current="page"':""}>${i}</button>`;prev=i}
+  h+=`<button data-page="${cur+1}" ${cur===pages?"disabled":""} aria-label="次のページ">次へ ›</button><span class="info">${from+1}〜${from+n}件目 ／ 全${total}店</span>`;
+  el.innerHTML=h;
+}
+document.addEventListener("click",e=>{const b=e.target.closest("#pager [data-page]");if(!b||b.disabled)return;PAGE=+b.dataset.page;renderShops();$("#list").scrollIntoView({behavior:"smooth",block:"start"})});
+function setView(v){view=v;["shops","today","tags"].forEach(k=>$("#tab-"+k).setAttribute("aria-pressed",v===k));$("#list").hidden=v!=="shops";$("#pager").hidden=v!=="shops";$("#per").hidden=v!=="shops";$("#grid").hidden=v!=="today";$("#tagview").hidden=v!=="tags";$("#sort").hidden=v!=="shops";$("#avail").hidden=v!=="today";$("#tag").hidden=v==="tags";render()}
 $("#tab-shops").onclick=()=>setView("shops");$("#tab-today").onclick=()=>setView("today");$("#tab-tags").onclick=()=>setView("tags");
 $("#tag").insertAdjacentHTML("beforeend",Object.entries(TAGS).map(([g,ts])=>`<optgroup label="${g}">${ts.map(t=>`<option>${t}</option>`).join("")}</optgroup>`).join(""));
-["#q","#area","#type","#onlyLocal","#onlyFav","#showHidden","#avail","#sort","#hideClosed","#tag","#onlyAlert"].forEach(s=>$(s).addEventListener("input",render));
+["#q","#area","#type","#onlyLocal","#onlyFav","#showHidden","#avail","#sort","#hideClosed","#tag","#onlyAlert","#per"].forEach(s=>$(s).addEventListener("input",()=>{PAGE=1;render()}));
+try{const v=localStorage.getItem("me:per");if(v!=null&&[...$("#per").options].some(o=>o.value===v))$("#per").value=v}catch(e){}
+$("#per").addEventListener("change",()=>{try{localStorage.setItem("me:per",$("#per").value)}catch(e){}});
 const F=GENRE==="kaishun"?["kaishun.json","kaishun_today.json"]:["shops.json","today.json"];
 $("#g-"+GENRE).setAttribute("aria-current","page");
 if(GENRE==="kaishun"){document.title="八王子・立川 回春エステ一覧";$("#h1").innerHTML="八王子・立川<wbr>回春エステ一覧";$("#localWrap").hidden=false;$("#area").hidden=true;$("#type").hidden=true;$("footer").textContent="情報元：風俗じゃぱん／ランキングデリ／シティヘブン（取れた日のみ）。八王子のページには都内各地から派遣する店も載るため、拠点が八王子・立川周辺の店を「地元発」としています。公式HPに3日続けてつながらない店は「閉店」。";}
