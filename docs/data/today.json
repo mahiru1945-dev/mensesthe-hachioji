@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24T01:21:30.534562+09:00",
+ "updated": "2026-11-24T03:08:32.464657+09:00",
  "therapists": [
   {
    "name": "ゆう",
@@ -24,147 +24,15 @@
    "shop_name": "百花繚乱"
   },
   {
-   "name": "星野まり",
-   "age": 24,
-   "time": "22:30〜04:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/78fe8bc7-ff7e-4288-b667-83b552b86b4b/#therapist-detail-1574244",
-   "shop_id": "er-78fe8bc7",
-   "shop_name": "Aroma w.Lupinus（アロマルピナス）"
-  },
-  {
-   "name": "斉藤しおり",
-   "age": 29,
-   "time": "22:30〜05:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000010065-6ae7512668904.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/78fe8bc7-ff7e-4288-b667-83b552b86b4b/#therapist-detail-1768265",
-   "shop_id": "er-78fe8bc7",
-   "shop_name": "Aroma w.Lupinus（アロマルピナス）"
-  },
-  {
-   "name": "濱砂かえで",
-   "age": 30,
-   "time": "22:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001165b-69e4ae61f14d2.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/8d396f97-d6f3-4b89-86ac-dc0c26177f90/#therapist-detail-1601054",
-   "shop_id": "er-8d396f97",
-   "shop_name": "Enotera（エノテラ）八王子ルーム"
-  },
-  {
    "name": "みお",
    "age": 25,
    "time": "21:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000011fa3-6aedd6a2e56aa.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/d4954df9-f3cd-4add-b82a-8fe004c3b094/#therapist-detail-1726793",
    "shop_id": "er-d4954df9",
    "shop_name": "百花繚乱"
-  },
-  {
-   "name": "あいり",
-   "age": 29,
-   "time": "20:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000011e41-67cfd146d992c.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/1e45cfc4-59aa-4704-9e46-5f0b56c21654/#therapist-detail-1193754",
-   "shop_id": "er-1e45cfc4",
-   "shop_name": "Diamond（ダイヤモンド）"
-  },
-  {
-   "name": "さき",
-   "age": 22,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012e0e-6aded61faa7eb.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1323422",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "すみれ",
-   "age": 20,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012e0e-6ad0cd5c6b2a5.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1323423",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "いろは",
-   "age": 28,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012e0e-6854abcf0d3ca.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1323449",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "ちなつ",
-   "age": 23,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012e0e-6a2bd0943abd1.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1348627",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "とむ",
-   "age": 22,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1853911",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "りょう",
-   "age": 24,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1853912",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "かりん",
-   "age": 26,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/a59c3fca-b132-4a64-a6ef-e89d15496886/#therapist-detail-1789312",
-   "shop_id": "er-a59c3fca",
-   "shop_name": "Private Salon 雅"
-  },
-  {
-   "name": "ひめか",
-   "age": 26,
-   "time": "19:30〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1323426",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
   },
   {
    "name": "あいな",
@@ -178,83 +46,6 @@
    "shop_name": "百花繚乱"
   },
   {
-   "name": "じゅり",
-   "age": 24,
-   "time": "15:30〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001530b-6a1ca2281c569.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/a59c3fca-b132-4a64-a6ef-e89d15496886/#therapist-detail-1670789",
-   "shop_id": "er-a59c3fca",
-   "shop_name": "Private Salon 雅"
-  },
-  {
-   "name": "るな",
-   "age": 27,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/icons/icon5_pink.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/1e45cfc4-59aa-4704-9e46-5f0b56c21654/#therapist-detail-1193752",
-   "shop_id": "er-1e45cfc4",
-   "shop_name": "Diamond（ダイヤモンド）"
-  },
-  {
-   "name": "りん",
-   "age": 25,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000011e41-67cfd13e14208.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/1e45cfc4-59aa-4704-9e46-5f0b56c21654/#therapist-detail-1193753",
-   "shop_id": "er-1e45cfc4",
-   "shop_name": "Diamond（ダイヤモンド）"
-  },
-  {
-   "name": "はる",
-   "age": 21,
-   "time": "14:00〜04:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001553f-6ab0cccc80509.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/1b42e2f7-d44b-42c4-bfad-723a9185aed7/#therapist-detail-1791979",
-   "shop_id": "er-1b42e2f7",
-   "shop_name": "Hangout（ハングアウト）"
-  },
-  {
-   "name": "りさ",
-   "age": 23,
-   "time": "13:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1856302",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "ももか",
-   "age": 21,
-   "time": "13:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012e0e-6a8fa4ab916fe.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1464371",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
-   "name": "ゆに",
-   "age": 24,
-   "time": "13:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012e0e-6acdd922b095d.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/9bf629db-dd5a-4a15-a573-c240ad857589/#therapist-detail-1655084",
-   "shop_id": "er-9bf629db",
-   "shop_name": "ポムポム 八王子・日野ルーム"
-  },
-  {
    "name": "知念らら",
    "age": 31,
    "time": "00:00〜05:00",
@@ -266,35 +57,13 @@
    "shop_name": "人妻ファンタジー"
   },
   {
-   "name": "成宮りえ",
-   "age": 40,
-   "time": "23:00〜02:00",
+   "name": "星野まり",
+   "age": 24,
+   "time": "22:30〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000003c18-6a0be280d05de.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/27b30002-5718-4ea8-8033-aef14a9251d2/#therapist-detail-100341",
-   "shop_id": "er-27b30002",
-   "shop_name": "らんぷ 八王子店"
-  },
-  {
-   "name": "白野すず♦︎",
-   "age": 20,
-   "time": "23:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001314a-687f3b15b8bdf.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/05348966-bac9-43aa-83cd-59fa193cb9b3/#therapist-detail-1355412",
-   "shop_id": "er-05348966",
-   "shop_name": "トキョプラ 八王子店"
-  },
-  {
-   "name": "甘咲みなみ",
-   "age": 25,
-   "time": "22:30〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000010065-6ae724001b69d.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/78fe8bc7-ff7e-4288-b667-83b552b86b4b/#therapist-detail-1827541",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000010065-69acecb3e93e7.webp",
+   "url": "https://www.esthe-ranking.jp/therapist/78fe8bc7-ff7e-4288-b667-83b552b86b4b/#therapist-detail-1574244",
    "shop_id": "er-78fe8bc7",
    "shop_name": "Aroma w.Lupinus（アロマルピナス）"
   },
@@ -310,6 +79,17 @@
    "shop_name": "Aroma w.Lupinus（アロマルピナス）"
   },
   {
+   "name": "斉藤しおり",
+   "age": 29,
+   "time": "22:30〜05:00",
+   "now": false,
+   "state": "",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000010065-6ae7512668904.webp",
+   "url": "https://www.esthe-ranking.jp/therapist/78fe8bc7-ff7e-4288-b667-83b552b86b4b/#therapist-detail-1768265",
+   "shop_id": "er-78fe8bc7",
+   "shop_name": "Aroma w.Lupinus（アロマルピナス）"
+  },
+  {
    "name": "椎名ゆい",
    "age": 47,
    "time": "22:00〜04:00",
@@ -319,17 +99,6 @@
    "url": "https://www.esthe-ranking.jp/therapist/27b30002-5718-4ea8-8033-aef14a9251d2/#therapist-detail-1263945",
    "shop_id": "er-27b30002",
    "shop_name": "らんぷ 八王子店"
-  },
-  {
-   "name": "日和",
-   "age": 32,
-   "time": "21:30〜05:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/7822408c-c02e-4a43-b590-d3b476001d9d/#therapist-detail-1857784",
-   "shop_id": "er-7822408c",
-   "shop_name": "艶音～TSUYANE～ 八王子ルーム"
   },
   {
    "name": "ゆらね",
@@ -343,15 +112,15 @@
    "shop_name": "ぐらどるスパ 八王子ルーム"
   },
   {
-   "name": "ゆの",
-   "age": 26,
-   "time": "21:00〜03:00",
+   "name": "日和",
+   "age": 32,
+   "time": "21:30〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012546-6a16df8fdbffc.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/433d198f-9f99-435f-a7f4-e9cee86df801/#therapist-detail-1250222",
-   "shop_id": "er-433d198f",
-   "shop_name": "Aroma Rose（アロマローズ）"
+   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
+   "url": "https://www.esthe-ranking.jp/therapist/7822408c-c02e-4a43-b590-d3b476001d9d/#therapist-detail-1857784",
+   "shop_id": "er-7822408c",
+   "shop_name": "艶音～TSUYANE～ 八王子ルーム"
   },
   {
    "name": "神代こはね",
@@ -370,21 +139,10 @@
    "time": "21:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001314a-687f3cf69b583.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/05348966-bac9-43aa-83cd-59fa193cb9b3/#therapist-detail-1355497",
    "shop_id": "er-05348966",
    "shop_name": "トキョプラ 八王子店"
-  },
-  {
-   "name": "あき",
-   "age": 29,
-   "time": "20:30〜02:30",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000b275-68d13c682f6f0.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/f56b46b7-2e7e-481b-b0fa-501c37f07f55/#therapist-detail-1008630",
-   "shop_id": "er-f56b46b7",
-   "shop_name": "ワンフィーリング 八王子ルーム"
   },
   {
    "name": "まこ",
@@ -392,43 +150,10 @@
    "time": "20:30〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000154ee-6acdbb9c3d11f.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/4ce1b1c3-9133-4a71-8973-a3165b685103/#therapist-detail-1812126",
    "shop_id": "er-4ce1b1c3",
    "shop_name": "Aroma Rain（アロマレイン）"
-  },
-  {
-   "name": "栗原かな♦︎",
-   "age": 27,
-   "time": "20:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001314a-687f3c56f1e1f.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/05348966-bac9-43aa-83cd-59fa193cb9b3/#therapist-detail-1355470",
-   "shop_id": "er-05348966",
-   "shop_name": "トキョプラ 八王子店"
-  },
-  {
-   "name": "葉山こまり",
-   "age": 50,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000003c18-6a0d9889bfde4.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/27b30002-5718-4ea8-8033-aef14a9251d2/#therapist-detail-856969",
-   "shop_id": "er-27b30002",
-   "shop_name": "らんぷ 八王子店"
-  },
-  {
-   "name": "もか",
-   "age": 22,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001530b-6ac0ff4a60563.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/a59c3fca-b132-4a64-a6ef-e89d15496886/#therapist-detail-1800959",
-   "shop_id": "er-a59c3fca",
-   "shop_name": "Private Salon 雅"
   },
   {
    "name": "ゆん",
@@ -486,39 +211,6 @@
    "shop_name": "艶音～TSUYANE～ 八王子ルーム"
   },
   {
-   "name": "星川ありさ♦︎",
-   "age": 26,
-   "time": "19:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001314a-6a65d132065d7.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/05348966-bac9-43aa-83cd-59fa193cb9b3/#therapist-detail-1728513",
-   "shop_id": "er-05348966",
-   "shop_name": "トキョプラ 八王子店"
-  },
-  {
-   "name": "川本みずき",
-   "age": 44,
-   "time": "19:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000003c18-6af0280a449f5.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/27b30002-5718-4ea8-8033-aef14a9251d2/#therapist-detail-418023",
-   "shop_id": "er-27b30002",
-   "shop_name": "らんぷ 八王子店"
-  },
-  {
-   "name": "花井りか",
-   "age": 34,
-   "time": "19:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000014a64-69be4ff373faf.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/2e240561-eeb5-47ab-b6e2-eada8b528629/#therapist-detail-1586025",
-   "shop_id": "er-2e240561",
-   "shop_name": "人妻ファンタジー"
-  },
-  {
    "name": "ゆうき",
    "age": 23,
    "time": "19:00〜04:00",
@@ -563,37 +255,15 @@
    "shop_name": "Aroma Rain（アロマレイン）"
   },
   {
-   "name": "高嶺れな",
-   "age": 25,
-   "time": "18:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001314a-6a324c405eed1.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/05348966-bac9-43aa-83cd-59fa193cb9b3/#therapist-detail-1690392",
-   "shop_id": "er-05348966",
-   "shop_name": "トキョプラ 八王子店"
-  },
-  {
    "name": "西宮あさと",
    "age": 30,
    "time": "18:00〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000014a64-69b4d15011514.webp",
    "url": "https://www.esthe-ranking.jp/therapist/2e240561-eeb5-47ab-b6e2-eada8b528629/#therapist-detail-1579771",
    "shop_id": "er-2e240561",
    "shop_name": "人妻ファンタジー"
-  },
-  {
-   "name": "りる",
-   "age": 22,
-   "time": "17:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/f56b46b7-2e7e-481b-b0fa-501c37f07f55/#therapist-detail-1216804",
-   "shop_id": "er-f56b46b7",
-   "shop_name": "ワンフィーリング 八王子ルーム"
   },
   {
    "name": "なゆ",
@@ -601,7 +271,7 @@
    "time": "17:00〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
    "url": "https://www.esthe-ranking.jp/therapist/1b42e2f7-d44b-42c4-bfad-723a9185aed7/#therapist-detail-1857662",
    "shop_id": "er-1b42e2f7",
    "shop_name": "Hangout（ハングアウト）"
@@ -662,61 +332,6 @@
    "shop_name": "ぐらどるスパ 八王子ルーム"
   },
   {
-   "name": "りん",
-   "age": 22,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6af28f7883cb1.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1844362",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "もか",
-   "age": 21,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6af6685bb8ace.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1032564",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "ゆず",
-   "age": 22,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6a30062143965.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1688186",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "とわ",
-   "age": 24,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6a362245b7f9e.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1693865",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "のえる",
-   "age": 24,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6a13e77873a2b.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1664956",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
    "name": "みゆ",
    "age": 28,
    "time": "15:00〜04:00",
@@ -728,81 +343,15 @@
    "shop_name": "Hangout（ハングアウト）"
   },
   {
-   "name": "あむ",
-   "age": 22,
-   "time": "14:00〜02:00",
+   "name": "はる",
+   "age": 21,
+   "time": "14:00〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6afb5ce561619.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1851369",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "らら",
-   "age": 28,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6af7c9c0d57e3.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1848859",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "せつな",
-   "age": 22,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6acdba890dcff.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1813407",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "みう",
-   "age": 20,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000000f888-6aba0719dcd82.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b30bd4db-d6af-4282-b365-d5cbe1db6b90/#therapist-detail-1797410",
-   "shop_id": "er-b30bd4db",
-   "shop_name": "ぐらどるスパ 八王子ルーム"
-  },
-  {
-   "name": "とあ",
-   "age": 23,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/0afa75d8-3898-416c-8324-c601a647facb/#therapist-detail-1835434",
-   "shop_id": "er-0afa75d8",
-   "shop_name": "アマテラス 八王子店"
-  },
-  {
-   "name": "りりあ",
-   "age": 23,
-   "time": "13:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001553f-6a771a132feb8.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/1b42e2f7-d44b-42c4-bfad-723a9185aed7/#therapist-detail-1745956",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001553f-6ab0cccc80509.webp",
+   "url": "https://www.esthe-ranking.jp/therapist/1b42e2f7-d44b-42c4-bfad-723a9185aed7/#therapist-detail-1791979",
    "shop_id": "er-1b42e2f7",
    "shop_name": "Hangout（ハングアウト）"
-  },
-  {
-   "name": "りり",
-   "age": 24,
-   "time": "13:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000162e4-6ae86637a1317.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/0afa75d8-3898-416c-8324-c601a647facb/#therapist-detail-1835351",
-   "shop_id": "er-0afa75d8",
-   "shop_name": "アマテラス 八王子店"
   },
   {
    "name": "三柴わかな♦︎",
@@ -814,28 +363,6 @@
    "url": "https://www.esthe-ranking.jp/therapist/05348966-bac9-43aa-83cd-59fa193cb9b3/#therapist-detail-1355416",
    "shop_id": "er-05348966",
    "shop_name": "トキョプラ 八王子店"
-  },
-  {
-   "name": "戸田みなみ",
-   "age": 35,
-   "time": "12:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000014a64-69b4ce5c391a4.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/2e240561-eeb5-47ab-b6e2-eada8b528629/#therapist-detail-1579712",
-   "shop_id": "er-2e240561",
-   "shop_name": "人妻ファンタジー"
-  },
-  {
-   "name": "宮下みれい",
-   "age": 25,
-   "time": "12:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000012546-6a926ad33c73a.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/433d198f-9f99-435f-a7f4-e9cee86df801/#therapist-detail-1477481",
-   "shop_id": "er-433d198f",
-   "shop_name": "Aroma Rose（アロマローズ）"
   },
   {
    "name": "小笠原れん",
@@ -964,7 +491,7 @@
    "time": "11:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000014a64-69b4d0c32b48e.webp",
    "url": "https://www.esthe-ranking.jp/therapist/2e240561-eeb5-47ab-b6e2-eada8b528629/#therapist-detail-1579759",
    "shop_id": "er-2e240561",
    "shop_name": "人妻ファンタジー"
@@ -975,7 +502,7 @@
    "time": "21:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000013cb3-6ae4d20f5e93f.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/c69ecba6-b82c-4228-8afc-30e53d1cc6a5/#therapist-detail-1831664",
    "shop_id": "er-c69ecba6",
    "shop_name": "美熟女スパ 熟的 八王子ルーム"
@@ -986,10 +513,21 @@
    "time": "18:00〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001452b-6ab1bec3496f0.webp",
    "url": "https://www.esthe-ranking.jp/therapist/25fb0072-7610-406c-a012-6fcd99c377b0/#therapist-detail-1792297",
    "shop_id": "er-25fb0072",
    "shop_name": "アプローチ八王子店"
+  },
+  {
+   "name": "るな",
+   "age": 27,
+   "time": "",
+   "now": false,
+   "state": "",
+   "img": "https://www.esthe-ranking.jp/assets/img/icons/icon5_pink.webp",
+   "url": "https://www.esthe-ranking.jp/therapist/1e45cfc4-59aa-4704-9e46-5f0b56c21654/#therapist-detail-1193752",
+   "shop_id": "er-1e45cfc4",
+   "shop_name": "Diamond（ダイヤモンド）"
   },
   {
    "name": "桜庭ひなた",
@@ -1206,7 +744,7 @@
    "time": "00:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000007254-6a05326a3d9a8.webp",
    "url": "https://www.esthe-ranking.jp/therapist/707ebed3-402c-4f79-ae5d-84e1b3f4d9cc/#therapist-detail-1648588",
    "shop_id": "er-707ebed3",
    "shop_name": "CREST SPA（クレストスパ）立川店"
@@ -1217,7 +755,7 @@
    "time": "00:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000015440-6a72ca311c961.webp",
    "url": "https://www.esthe-ranking.jp/therapist/81f3047d-08de-4e55-bc12-7a83b7885e66/#therapist-detail-1675200",
    "shop_id": "er-81f3047d",
    "shop_name": "立川メンズエステダイヤモンド"
@@ -1230,17 +768,6 @@
    "state": "",
    "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000015440-6af013496a8bd.webp",
    "url": "https://www.esthe-ranking.jp/therapist/81f3047d-08de-4e55-bc12-7a83b7885e66/#therapist-detail-1842283",
-   "shop_id": "er-81f3047d",
-   "shop_name": "立川メンズエステダイヤモンド"
-  },
-  {
-   "name": "立石まなみ",
-   "age": 22,
-   "time": "22:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000015440-6adb84be94071.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/81f3047d-08de-4e55-bc12-7a83b7885e66/#therapist-detail-1824468",
    "shop_id": "er-81f3047d",
    "shop_name": "立川メンズエステダイヤモンド"
   },
@@ -1289,61 +816,6 @@
    "shop_name": "立川メンズエステダイヤモンド"
   },
   {
-   "name": "望月しおん",
-   "age": 30,
-   "time": "19:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/79d4b5ad-a438-4728-b674-5ada5544e8bb/#therapist-detail-1600497",
-   "shop_id": "er-79d4b5ad",
-   "shop_name": "むちむちお姉さん西東京支店 立川ルーム"
-  },
-  {
-   "name": "体験入店あむ",
-   "age": 22,
-   "time": "15:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000008590-6adb2c043930f.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/5154b9b7-85be-4dbf-af30-2cc1d1658df5/#therapist-detail-1824197",
-   "shop_id": "er-5154b9b7",
-   "shop_name": "Panda.立川店"
-  },
-  {
-   "name": "体験入店なのか",
-   "age": 28,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000008590-6afd9dfdead59.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/5154b9b7-85be-4dbf-af30-2cc1d1658df5/#therapist-detail-1853709",
-   "shop_id": "er-5154b9b7",
-   "shop_name": "Panda.立川店"
-  },
-  {
-   "name": "新人まゆ",
-   "age": 25,
-   "time": "14:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000008590-6a92878d20ddc.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/5154b9b7-85be-4dbf-af30-2cc1d1658df5/#therapist-detail-1769368",
-   "shop_id": "er-5154b9b7",
-   "shop_name": "Panda.立川店"
-  },
-  {
-   "name": "浜崎しのぶ",
-   "age": 39,
-   "time": "11:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000013ea6-6a83ef066ee91.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/79d4b5ad-a438-4728-b674-5ada5544e8bb/#therapist-detail-1694054",
-   "shop_id": "er-79d4b5ad",
-   "shop_name": "むちむちお姉さん西東京支店 立川ルーム"
-  },
-  {
    "name": "和泉ちか",
    "age": 24,
    "time": "01:00〜06:00",
@@ -1388,28 +860,6 @@
    "shop_name": "VIEAS（ヴィアス）立川メンズエステ"
   },
   {
-   "name": "桜井みゆ",
-   "age": 26,
-   "time": "22:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000016376-6af12ca498d45.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/6e368251-a105-4cd2-b249-bdd70f66012e/#therapist-detail-1843004",
-   "shop_id": "er-6e368251",
-   "shop_name": "小悪魔Spa Tokyo 立川ルーム"
-  },
-  {
-   "name": "もも",
-   "age": 22,
-   "time": "22:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000007254-6ab7e3ae6d460.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/707ebed3-402c-4f79-ae5d-84e1b3f4d9cc/#therapist-detail-1794428",
-   "shop_id": "er-707ebed3",
-   "shop_name": "CREST SPA（クレストスパ）立川店"
-  },
-  {
    "name": "水無瀬なつ",
    "age": 28,
    "time": "21:30〜05:00",
@@ -1419,28 +869,6 @@
    "url": "https://www.esthe-ranking.jp/therapist/81f3047d-08de-4e55-bc12-7a83b7885e66/#therapist-detail-1852383",
    "shop_id": "er-81f3047d",
    "shop_name": "立川メンズエステダイヤモンド"
-  },
-  {
-   "name": "あさひ",
-   "age": 24,
-   "time": "21:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000009870-68f2c886707f6.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b0ba0fee-d444-4f00-80eb-28bc97265648/#therapist-detail-1429152",
-   "shop_id": "er-b0ba0fee",
-   "shop_name": "Calla（カラー）"
-  },
-  {
-   "name": "みさき",
-   "age": 37,
-   "time": "21:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000009870-6ad44c6d95183.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/b0ba0fee-d444-4f00-80eb-28bc97265648/#therapist-detail-624637",
-   "shop_id": "er-b0ba0fee",
-   "shop_name": "Calla（カラー）"
   },
   {
    "name": "神代こはね",
@@ -1474,50 +902,6 @@
    "url": "https://www.esthe-ranking.jp/therapist/76403f4b-8522-415c-ac8b-1cb5bb4e7755/#therapist-detail-1599635",
    "shop_id": "er-76403f4b",
    "shop_name": "MORGANITE～モルガナイト～"
-  },
-  {
-   "name": "るあ",
-   "age": 20,
-   "time": "20:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000051d7-6a6c2309b99e5.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/01383749-100e-4290-8365-6033aaa7df53/#therapist-detail-1728972",
-   "shop_id": "er-01383749",
-   "shop_name": "VIEAS（ヴィアス）立川メンズエステ"
-  },
-  {
-   "name": "きい",
-   "age": 24,
-   "time": "20:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000008590-67e6345e87220.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/5154b9b7-85be-4dbf-af30-2cc1d1658df5/#therapist-detail-1226850",
-   "shop_id": "er-5154b9b7",
-   "shop_name": "Panda.立川店"
-  },
-  {
-   "name": "なぎさ",
-   "age": 26,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000051d7-6470b2579a1a1.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/01383749-100e-4290-8365-6033aaa7df53/#therapist-detail-598635",
-   "shop_id": "er-01383749",
-   "shop_name": "VIEAS（ヴィアス）立川メンズエステ"
-  },
-  {
-   "name": "沙羅",
-   "age": 36,
-   "time": "20:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/shop/no-img.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/dc438560-8287-4ce7-b860-4e1052442006/#therapist-detail-1506088",
-   "shop_id": "er-dc438560",
-   "shop_name": "ミセスヒーリング"
   },
   {
    "name": "あいか",
@@ -1586,34 +970,12 @@
    "shop_name": "人妻コレクション"
   },
   {
-   "name": "花井りか",
-   "age": 34,
-   "time": "19:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
-   "url": "https://www.esthe-ranking.jp/therapist/54c34f3d-465d-4c3a-9cfa-78f9e1fd5627/#therapist-detail-1586024",
-   "shop_id": "er-54c34f3d",
-   "shop_name": "人妻コレクション"
-  },
-  {
-   "name": "天音まり",
-   "age": 41,
-   "time": "19:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001385a-6ae1878157187.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/742d10e5-8aa0-43fa-80a5-3b0fb50574e4/#therapist-detail-1697881",
-   "shop_id": "er-742d10e5",
-   "shop_name": "enchant（エンチャント）"
-  },
-  {
    "name": "のえる",
    "age": 20,
    "time": "19:00〜04:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000051d7-647b39a04de49.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/01383749-100e-4290-8365-6033aaa7df53/#therapist-detail-480299",
    "shop_id": "er-01383749",
    "shop_name": "VIEAS（ヴィアス）立川メンズエステ"
@@ -1630,17 +992,6 @@
    "shop_name": "人妻コレクション"
   },
   {
-   "name": "えま",
-   "age": 22,
-   "time": "18:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000016376-6af131858678e.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/6e368251-a105-4cd2-b249-bdd70f66012e/#therapist-detail-1842946",
-   "shop_id": "er-6e368251",
-   "shop_name": "小悪魔Spa Tokyo 立川ルーム"
-  },
-  {
    "name": "西宮あさと",
    "age": 30,
    "time": "18:00〜04:00",
@@ -1650,28 +1001,6 @@
    "url": "https://www.esthe-ranking.jp/therapist/54c34f3d-465d-4c3a-9cfa-78f9e1fd5627/#therapist-detail-1540125",
    "shop_id": "er-54c34f3d",
    "shop_name": "人妻コレクション"
-  },
-  {
-   "name": "如月あらな",
-   "age": 33,
-   "time": "17:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001385a-6a62b697908a0.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/742d10e5-8aa0-43fa-80a5-3b0fb50574e4/#therapist-detail-1720961",
-   "shop_id": "er-742d10e5",
-   "shop_name": "enchant（エンチャント）"
-  },
-  {
-   "name": "めい",
-   "age": 23,
-   "time": "17:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001623e-6afee9e8bf255.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/cb4301b9-4980-4440-b6a0-cb405aed4352/#therapist-detail-1854908",
-   "shop_id": "er-cb4301b9",
-   "shop_name": "Heaven's Road（ヘブンズロード）"
   },
   {
    "name": "一条さき",
@@ -1696,17 +1025,6 @@
    "shop_name": "小悪魔Spa Tokyo 立川ルーム"
   },
   {
-   "name": "姫乃もえ",
-   "age": 20,
-   "time": "15:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-0000016376-6af12ca4c6b06.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/6e368251-a105-4cd2-b249-bdd70f66012e/#therapist-detail-1843008",
-   "shop_id": "er-6e368251",
-   "shop_name": "小悪魔Spa Tokyo 立川ルーム"
-  },
-  {
    "name": "こはる",
    "age": 22,
    "time": "15:00〜05:00",
@@ -1727,17 +1045,6 @@
    "url": "https://www.esthe-ranking.jp/therapist/6e368251-a105-4cd2-b249-bdd70f66012e/#therapist-detail-1848054",
    "shop_id": "er-6e368251",
    "shop_name": "小悪魔Spa Tokyo 立川ルーム"
-  },
-  {
-   "name": "戸田みなみ",
-   "age": 35,
-   "time": "12:00〜02:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001460b-699d88c3e8dac.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/54c34f3d-465d-4c3a-9cfa-78f9e1fd5627/#therapist-detail-1540066",
-   "shop_id": "er-54c34f3d",
-   "shop_name": "人妻コレクション"
   },
   {
    "name": "白石めい",
@@ -1789,7 +1096,7 @@
    "time": "12:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000127ec-6a6171e9acb88.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/edd92995-d503-40e2-8ad8-2d934a641fcd/#therapist-detail-1725933",
    "shop_id": "er-edd92995",
    "shop_name": "道のエステ"
@@ -1800,7 +1107,7 @@
    "time": "12:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000127ec-6adf764af065f.webp",
+   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
    "url": "https://www.esthe-ranking.jp/therapist/edd92995-d503-40e2-8ad8-2d934a641fcd/#therapist-detail-1826523",
    "shop_id": "er-edd92995",
    "shop_name": "道のエステ"
@@ -1828,17 +1135,6 @@
    "shop_name": "人妻コレクション"
   },
   {
-   "name": "せんり",
-   "age": 24,
-   "time": "10:00〜03:00",
-   "now": false,
-   "state": "",
-   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-00000127ec-681da3faadc1e.webp",
-   "url": "https://www.esthe-ranking.jp/therapist/edd92995-d503-40e2-8ad8-2d934a641fcd/#therapist-detail-1274688",
-   "shop_id": "er-edd92995",
-   "shop_name": "道のエステ"
-  },
-  {
    "name": "酒井らら",
    "age": 41,
    "time": "21:00〜05:00",
@@ -1855,7 +1151,7 @@
    "time": "20:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001317c-6ae228ac9a2a9.webp",
    "url": "https://www.esthe-ranking.jp/therapist/a96a1943-b64f-4019-94a3-89d15c62a580/#therapist-detail-1720185",
    "shop_id": "er-a96a1943",
    "shop_name": "ねこのて 立川店"
@@ -1866,7 +1162,7 @@
    "time": "20:00〜05:00",
    "now": false,
    "state": "",
-   "img": "https://www.esthe-ranking.jp/assets/img/light.gif",
+   "img": "https://www.esthe-ranking.jp/uploads/webp/girl-000001317c-688179818f8f1.webp",
    "url": "https://www.esthe-ranking.jp/therapist/a96a1943-b64f-4019-94a3-89d15c62a580/#therapist-detail-1356954",
    "shop_id": "er-a96a1943",
    "shop_name": "ねこのて 立川店"
