@@ -1,5 +1,5 @@
 {
- "started": "2026-11-23T06:26:06.974051+09:00",
+ "started": "2026-11-24T06:33:02.042730+09:00",
  "steps": {
   "er_list_八王子": 43,
   "go_list_八王子": 58,
@@ -9,8 +9,8 @@
   "added_立川": 0,
   "hp_check": {
    "ok": 129,
-   "ng": 7,
-   "unknown": 5
+   "ng": 8,
+   "unknown": 4
   },
   "browse_schedule_found": 69,
   "browse": {
@@ -24,30 +24,30 @@
    "trouble_flag": 1
   },
   "news": {
-   "articles": 11,
+   "articles": 10,
    "shop_matches": 0
   },
   "schedule_pages": 2,
-  "therapists": 447,
-  "therapists_with_photo": 447,
-  "kaishun_fuzoku": 55,
-  "kaishun_rdeli": 32,
+  "therapists": 440,
+  "therapists_with_photo": 440,
+  "kaishun_fuzoku": 56,
+  "kaishun_rdeli": 33,
   "kaishun_heaven": 0,
   "kaishun_added": 2,
   "kaishun_hp_check": {
-   "ok": 58,
-   "ng": 3,
+   "ok": 59,
+   "ng": 4,
    "unknown": 11
   },
-  "kaishun_browse_schedule_found": 27,
+  "kaishun_browse_schedule_found": 28,
   "kaishun_browse": {
-   "ok": 58,
-   "ng": 8,
-   "age_gate_passed": 33,
-   "new_screenshots": 2
+   "ok": 59,
+   "ng": 9,
+   "age_gate_passed": 34,
+   "new_screenshots": 1
   },
-  "kaishun_therapists": 49,
-  "kaishun_shops": 72,
+  "kaishun_therapists": 60,
+  "kaishun_shops": 74,
   "kaishun_local": 6,
   "mens_official": {
    "schedule_pages": 69,
@@ -55,14 +55,17 @@
    "shops_with_girls": 11,
    "girls": 86
   },
+  "kaishun_official_roster_skipped": [
+   "アドミsince2002立川デリヘル&Go To FANTASY東京本店"
+  ],
   "kaishun_official": {
    "schedule_pages": 3,
    "opened": 3,
-   "shops_with_girls": 1,
-   "girls": 1
+   "shops_with_girls": 0,
+   "girls": 0
   }
  },
  "errors": [],
- "finished": "2026-11-23T07:11:40.165239+09:00",
+ "finished": "2026-11-24T07:19:45.470701+09:00",
  "shops": 143
 }
