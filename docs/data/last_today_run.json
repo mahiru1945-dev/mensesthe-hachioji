@@ -1,10 +1,10 @@
 {
- "started": "2026-11-25T03:00:28.225436+09:00",
+ "started": "2026-11-25T04:09:13.502246+09:00",
  "steps": {
   "schedule_pages": 2,
-  "therapists": 132,
+  "therapists": 120,
   "kaishun_therapists": 58
  },
  "errors": [],
- "finished": "2026-11-25T03:01:49.665784+09:00"
+ "finished": "2026-11-25T04:10:36.306396+09:00"
 }
