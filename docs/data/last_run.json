@@ -1,5 +1,5 @@
 {
- "started": "2026-11-25T06:37:44.443528+09:00",
+ "started": "2026-11-26T06:41:03.029803+09:00",
  "steps": {
   "er_list_八王子": 43,
   "go_list_八王子": 58,
@@ -24,36 +24,36 @@
    "trouble_flag": 1
   },
   "news": {
-   "articles": 11,
+   "articles": 9,
    "shop_matches": 0
   },
   "schedule_pages": 2,
-  "therapists": 452,
-  "therapists_with_photo": 452,
+  "therapists": 461,
+  "therapists_with_photo": 461,
   "kaishun_fuzoku": 56,
-  "kaishun_rdeli": 32,
+  "kaishun_rdeli": 33,
   "kaishun_heaven": 0,
   "kaishun_added": 1,
   "kaishun_hp_check": {
    "ok": 62,
-   "ng": 4,
+   "ng": 5,
    "unknown": 9
   },
-  "kaishun_browse_schedule_found": 29,
+  "kaishun_browse_schedule_found": 30,
   "kaishun_browse": {
    "ok": 61,
-   "ng": 8,
+   "ng": 9,
    "age_gate_passed": 37,
-   "new_screenshots": 3
+   "new_screenshots": 0
   },
-  "kaishun_therapists": 59,
-  "kaishun_shops": 75,
+  "kaishun_therapists": 57,
+  "kaishun_shops": 76,
   "kaishun_local": 6,
   "mens_official": {
    "schedule_pages": 69,
    "opened": 69,
    "shops_with_girls": 11,
-   "girls": 94
+   "girls": 93
   },
   "kaishun_official_roster_skipped": [
    "アドミsince2002立川デリヘル&Go To FANTASY東京本店"
@@ -66,6 +66,6 @@
   }
  },
  "errors": [],
- "finished": "2026-11-25T07:26:48.052878+09:00",
+ "finished": "2026-11-26T07:33:22.545170+09:00",
  "shops": 143
 }
