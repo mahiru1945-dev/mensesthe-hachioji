@@ -1,5 +1,5 @@
 {
- "started": "2026-11-26T06:41:03.029803+09:00",
+ "started": "2026-11-27T06:34:08.316925+09:00",
  "steps": {
   "er_list_八王子": 43,
   "go_list_八王子": 58,
@@ -9,15 +9,15 @@
   "added_立川": 0,
   "hp_check": {
    "ok": 129,
-   "ng": 7,
-   "unknown": 5
+   "ng": 8,
+   "unknown": 4
   },
   "browse_schedule_found": 69,
   "browse": {
    "ok": 125,
    "ng": 16,
    "age_gate_passed": 1,
-   "new_screenshots": 0
+   "new_screenshots": 1
   },
   "reviews": {
    "shops": 96,
@@ -28,32 +28,32 @@
    "shop_matches": 0
   },
   "schedule_pages": 2,
-  "therapists": 461,
-  "therapists_with_photo": 461,
+  "therapists": 507,
+  "therapists_with_photo": 507,
   "kaishun_fuzoku": 56,
-  "kaishun_rdeli": 33,
+  "kaishun_rdeli": 31,
   "kaishun_heaven": 0,
-  "kaishun_added": 1,
+  "kaishun_added": 0,
   "kaishun_hp_check": {
-   "ok": 62,
-   "ng": 5,
+   "ok": 60,
+   "ng": 7,
    "unknown": 9
   },
-  "kaishun_browse_schedule_found": 30,
+  "kaishun_browse_schedule_found": 28,
   "kaishun_browse": {
-   "ok": 61,
-   "ng": 9,
-   "age_gate_passed": 37,
-   "new_screenshots": 0
+   "ok": 60,
+   "ng": 10,
+   "age_gate_passed": 35,
+   "new_screenshots": 1
   },
-  "kaishun_therapists": 57,
+  "kaishun_therapists": 61,
   "kaishun_shops": 76,
   "kaishun_local": 6,
   "mens_official": {
-   "schedule_pages": 69,
+   "schedule_pages": 70,
    "opened": 69,
    "shops_with_girls": 11,
-   "girls": 93
+   "girls": 91
   },
   "kaishun_official_roster_skipped": [
    "アドミsince2002立川デリヘル&Go To FANTASY東京本店"
@@ -65,7 +65,9 @@
    "girls": 0
   }
  },
- "errors": [],
- "finished": "2026-11-26T07:33:22.545170+09:00",
+ "errors": [
+  "mens 公式出勤の取得失敗 おうちでSPA: TimeoutError"
+ ],
+ "finished": "2026-11-27T07:26:19.797624+09:00",
  "shops": 143
 }
